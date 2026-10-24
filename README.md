@@ -1,4 +1,6 @@
-# rekansiaga
+# Rekan Siaga
+
+Pemrograman Berbasis Platform.
 
 A new Flutter project.
 
