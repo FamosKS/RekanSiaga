@@ -14,6 +14,8 @@ class SubmitReportUseCase {
     required String title,
     required String description,
     required String reportType,
+    double? latitude,
+    double? longitude,
   }) async {
     final sanitizedTitle = title.trim();
     final sanitizedDescription = description.trim();
@@ -35,6 +37,8 @@ class SubmitReportUseCase {
       title: sanitizedTitle,
       description: sanitizedDescription,
       reportType: sanitizedReportType,
+      latitude: latitude,
+      longitude: longitude,
     );
 
     return _repository.submitReport(

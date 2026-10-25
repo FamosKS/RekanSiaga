@@ -15,7 +15,8 @@ class ActiveReportRepositoryImpl implements ActiveReportRepository {
     final rows = await _client
         .from('public_reports')
         .select('id,tracking_code,title,description,status,created_at')
-        .inFilter('status', _activeStatuses);
+        .inFilter('status', _activeStatuses)
+        .isFilter('deleted_at', null);
 
     return rows.map(_activeReportFromRow).toList(growable: false);
   }

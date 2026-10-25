@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../dashboard/presentation/providers/active_reports_provider.dart';
 import '../../../dashboard/presentation/widgets/report_card.dart';
 import '../../../reports/domain/entities/report.dart';
 import '../../domain/entities/report_review.dart';
@@ -38,11 +39,58 @@ class ReportDetailPage extends ConsumerWidget {
       }
     });
 
+    ref.listen<DeleteReportState>(deleteReportControllerProvider, (
+      previous,
+      next,
+    ) {
+      if (next.status == DeleteReportStatus.success) {
+        ref.invalidate(reportReviewProvider(reportId));
+        ref.invalidate(activeReportsProvider);
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(content: Text('Laporan berhasil dihapus')),
+          );
+        Navigator.of(context).pop();
+        ref.read(deleteReportControllerProvider.notifier).reset();
+      } else if (next.status == DeleteReportStatus.error &&
+          previous?.status != DeleteReportStatus.error) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(next.errorMessage ?? 'Gagal menghapus laporan.'),
+            ),
+          );
+        ref.read(deleteReportControllerProvider.notifier).reset();
+      }
+    });
+
     final reportAsync = ref.watch(reportReviewProvider(reportId));
     final updateState = ref.watch(updateReportStatusControllerProvider);
+    final deleteState = ref.watch(deleteReportControllerProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Detail Laporan')),
+      appBar: AppBar(
+        title: const Text('Detail Laporan'),
+        actions: [
+          IconButton(
+            tooltip: 'Hapus laporan',
+            onPressed:
+                updateState.status == ReportStatusUpdateState.loading ||
+                    deleteState.status == DeleteReportStatus.loading
+                ? null
+                : () => _confirmDelete(context, ref),
+            icon: deleteState.status == DeleteReportStatus.loading
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.delete_outline),
+          ),
+        ],
+      ),
       body: reportAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stackTrace) => Center(
@@ -62,6 +110,33 @@ class ReportDetailPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _confirmDelete(BuildContext context, WidgetRef ref) async {
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Hapus laporan?'),
+        content: const Text(
+          'Laporan ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Batal'),
+          ),
+          FilledButton.icon(
+            onPressed: () => Navigator.of(context).pop(true),
+            icon: const Icon(Icons.delete_outline),
+            label: const Text('Hapus'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldDelete == true) {
+      await ref.read(deleteReportControllerProvider.notifier).delete(reportId);
+    }
   }
 
   Widget _buildDetails(

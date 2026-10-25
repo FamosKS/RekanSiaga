@@ -17,6 +17,7 @@ class ReportAdminRepositoryImpl implements ReportAdminRepository {
           'id,tracking_code,title,description,report_type,status,created_at',
         )
         .eq('id', reportId)
+        .isFilter('deleted_at', null)
         .maybeSingle();
 
     if (row == null) {
@@ -24,6 +25,14 @@ class ReportAdminRepositoryImpl implements ReportAdminRepository {
     }
 
     return _reportFromRow(row);
+  }
+
+  @override
+  Future<void> deleteReport(String reportId) async {
+    await _client.rpc(
+      'soft_delete_public_report',
+      params: {'p_report_id': reportId},
+    );
   }
 
   @override

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class PemantauanPage extends StatelessWidget {
-  const PemantauanPage({super.key});
+  const PemantauanPage({super.key, this.onOpenMap});
+
+  final VoidCallback? onOpenMap;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +92,7 @@ class PemantauanPage extends StatelessWidget {
                   ),
                 ],
                 description: 'Wilayah Awas menunjukkan kondisi darurat yang memerlukan tindakan segera. Pantau peta siaga dan ikuti instruksi tim lapangan.',
+                onOpenMap: onOpenMap,
               ),
               const SizedBox(height: 12),
               _buildStatusCard(
@@ -107,6 +110,7 @@ class PemantauanPage extends StatelessWidget {
                   ),
                 ],
                 description: 'Wilayah Siaga menunjukkan peningkatan aktivitas yang perlu diawasi terus. Pastikan jalur evakuasi dan perlengkapan siaga sudah siap.',
+                onOpenMap: onOpenMap,
               ),
               const SizedBox(height: 12),
               _buildStatusCard(
@@ -119,6 +123,7 @@ class PemantauanPage extends StatelessWidget {
                 statistics: const [],
                 description: 'Tetap perbarui informasi wilayah Anda dan ikuti arahan resmi untuk menjaga keselamatan bersama.',
                 showActions: false,
+                onOpenMap: onOpenMap,
               ),
             ],
           ),
@@ -137,6 +142,7 @@ class PemantauanPage extends StatelessWidget {
     required List<_MonitoringStatistic> statistics,
     required String description,
     bool showActions = true,
+    VoidCallback? onOpenMap,
   }) {
     final textTheme = Theme.of(context).textTheme;
 
@@ -222,7 +228,11 @@ class PemantauanPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () => context.pop(),
+                      key: const ValueKey('monitoring-open-map-button'),
+                      onPressed: () {
+                        onOpenMap?.call();
+                        context.pop();
+                      },
                       icon: const Icon(Icons.map_outlined, size: 16),
                       label: const Text('Lihat di Peta'),
                       style: ElevatedButton.styleFrom(

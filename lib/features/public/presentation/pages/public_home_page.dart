@@ -1,6 +1,12 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class PublicHomePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
+
+import '../widgets/disaster_warning_dialog.dart';
+
+class PublicHomePage extends StatefulWidget {
   const PublicHomePage({
     super.key,
     required this.onOpenMap,
@@ -19,6 +25,53 @@ class PublicHomePage extends StatelessWidget {
   ];
 
   @override
+  State<PublicHomePage> createState() => _PublicHomePageState();
+}
+
+class _PublicHomePageState extends State<PublicHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(requestLocationPermission());
+    });
+  }
+
+  Future<void> requestLocationPermission() async {
+    try {
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+
+      if (!mounted || permission != LocationPermission.deniedForever) {
+        return;
+      }
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Izin lokasi ditolak permanen. Aktifkan izin lokasi melalui pengaturan aplikasi.',
+            ),
+          ),
+        );
+    } on PlatformException catch (error, stackTrace) {
+      debugPrint('Unable to request location permission: $error\n$stackTrace');
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text('Izin lokasi tidak dapat diminta saat ini.'),
+          ),
+        );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -30,7 +83,7 @@ class PublicHomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _HomeHeader(onEmergencyTap: onOpenEmergency),
+              _HomeHeader(onEmergencyTap: widget.onOpenEmergency),
               const SizedBox(height: 18),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -57,9 +110,16 @@ class PublicHomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              _HighlightCard(onReportTap: onOpenReport, onMapTap: onOpenMap),
+              _HighlightCard(
+                onReportTap: widget.onOpenReport,
+                onMapTap: widget.onOpenMap,
+              ),
               const SizedBox(height: 14),
-              const _RiskAnalysisCard(),
+              _RiskAnalysisCard(
+                onPreviewWarning: () {
+                  unawaited(showDisasterWarningDialog(context));
+                },
+              ),
               const SizedBox(height: 12),
               _NewsSection(
                 onSeeAll: () => _showComingSoon(context, 'Berita terbaru'),
@@ -266,7 +326,9 @@ class _HighlightCard extends StatelessWidget {
 }
 
 class _RiskAnalysisCard extends StatelessWidget {
-  const _RiskAnalysisCard();
+  const _RiskAnalysisCard({required this.onPreviewWarning});
+
+  final VoidCallback onPreviewWarning;
 
   @override
   Widget build(BuildContext context) {
@@ -354,6 +416,19 @@ class _RiskAnalysisCard extends StatelessWidget {
               style: textTheme.bodySmall?.copyWith(
                 color: Colors.blueGrey[500],
                 height: 1.35,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                onPressed: onPreviewWarning,
+                icon: const Icon(Icons.warning_amber_rounded, size: 17),
+                label: const Text('Pratinjau peringatan'),
+                style: TextButton.styleFrom(
+                  foregroundColor: const Color(0xFFB84E00),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  visualDensity: VisualDensity.compact,
+                ),
               ),
             ),
           ],

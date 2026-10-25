@@ -4,6 +4,8 @@ import '../../../reports/domain/entities/report.dart';
 abstract interface class ReportAdminRepository {
   Future<ReportReview> getReportById(String reportId);
 
+  Future<void> deleteReport(String reportId);
+
   Future<ReportReview> updateReportStatus({
     required String reportId,
     required ReportStatus newStatus,

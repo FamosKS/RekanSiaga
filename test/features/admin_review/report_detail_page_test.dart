@@ -56,15 +56,66 @@ void main() {
 
     expect(find.textContaining('Update ditolak'), findsOneWidget);
   });
+
+  testWidgets('deletes report after confirmation', (tester) async {
+    final repository = _FakeReportAdminRepository();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          reportAdminRepositoryProvider.overrideWithValue(repository),
+          currentStaffIdProvider.overrideWithValue('staff-1'),
+        ],
+        child: const MaterialApp(
+          home: Scaffold(body: ReportDetailPage(reportId: 'report-1')),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Hapus laporan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Hapus laporan?'), findsOneWidget);
+
+    await tester.tap(find.widgetWithText(FilledButton, 'Hapus'));
+    await tester.pumpAndSettle();
+
+    expect(repository.deletedReportId, 'report-1');
+  });
+
+  testWidgets('shows a snackbar when deleting report fails', (tester) async {
+    final repository = _FakeReportAdminRepository(failDelete: true);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          reportAdminRepositoryProvider.overrideWithValue(repository),
+          currentStaffIdProvider.overrideWithValue('staff-1'),
+        ],
+        child: const MaterialApp(home: ReportDetailPage(reportId: 'report-1')),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Hapus laporan'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Hapus'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Delete ditolak'), findsOneWidget);
+  });
 }
 
 class _FakeReportAdminRepository implements ReportAdminRepository {
-  _FakeReportAdminRepository({this.failUpdate = false});
+  _FakeReportAdminRepository({
+    this.failUpdate = false,
+    this.failDelete = false,
+  });
 
   final bool failUpdate;
+  final bool failDelete;
   ReportStatus status = ReportStatus.submitted;
   ReportStatus? updatedStatus;
   String? actorStaffId;
+  String? deletedReportId;
 
   ReportReview _report() {
     return ReportReview(
@@ -80,6 +131,14 @@ class _FakeReportAdminRepository implements ReportAdminRepository {
 
   @override
   Future<ReportReview> getReportById(String reportId) async => _report();
+
+  @override
+  Future<void> deleteReport(String reportId) async {
+    if (failDelete) {
+      throw StateError('Delete ditolak oleh backend.');
+    }
+    deletedReportId = reportId;
+  }
 
   @override
   Future<ReportReview> updateReportStatus({

@@ -5,6 +5,7 @@ import '../../../reports/domain/entities/report.dart';
 import '../../data/repositories/report_admin_repository_impl.dart';
 import '../../domain/entities/report_review.dart';
 import '../../domain/repositories/report_admin_repository.dart';
+import '../../domain/usecases/delete_report_usecase.dart';
 import '../../domain/usecases/update_report_status_usecase.dart';
 
 final reportAdminRepositoryProvider = Provider<ReportAdminRepository>((ref) {
@@ -15,6 +16,10 @@ final updateReportStatusUseCaseProvider = Provider<UpdateReportStatusUseCase>((
   ref,
 ) {
   return UpdateReportStatusUseCase(ref.watch(reportAdminRepositoryProvider));
+});
+
+final deleteReportUseCaseProvider = Provider<DeleteReportUseCase>((ref) {
+  return DeleteReportUseCase(ref.watch(reportAdminRepositoryProvider));
 });
 
 final currentStaffIdProvider = Provider<String?>((ref) {
@@ -32,6 +37,46 @@ final updateReportStatusControllerProvider =
     NotifierProvider<UpdateReportStatusController, UpdateReportStatusState>(
       UpdateReportStatusController.new,
     );
+
+enum DeleteReportStatus { idle, loading, success, error }
+
+class DeleteReportState {
+  const DeleteReportState({
+    this.status = DeleteReportStatus.idle,
+    this.errorMessage,
+  });
+
+  final DeleteReportStatus status;
+  final String? errorMessage;
+}
+
+final deleteReportControllerProvider =
+    NotifierProvider<DeleteReportController, DeleteReportState>(
+      DeleteReportController.new,
+    );
+
+class DeleteReportController extends Notifier<DeleteReportState> {
+  @override
+  DeleteReportState build() => const DeleteReportState();
+
+  Future<void> delete(String reportId) async {
+    state = const DeleteReportState(status: DeleteReportStatus.loading);
+
+    try {
+      await ref.read(deleteReportUseCaseProvider).execute(reportId);
+      state = const DeleteReportState(status: DeleteReportStatus.success);
+    } catch (error) {
+      state = DeleteReportState(
+        status: DeleteReportStatus.error,
+        errorMessage: error.toString(),
+      );
+    }
+  }
+
+  void reset() {
+    state = const DeleteReportState();
+  }
+}
 
 enum ReportStatusUpdateState { idle, loading, success, error }
 

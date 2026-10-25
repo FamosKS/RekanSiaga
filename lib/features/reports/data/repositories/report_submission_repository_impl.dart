@@ -24,6 +24,8 @@ class ReportSubmissionRepositoryImpl implements ReportSubmissionRepository {
           'title': submission.title,
           'description': submission.description,
           'report_type': submission.reportType,
+          if (submission.coordinatesWkt != null)
+            'coordinates': submission.coordinatesWkt,
         })
         .select('id,tracking_code,title,description,report_type,status')
         .single();

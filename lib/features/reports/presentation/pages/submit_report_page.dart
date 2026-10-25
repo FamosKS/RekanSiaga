@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../dashboard/presentation/providers/active_reports_provider.dart';
@@ -19,13 +23,87 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _reportTypeController = TextEditingController();
+  final _koordinatController = TextEditingController();
+
+  double? _latitude;
+  double? _longitude;
+  bool _isLoadingLocation = false;
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(_isiKoordinatOtomatis());
+  }
 
   @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
     _reportTypeController.dispose();
+    _koordinatController.dispose();
     super.dispose();
+  }
+
+  Future<void> _isiKoordinatOtomatis() async {
+    if (_isLoadingLocation) return;
+
+    setState(() {
+      _isLoadingLocation = true;
+    });
+
+    try {
+      if (!await Geolocator.isLocationServiceEnabled()) {
+        _showLocationError(
+          'Aktifkan layanan lokasi untuk mengambil koordinat.',
+        );
+        return;
+      }
+
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        _showLocationError('Izin lokasi diperlukan untuk mengambil koordinat.');
+        return;
+      }
+
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
+      );
+      if (!mounted) return;
+
+      _latitude = position.latitude;
+      _longitude = position.longitude;
+      _koordinatController.text = '${position.latitude}, ${position.longitude}';
+    } on LocationServiceDisabledException {
+      _showLocationError('Aktifkan layanan lokasi untuk mengambil koordinat.');
+    } on PermissionDeniedException {
+      _showLocationError('Izin lokasi diperlukan untuk mengambil koordinat.');
+    } on PlatformException catch (error, stackTrace) {
+      debugPrint('Unable to get current location: $error\n$stackTrace');
+      _showLocationError('Koordinat lokasi tidak dapat diambil saat ini.');
+    } on MissingPluginException catch (error, stackTrace) {
+      debugPrint('Location plugin is unavailable: $error\n$stackTrace');
+      _showLocationError('Fitur lokasi tidak tersedia pada perangkat ini.');
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoadingLocation = false;
+        });
+      }
+    }
+  }
+
+  void _showLocationError(String message) {
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -260,11 +338,34 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                         const SizedBox(height: 7),
                         TextFormField(
                           key: const ValueKey('report-location-visual-field'),
+                          controller: _koordinatController,
+                          readOnly: true,
                           textInputAction: TextInputAction.next,
-                          decoration: fieldDecoration(
-                            hint: 'Masukkan koordinat atau pilih dari peta',
-                            icon: Icons.my_location_outlined,
-                          ),
+                          decoration:
+                              fieldDecoration(
+                                hint: 'Koordinat lokasi akan terisi otomatis',
+                                icon: Icons.my_location_outlined,
+                              ).copyWith(
+                                suffixIcon: _isLoadingLocation
+                                    ? const Padding(
+                                        padding: EdgeInsets.all(12),
+                                        child: SizedBox(
+                                          width: 18,
+                                          height: 18,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
+                                        ),
+                                      )
+                                    : IconButton(
+                                        key: const ValueKey(
+                                          'refresh-location-button',
+                                        ),
+                                        tooltip: 'Perbarui koordinat',
+                                        onPressed: _isiKoordinatOtomatis,
+                                        icon: const Icon(Icons.refresh),
+                                      ),
+                              ),
                         ),
                         const SizedBox(height: 11),
                         fieldLabel(Icons.title_outlined, 'Judul Laporan'),
@@ -443,6 +544,8 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
           title: _titleController.text,
           description: _descriptionController.text,
           reportType: _reportTypeController.text,
+          latitude: _latitude,
+          longitude: _longitude,
         );
   }
 }

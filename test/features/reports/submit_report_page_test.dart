@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rekansiaga/features/reports/domain/entities/report.dart';
 import 'package:rekansiaga/features/reports/domain/entities/report_submission.dart';
@@ -12,6 +13,16 @@ import 'package:rekansiaga/features/reports/presentation/pages/submit_report_pag
 import 'package:rekansiaga/features/reports/presentation/providers/submit_report_provider.dart';
 
 void main() {
+  final originalGeolocatorPlatform = GeolocatorPlatform.instance;
+
+  setUp(() {
+    GeolocatorPlatform.instance = _FakeGeolocatorPlatform();
+  });
+
+  tearDown(() {
+    GeolocatorPlatform.instance = originalGeolocatorPlatform;
+  });
+
   testWidgets('validates required fields and submits report', (tester) async {
     final repository = _FakeReportSubmissionRepository();
     final router = _createRouter();
@@ -27,6 +38,15 @@ void main() {
 
     await tester.tap(find.text('Buka form laporan'));
     await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<TextFormField>(
+            find.byKey(const ValueKey('report-location-visual-field')),
+          )
+          .controller
+          ?.text,
+      '-6.2, 106.8',
+    );
     await tester.ensureVisible(find.text('Submit'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Submit'));
@@ -57,6 +77,9 @@ void main() {
     expect(repository.submission?.title, 'Banjir');
     expect(repository.submission?.reportType, 'banjir');
     expect(repository.submission?.description, 'Kondisi parah');
+    expect(repository.submission?.latitude, -6.2);
+    expect(repository.submission?.longitude, 106.8);
+    expect(repository.submission?.coordinatesWkt, 'POINT(106.8 -6.2)');
     expect(repository.status, ReportStatus.submitted);
     expect(repository.trackingCode, startsWith('RPT-'));
     expect(find.text('Buka form laporan'), findsOneWidget);
@@ -160,4 +183,29 @@ class _FakeReportSubmissionRepository implements ReportSubmissionRepository {
           ),
         );
   }
+}
+
+class _FakeGeolocatorPlatform extends GeolocatorPlatform {
+  @override
+  Future<bool> isLocationServiceEnabled() async => true;
+
+  @override
+  Future<LocationPermission> checkPermission() async =>
+      LocationPermission.whileInUse;
+
+  @override
+  Future<Position> getCurrentPosition({
+    LocationSettings? locationSettings,
+  }) async => Position(
+    longitude: 106.8,
+    latitude: -6.2,
+    timestamp: DateTime(2026),
+    accuracy: 5,
+    altitude: 0,
+    altitudeAccuracy: 0,
+    heading: 0,
+    headingAccuracy: 0,
+    speed: 0,
+    speedAccuracy: 0,
+  );
 }

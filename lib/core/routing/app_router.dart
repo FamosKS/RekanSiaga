@@ -60,7 +60,12 @@ GoRouter createAppRouter({SupabaseClient? supabaseClient}) {
       ),
       GoRoute(
         path: AppRoutes.monitoring,
-        builder: (context, state) => const PemantauanPage(),
+        builder: (context, state) {
+          final onOpenMap = state.extra;
+          return PemantauanPage(
+            onOpenMap: onOpenMap is VoidCallback ? onOpenMap : null,
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.guide,

@@ -40,6 +40,8 @@ class SubmitReportController extends Notifier<SubmitReportState> {
     required String title,
     required String description,
     required String reportType,
+    double? latitude,
+    double? longitude,
   }) async {
     state = const SubmitReportState(status: SubmitReportStatus.loading);
 
@@ -50,6 +52,8 @@ class SubmitReportController extends Notifier<SubmitReportState> {
             title: title,
             description: description,
             reportType: reportType,
+            latitude: latitude,
+            longitude: longitude,
           );
       state = const SubmitReportState(status: SubmitReportStatus.success);
     } on FormatException catch (error) {

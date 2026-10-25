@@ -6,13 +6,26 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 
 import 'package:rekansiaga/core/routing/app_router.dart';
 import 'package:rekansiaga/main.dart';
 
 void main() {
+  final originalGeolocatorPlatform = GeolocatorPlatform.instance;
+
+  setUp(() {
+    GeolocatorPlatform.instance = _FakeGeolocatorPlatform();
+  });
+
+  tearDown(() {
+    GeolocatorPlatform.instance = originalGeolocatorPlatform;
+  });
+
   testWidgets('app opens on the public home page', (WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(child: MyApp(router: createAppRouter())),
@@ -22,6 +35,7 @@ void main() {
     expect(find.text('Hi, RekanSiaga'), findsOneWidget);
     expect(find.text('Analisis Risiko Lokasi Saya'), findsOneWidget);
     expect(find.text('Berita Terbaru'), findsOneWidget);
+    expect(find.byType(FlutterMap), findsNothing);
     expect(find.text('Masuk Staf'), findsNothing);
     expect(
       find.text('You have pushed the button this many times:'),
@@ -161,18 +175,41 @@ void main() {
     expect(find.text('Pemantauan Terkini'), findsOneWidget);
 
     await tester.tap(find.text('Peta'));
-    await tester.pumpAndSettle();
-    expect(find.text('Peta RekanSiaga'), findsOneWidget);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(find.text('Peta Bencana'), findsOneWidget);
+    expect(find.text('Zona Merah · Koto Tangah, Padang'), findsOneWidget);
+    expect(find.byType(FlutterMap), findsOneWidget);
+    expect(find.byType(CircleLayer), findsOneWidget);
+    expect(find.byType(MarkerLayer), findsOneWidget);
+    expect(find.byIcon(Icons.warning_amber), findsOneWidget);
+    expect(find.byTooltip('Lokasi saya'), findsOneWidget);
+
+    final map = tester.widget<FlutterMap>(find.byType(FlutterMap));
+    expect(map.options.initialCenter, const LatLng(-0.8198, 100.3204));
+    expect(map.options.initialZoom, 14.0);
+    final tileLayer = tester.widget<TileLayer>(find.byType(TileLayer));
     expect(
-      find.text(
-        'Area Peta Interaktif (Akan diintegrasikan dengan flutter_map atau google_maps_flutter)',
-      ),
-      findsOneWidget,
+      tileLayer.urlTemplate,
+      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     );
-    expect(find.text('Lapisan Peta'), findsOneWidget);
-    expect(find.text('Tampilkan Relawan'), findsOneWidget);
-    expect(find.text('Tampilkan Posko'), findsOneWidget);
-    expect(find.text('Cek Risiko Lokasi Saya'), findsOneWidget);
+    expect(
+      tileLayer.tileProvider.headers['User-Agent'],
+      'flutter_map (com.example.rekansiaga)',
+    );
+    final circle = tester
+        .widget<CircleLayer>(find.byType(CircleLayer))
+        .circles
+        .single;
+    expect(circle.point, const LatLng(-0.8198, 100.3204));
+    expect(circle.radius, 1500);
+    expect(circle.useRadiusInMeter, isTrue);
+    expect(circle.color.a, closeTo(0.3, 0.01));
+
+    await tester.tap(find.byTooltip('Lokasi saya'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(find.byKey(const ValueKey('user-location-marker')), findsOneWidget);
 
     await tester.tap(find.text('Donasi'));
     await tester.pumpAndSettle();
@@ -219,6 +256,38 @@ void main() {
     router.dispose();
   });
 
+  testWidgets('monitoring map action opens the map tab', (tester) async {
+    final router = createAppRouter();
+    await tester.pumpWidget(
+      ProviderScope(child: MaterialApp.router(routerConfig: router)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Informasi'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Lihat selengkapnya'));
+    await tester.tap(find.text('Lihat selengkapnya'));
+    await tester.pumpAndSettle();
+    expect(find.text('Pemantauan Terkini'), findsOneWidget);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('monitoring-open-map-button')).first,
+    );
+    await tester.tap(
+      find.byKey(const ValueKey('monitoring-open-map-button')).first,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Peta Bencana'), findsOneWidget);
+    expect(
+      tester
+          .widget<BottomNavigationBar>(find.byType(BottomNavigationBar))
+          .currentIndex,
+      2,
+    );
+    router.dispose();
+  });
+
   testWidgets('public submit-report route can be opened without staff login', (
     tester,
   ) async {
@@ -238,4 +307,29 @@ void main() {
     );
     router.dispose();
   });
+}
+
+class _FakeGeolocatorPlatform extends GeolocatorPlatform {
+  @override
+  Future<bool> isLocationServiceEnabled() async => true;
+
+  @override
+  Future<LocationPermission> checkPermission() async =>
+      LocationPermission.whileInUse;
+
+  @override
+  Future<Position> getCurrentPosition({
+    LocationSettings? locationSettings,
+  }) async => Position(
+    longitude: 100.3204,
+    latitude: -0.8198,
+    timestamp: DateTime(2026),
+    accuracy: 5,
+    altitude: 0,
+    altitudeAccuracy: 0,
+    heading: 0,
+    headingAccuracy: 0,
+    speed: 0,
+    speedAccuracy: 0,
+  );
 }

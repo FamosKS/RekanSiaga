@@ -5,7 +5,7 @@ import '../../../reports/presentation/pages/submit_report_page.dart';
 import 'public_donation_page.dart';
 import 'public_home_page.dart';
 import 'public_information_page.dart';
-import 'public_map_page.dart';
+import 'peta_bencana_page.dart';
 
 class PublicMainPage extends StatefulWidget {
   const PublicMainPage({super.key});
@@ -16,6 +16,9 @@ class PublicMainPage extends StatefulWidget {
 
 class _PublicMainPageState extends State<PublicMainPage> {
   int _selectedIndex = 0;
+  bool _mapPageOpened = false;
+  bool _reportPageOpened = false;
+  final _selectedIndexListenable = ValueNotifier<int>(0);
 
   late final List<Widget> _pages = [
     PublicHomePage(
@@ -28,10 +31,28 @@ class _PublicMainPageState extends State<PublicMainPage> {
       onOpenEmergency: _openEmergency,
       onOpenMonitoring: _openMonitoring,
     ),
-    PublicMapPage(onEmergencyTap: _openEmergency),
-    SubmitReportPage(
-      onSubmitted: () {
-        _selectTab(0);
+    ValueListenableBuilder<int>(
+      valueListenable: _selectedIndexListenable,
+      builder: (context, selectedIndex, child) {
+        if (!_mapPageOpened) return const SizedBox.shrink();
+        return TickerMode(
+          enabled: selectedIndex == 2,
+          child: PetaBencanaPage(onEmergencyTap: _openEmergency),
+        );
+      },
+    ),
+    ValueListenableBuilder<int>(
+      valueListenable: _selectedIndexListenable,
+      builder: (context, selectedIndex, child) {
+        if (!_reportPageOpened) return const SizedBox.shrink();
+        return TickerMode(
+          enabled: selectedIndex == 3,
+          child: SubmitReportPage(
+            onSubmitted: () {
+              _selectTab(0);
+            },
+          ),
+        );
       },
     ),
     const PublicDonationPage(),
@@ -68,7 +89,20 @@ class _PublicMainPageState extends State<PublicMainPage> {
   void _selectTab(int index) {
     setState(() {
       _selectedIndex = index;
+      if (index == 2) {
+        _mapPageOpened = true;
+      }
+      if (index == 3) {
+        _reportPageOpened = true;
+      }
     });
+    _selectedIndexListenable.value = index;
+  }
+
+  @override
+  void dispose() {
+    _selectedIndexListenable.dispose();
+    super.dispose();
   }
 
   void _openEmergency() {
@@ -76,7 +110,7 @@ class _PublicMainPageState extends State<PublicMainPage> {
   }
 
   void _openMonitoring() {
-    context.push('/pemantauan');
+    context.push('/pemantauan', extra: () => _selectTab(2));
   }
 
   @override
