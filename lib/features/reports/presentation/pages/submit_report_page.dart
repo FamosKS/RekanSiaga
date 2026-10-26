@@ -245,6 +245,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                         TextFormField(
                           key: const ValueKey('reporter-name-visual-field'),
                           textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.black87),
                           decoration: fieldDecoration(
                             hint: 'Masukkan nama lengkap',
                             icon: Icons.person_outline,
@@ -259,6 +260,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                         TextFormField(
                           key: const ValueKey('reporter-address-visual-field'),
                           textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.black87),
                           decoration: fieldDecoration(
                             hint: 'Masukkan alamat lengkap',
                             icon: Icons.location_on_outlined,
@@ -341,6 +343,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                           controller: _koordinatController,
                           readOnly: true,
                           textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.black87),
                           decoration:
                               fieldDecoration(
                                 hint: 'Koordinat lokasi akan terisi otomatis',
@@ -374,6 +377,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                           key: const ValueKey('report-title-field'),
                           controller: _titleController,
                           textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.black87),
                           decoration: fieldDecoration(
                             hint: 'Contoh: Banjir di wilayah utara',
                             icon: Icons.title_outlined,
@@ -387,6 +391,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                           key: const ValueKey('report-type-field'),
                           controller: _reportTypeController,
                           textInputAction: TextInputAction.next,
+                          style: const TextStyle(color: Colors.black87),
                           decoration: fieldDecoration(
                             hint: 'Contoh: Banjir',
                             icon: Icons.category_outlined,
@@ -403,6 +408,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                           minLines: 4,
                           maxLines: 4,
                           textInputAction: TextInputAction.newline,
+                          style: const TextStyle(color: Colors.black87),
                           decoration: fieldDecoration(
                             hint: 'Deskripsikan kejadian, dampak, dan kebutuhan bantuan lapangan.',
                             icon: Icons.description_outlined,

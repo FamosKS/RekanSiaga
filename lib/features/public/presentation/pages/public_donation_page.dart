@@ -144,6 +144,7 @@ class _PublicDonationPageState extends State<PublicDonationPage> {
                       TextFormField(
                         controller: _donationAmountController,
                         keyboardType: TextInputType.number,
+                        style: const TextStyle(color: Colors.black87),
                         onChanged: (_) {
                           setState(() {
                             _selectedAmount = null;
@@ -355,6 +356,7 @@ class _DonationField extends StatelessWidget {
           controller: controller,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
+          style: const TextStyle(color: Colors.black87),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: Colors.blueGrey[300], fontSize: 12),
