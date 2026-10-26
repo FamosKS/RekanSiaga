@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class PanduanSiagaPage extends StatelessWidget {
+import 'ceklis_tas_siaga_page.dart';
+import 'detail_panduan_page.dart';
+import 'semua_panduan_page.dart';
+
+class PanduanSiagaPage extends StatefulWidget {
   const PanduanSiagaPage({super.key});
 
+  @override
+  State<PanduanSiagaPage> createState() => _PanduanSiagaPageState();
+}
+
+class _PanduanSiagaPageState extends State<PanduanSiagaPage> {
   static const _learningItems = [
     _LearningItem(
       tag: 'VIDEO',
@@ -27,6 +36,8 @@ class PanduanSiagaPage extends StatelessWidget {
       isVideo: true,
     ),
   ];
+
+  double _tasSiagaProgress = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +98,12 @@ class PanduanSiagaPage extends StatelessWidget {
                 context,
                 title: 'Panduan Berdasarkan Bencana',
                 action: 'Lihat semua',
-                onTap: () => _showMessage(context, 'Panduan bencana'),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const SemuaPanduanPage(),
+                  ),
+                ),
               ),
               const SizedBox(height: 10),
               GridView.count(
@@ -99,24 +115,28 @@ class PanduanSiagaPage extends StatelessWidget {
                 childAspectRatio: 0.85,
                 children: [
                   _buildGuideCard(
+                    context,
                     const Color(0xFFFCE9E7),
                     Icons.monitor_heart_rounded,
                     'Saat Gempa Terjadi',
                     const Color(0xFFD94B3D),
                   ),
                   _buildGuideCard(
+                    context,
                     const Color(0xFFE7F2F7),
                     Icons.flood_outlined,
                     'Evakuasi Banjir',
                     const Color(0xFF28617E),
                   ),
                   _buildGuideCard(
+                    context,
                     const Color(0xFFFFF0DC),
                     Icons.local_fire_department_rounded,
                     'Pencegahan Karhutla',
                     const Color(0xFFD36A18),
                   ),
                   _buildGuideCard(
+                    context,
                     const Color(0xFFE5F3EC),
                     Icons.landscape_rounded,
                     'Siaga Erupsi Gunung',
@@ -158,7 +178,19 @@ class PanduanSiagaPage extends StatelessWidget {
       shadowColor: Colors.black.withValues(alpha: 0.08),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: InkWell(
-        onTap: () => _showMessage(context, 'Ceklis tas siaga'),
+        onTap: () async {
+          final result = await Navigator.push<double>(
+            context,
+            MaterialPageRoute<double>(
+              builder: (context) => const CeklisTasSiagaPage(),
+            ),
+          );
+          if (result != null && mounted) {
+            setState(() {
+              _tasSiagaProgress = result;
+            });
+          }
+        },
         borderRadius: BorderRadius.circular(15),
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -203,8 +235,8 @@ class PanduanSiagaPage extends StatelessWidget {
                     const SizedBox(height: 7),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: const LinearProgressIndicator(
-                        value: 0.6,
+                      child: LinearProgressIndicator(
+                        value: _tasSiagaProgress,
                         minHeight: 5,
                         backgroundColor: Color(0xFFE5E7EB),
                         color: Color(0xFFB84E00),
@@ -212,7 +244,7 @@ class PanduanSiagaPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '60% Selesai',
+                      '${(_tasSiagaProgress * 100).toInt()}% Selesai',
                       style: textTheme.labelSmall?.copyWith(
                         color: const Color(0xFFB84E00),
                         fontWeight: FontWeight.w600,
@@ -265,49 +297,62 @@ class PanduanSiagaPage extends StatelessWidget {
   }
 
   Widget _buildGuideCard(
+    BuildContext context,
     Color bgColor,
     IconData icon,
     String title,
     Color iconColor,
   ) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: bgColor,
+    return Material(
+      color: bgColor,
+      borderRadius: BorderRadius.circular(15),
+      child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: iconColor.withValues(alpha: 0.10)),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 54,
-            height: 54,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => DetailPanduanPage(title: title),
+          ),
+        ),
+        child: Ink(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: iconColor.withValues(alpha: 0.10)),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 54,
+                height: 54,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.04),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Icon(icon, color: iconColor, size: 27),
+                child: Icon(icon, color: iconColor, size: 27),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Color(0xFF172033),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  height: 1.25,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Color(0xFF172033),
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
-              height: 1.25,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

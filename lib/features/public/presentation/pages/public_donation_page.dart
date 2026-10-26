@@ -9,19 +9,28 @@ class PublicDonationPage extends StatefulWidget {
 
 class _PublicDonationPageState extends State<PublicDonationPage> {
   static const _donationAmounts = [100000, 250000, 500000];
+  static const _minimumDonation = 10000;
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _donationAmountController = TextEditingController();
   int? _selectedAmount;
   _PaymentMethod? _selectedPaymentMethod;
+  String? _selectedPaymentOption;
   bool _hasAcceptedTerms = false;
+
+  int get _donationAmount =>
+      int.tryParse(_donationAmountController.text.replaceAll('.', '')) ?? 0;
+
+  bool get _isDonationAmountValid => _donationAmount >= _minimumDonation;
 
   @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
+    _donationAmountController.dispose();
     super.dispose();
   }
 
@@ -123,10 +132,42 @@ class _PublicDonationPageState extends State<PublicDonationPage> {
                               onTap: () {
                                 setState(() {
                                   _selectedAmount = amount;
+                                  _donationAmountController.text = amount
+                                      .toString();
                                 });
                               },
                             );
                           },
+                        ),
+                      ),
+                      const SizedBox(height: 9),
+                      TextFormField(
+                        controller: _donationAmountController,
+                        keyboardType: TextInputType.number,
+                        onChanged: (_) {
+                          setState(() {
+                            _selectedAmount = null;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          prefixText: 'Rp ',
+                          hintText: 'Masukkan nominal donasi',
+                          errorText:
+                              _donationAmountController.text.isNotEmpty &&
+                                  !_isDonationAmountValid
+                              ? 'Minimal donasi Rp 10.000'
+                              : null,
+                          filled: true,
+                          fillColor: const Color(0xFFF7F8FA),
+                          isDense: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 11,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(11),
+                            borderSide: BorderSide.none,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -143,16 +184,25 @@ class _PublicDonationPageState extends State<PublicDonationPage> {
                         selected:
                             _selectedPaymentMethod ==
                             _PaymentMethod.bankTransfer,
+                        selectedOption:
+                            _selectedPaymentMethod ==
+                                _PaymentMethod.bankTransfer
+                            ? _selectedPaymentOption
+                            : null,
                         onTap: () =>
-                            _selectPaymentMethod(_PaymentMethod.bankTransfer),
+                            _choosePaymentMethod(_PaymentMethod.bankTransfer),
                       ),
                       const SizedBox(height: 7),
                       _PaymentMethodOption(
                         method: _PaymentMethod.eWallet,
                         selected:
                             _selectedPaymentMethod == _PaymentMethod.eWallet,
+                        selectedOption:
+                            _selectedPaymentMethod == _PaymentMethod.eWallet
+                            ? _selectedPaymentOption
+                            : null,
                         onTap: () =>
-                            _selectPaymentMethod(_PaymentMethod.eWallet),
+                            _choosePaymentMethod(_PaymentMethod.eWallet),
                       ),
                       const SizedBox(height: 5),
                       Row(
@@ -181,7 +231,9 @@ class _PublicDonationPageState extends State<PublicDonationPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: _submitDonation,
+                          onPressed: _isDonationAmountValid
+                              ? _submitDonation
+                              : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFB84E00),
                             foregroundColor: Colors.white,
@@ -195,7 +247,7 @@ class _PublicDonationPageState extends State<PublicDonationPage> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          child: const Text('Submit'),
+                          child: const Text('Lanjutkan'),
                         ),
                       ),
                     ],
@@ -209,10 +261,47 @@ class _PublicDonationPageState extends State<PublicDonationPage> {
     );
   }
 
-  void _selectPaymentMethod(_PaymentMethod method) {
-    setState(() {
-      _selectedPaymentMethod = method;
-    });
+  Future<void> _choosePaymentMethod(_PaymentMethod method) async {
+    final options = method == _PaymentMethod.bankTransfer
+        ? const ['BCA', 'Mandiri', 'BNI', 'BRI', 'BSI']
+        : const ['GoPay', 'OVO', 'DANA', 'ShopeePay'];
+    final option = await showModalBottomSheet<String>(
+      context: context,
+      builder: (sheetContext) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                method == _PaymentMethod.bankTransfer
+                    ? 'Pilih Bank'
+                    : 'Pilih E-Wallet',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            ...options.map(
+              (option) => ListTile(
+                leading: Icon(
+                  method == _PaymentMethod.bankTransfer
+                      ? Icons.account_balance_outlined
+                      : Icons.wallet_outlined,
+                ),
+                title: Text(option),
+                onTap: () => Navigator.pop(sheetContext, option),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (option != null && mounted) {
+      setState(() {
+        _selectedPaymentMethod = method;
+        _selectedPaymentOption = option;
+      });
+    }
   }
 
   void _submitDonation() {
@@ -360,11 +449,13 @@ class _PaymentMethodOption extends StatelessWidget {
   const _PaymentMethodOption({
     required this.method,
     required this.selected,
+    required this.selectedOption,
     required this.onTap,
   });
 
   final _PaymentMethod method;
   final bool selected;
+  final String? selectedOption;
   final VoidCallback onTap;
 
   @override
@@ -402,14 +493,16 @@ class _PaymentMethodOption extends StatelessWidget {
               ),
             ),
             title: Text(
-              isBank ? 'Transfer Bank' : 'E-Wallet',
+              selectedOption ?? (isBank ? 'Transfer Bank' : 'E-Wallet'),
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 color: const Color(0xFF172033),
                 fontWeight: FontWeight.w700,
               ),
             ),
             subtitle: Text(
-              isBank
+              selectedOption != null
+                  ? (isBank ? 'Transfer Bank' : 'E-Wallet')
+                  : isBank
                   ? 'Mandiri, BRI, BCA, BSI, BNI'
                   : 'DANA, GoPay, ShopeePay, QRIS',
               style: Theme.of(context).textTheme.labelSmall
