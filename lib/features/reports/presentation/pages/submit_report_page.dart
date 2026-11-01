@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../dashboard/presentation/providers/active_reports_provider.dart';
 import '../providers/submit_report_provider.dart';
@@ -24,6 +27,10 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
   final _descriptionController = TextEditingController();
   final _reportTypeController = TextEditingController();
   final _koordinatController = TextEditingController();
+  final _reporterNameController = TextEditingController();
+  final _reporterAddressController = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  XFile? _fotoBukti;
 
   double? _latitude;
   double? _longitude;
@@ -41,6 +48,8 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
     _descriptionController.dispose();
     _reportTypeController.dispose();
     _koordinatController.dispose();
+    _reporterNameController.dispose();
+    _reporterAddressController.dispose();
     super.dispose();
   }
 
@@ -114,26 +123,12 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
     ) {
       if (next.status == SubmitReportStatus.success) {
         ref.invalidate(activeReportsProvider);
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            const SnackBar(content: Text('Laporan berhasil dikirim')),
-          );
         final onSubmitted = widget.onSubmitted;
         if (onSubmitted != null) {
           onSubmitted();
         } else {
           context.pop();
         }
-      } else if (next.status == SubmitReportStatus.error &&
-          previous?.status != SubmitReportStatus.error) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(
-              content: Text(next.errorMessage ?? 'Gagal mengirim laporan.'),
-            ),
-          );
       }
     });
 
@@ -244,6 +239,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                         const SizedBox(height: 7),
                         TextFormField(
                           key: const ValueKey('reporter-name-visual-field'),
+                          controller: _reporterNameController,
                           textInputAction: TextInputAction.next,
                           style: const TextStyle(color: Colors.black87),
                           decoration: fieldDecoration(
@@ -259,6 +255,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                         const SizedBox(height: 7),
                         TextFormField(
                           key: const ValueKey('reporter-address-visual-field'),
+                          controller: _reporterAddressController,
                           textInputAction: TextInputAction.next,
                           style: const TextStyle(color: Colors.black87),
                           decoration: fieldDecoration(
@@ -270,17 +267,7 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                         fieldLabel(Icons.image_outlined, 'Tambah Foto'),
                         const SizedBox(height: 7),
                         InkWell(
-                          onTap: () {
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Fitur foto bukti segera hadir.',
-                                  ),
-                                ),
-                              );
-                          },
+                          onTap: _pilihFoto,
                           borderRadius: BorderRadius.circular(12),
                           child: Container(
                             width: double.infinity,
@@ -298,15 +285,35 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                             ),
                             child: Row(
                               children: [
-                                Icon(
-                                  Icons.camera_alt_outlined,
-                                  size: 18,
-                                  color: Colors.blueGrey[500],
-                                ),
+                                if (_fotoBukti != null)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(6),
+                                    child: kIsWeb
+                                        ? Image.network(
+                                            _fotoBukti!.path,
+                                            width: 44,
+                                            height: 44,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.file(
+                                            File(_fotoBukti!.path),
+                                            width: 44,
+                                            height: 44,
+                                            fit: BoxFit.cover,
+                                          ),
+                                  )
+                                else
+                                  Icon(
+                                    Icons.camera_alt_outlined,
+                                    size: 18,
+                                    color: Colors.blueGrey[500],
+                                  ),
                                 const SizedBox(width: 9),
                                 Expanded(
                                   child: Text(
-                                    'Pilih foto bukti',
+                                    _fotoBukti?.name ?? 'Pilih foto bukti',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                     style: textTheme.bodySmall?.copyWith(
                                       color: Colors.blueGrey[600],
                                     ),
@@ -322,10 +329,19 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                                       color: Colors.blueGrey.shade100,
                                     ),
                                   ),
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 18,
-                                    color: Colors.blueGrey[700],
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    onPressed: _fotoBukti == null
+                                        ? null
+                                        : () =>
+                                              setState(() => _fotoBukti = null),
+                                    icon: Icon(
+                                      _fotoBukti == null
+                                          ? Icons.add
+                                          : Icons.close,
+                                      size: 18,
+                                      color: Colors.blueGrey[700],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -539,19 +555,76 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
     return null;
   }
 
-  void _submit() {
+  Future<void> _pilihFoto() async {
+    final foto = await _picker.pickImage(source: ImageSource.gallery);
+    if (foto != null && mounted) {
+      setState(() {
+        _fotoBukti = foto;
+      });
+    }
+  }
+
+  Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    ref
-        .read(submitReportControllerProvider.notifier)
-        .submit(
-          title: _titleController.text,
-          description: _descriptionController.text,
-          reportType: _reportTypeController.text,
-          latitude: _latitude,
-          longitude: _longitude,
+    if (_descriptionController.text.trim().length < 15) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Isi laporan terlalu singkat. Mohon jelaskan situasi minimal 15 karakter agar informasi jelas.',
+            ),
+            backgroundColor: Colors.orange,
+          ),
         );
+      return;
+    }
+
+    try {
+      await ref
+          .read(submitReportControllerProvider.notifier)
+          .submit(
+            title: _titleController.text,
+            description: _descriptionController.text,
+            reportType: _reportTypeController.text,
+            latitude: _latitude,
+            longitude: _longitude,
+          );
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text('Laporan berhasil dikirim!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      setState(() {
+        _formKey.currentState?.reset();
+        _reporterNameController.clear();
+        _reporterAddressController.clear();
+        _titleController.clear();
+        _descriptionController.clear();
+        _reportTypeController.clear();
+        _koordinatController.clear();
+        _latitude = null;
+        _longitude = null;
+        _fotoBukti = null;
+      });
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text('Gagal mengirim laporan: $error'),
+            backgroundColor: Colors.red,
+          ),
+        );
+    }
   }
 }

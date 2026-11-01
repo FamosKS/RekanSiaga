@@ -51,7 +51,7 @@ class ReportSubmissionRepositoryImpl implements ReportSubmissionRepository {
   String _statusToDatabaseValue(ReportStatus status) {
     return switch (status) {
       ReportStatus.draft => 'draft',
-      ReportStatus.submitted => 'submitted',
+      ReportStatus.submitted => 'unverified',
       ReportStatus.underReview => 'under_review',
       ReportStatus.approved => 'approved',
       ReportStatus.rejected => 'rejected',
@@ -62,7 +62,7 @@ class ReportSubmissionRepositoryImpl implements ReportSubmissionRepository {
   ReportStatus _statusFromDatabaseValue(String value) {
     return switch (value) {
       'draft' => ReportStatus.draft,
-      'submitted' => ReportStatus.submitted,
+      'unverified' => ReportStatus.submitted,
       'under_review' => ReportStatus.underReview,
       'approved' => ReportStatus.approved,
       'rejected' => ReportStatus.rejected,

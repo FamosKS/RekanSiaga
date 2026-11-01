@@ -61,11 +61,13 @@ class SubmitReportController extends Notifier<SubmitReportState> {
         status: SubmitReportStatus.error,
         errorMessage: error.message,
       );
+      rethrow;
     } on Exception catch (error) {
       state = SubmitReportState(
         status: SubmitReportStatus.error,
         errorMessage: error.toString(),
       );
+      rethrow;
     }
   }
 

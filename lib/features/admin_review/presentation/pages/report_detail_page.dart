@@ -284,7 +284,7 @@ class ReportDetailPage extends ConsumerWidget {
   String _statusValue(ReportStatus status) {
     return switch (status) {
       ReportStatus.draft => 'draft',
-      ReportStatus.submitted => 'submitted',
+      ReportStatus.submitted => 'unverified',
       ReportStatus.underReview => 'under_review',
       ReportStatus.approved => 'approved',
       ReportStatus.rejected => 'rejected',

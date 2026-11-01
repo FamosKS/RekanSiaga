@@ -131,8 +131,8 @@ class StatusBadge extends StatelessWidget {
         colorScheme.onPrimaryContainer,
         colorScheme.primaryContainer,
       ),
-      'submitted' => (
-        'Dikirim',
+      'unverified' => (
+        'Belum Terverifikasi',
         colorScheme.onSurfaceVariant,
         colorScheme.surfaceContainerHighest,
       ),

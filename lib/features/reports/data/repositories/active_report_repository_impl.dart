@@ -6,7 +6,7 @@ import '../../domain/repositories/active_report_repository.dart';
 class ActiveReportRepositoryImpl implements ActiveReportRepository {
   const ActiveReportRepositoryImpl(this._client);
 
-  static const _activeStatuses = ['submitted', 'under_review', 'approved'];
+  static const _activeStatuses = ['unverified', 'under_review', 'verified'];
 
   final SupabaseClient _client;
 

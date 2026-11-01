@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import '../entities/report_submission.dart';
 import '../entities/report.dart';
 import '../entities/submitted_report.dart';
@@ -49,8 +47,7 @@ class SubmitReportUseCase {
   }
 
   String _generateTrackingCode() {
-    final timestamp = DateTime.now().millisecondsSinceEpoch.toRadixString(36);
-    final nonce = Random.secure().nextInt(1 << 32).toRadixString(36);
-    return 'RPT-${timestamp.toUpperCase()}-${nonce.toUpperCase()}';
+    final timestamp = DateTime.now().microsecondsSinceEpoch.toRadixString(36);
+    return 'RPT-${timestamp.toUpperCase()}';
   }
 }
