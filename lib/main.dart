@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'core/accessibility/accessibility_settings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,12 +42,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'RekanSiaga',
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      routerConfig: router ?? _router,
+    return ValueListenableBuilder<bool>(
+      valueListenable: isHighContrastNotifier,
+      builder: (context, highContrast, _) {
+        return ValueListenableBuilder<double>(
+          valueListenable: fontSizeFactorNotifier,
+          builder: (context, fontSizeFactor, _) {
+            return MaterialApp.router(
+              title: 'RekanSiaga',
+              theme: highContrast ? ThemeData.dark() : AppTheme.light,
+              darkTheme: AppTheme.dark,
+              themeMode: highContrast ? ThemeMode.dark : ThemeMode.system,
+              builder: (context, child) => MediaQuery(
+                data: MediaQuery.of(context)
+                    .copyWith(textScaler: TextScaler.linear(fontSizeFactor)),
+                child: child!,
+              ),
+              routerConfig: router ?? _router,
+            );
+          },
+        );
+      },
     );
   }
 }

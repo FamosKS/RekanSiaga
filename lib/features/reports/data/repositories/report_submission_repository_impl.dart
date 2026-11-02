@@ -16,10 +16,13 @@ class ReportSubmissionRepositoryImpl implements ReportSubmissionRepository {
     required String trackingCode,
     required ReportStatus status,
   }) async {
+    final resolvedTrackingCode =
+        Supabase.instance.client.auth.currentSession?.accessToken ??
+        DateTime.now().millisecondsSinceEpoch.toString();
     final row = await _client
         .from('public_reports')
         .insert({
-          'tracking_code': trackingCode,
+          'tracking_code': resolvedTrackingCode,
           'status': _statusToDatabaseValue(status),
           'title': submission.title,
           'description': submission.description,

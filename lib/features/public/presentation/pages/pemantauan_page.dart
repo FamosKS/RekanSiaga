@@ -116,13 +116,23 @@ class PemantauanPage extends StatelessWidget {
               _buildStatusCard(
                 context,
                 color: const Color(0xFF247A5A),
-                paleColor: const Color(0xFFE4F4EC),
-                icon: Icons.remove_red_eye,
+                paleColor: const Color(0xFFE8F5E9),
+                icon: Icons.remove_red_eye_outlined,
                 title: 'Waspada',
                 subtitle: 'Pantau kondisi lapangan secara berkala',
-                statistics: const [],
-                description: 'Tetap perbarui informasi wilayah Anda dan ikuti arahan resmi untuk menjaga keselamatan bersama.',
-                showActions: false,
+                statistics: const [
+                  _MonitoringStatistic(
+                    icon: Icons.monitor_heart_outlined,
+                    title: 'Gempa',
+                    detail: '5 daerah',
+                  ),
+                  _MonitoringStatistic(
+                    icon: Icons.more_horiz_rounded,
+                    title: 'Lainnya',
+                    detail: '5 daerah',
+                  ),
+                ],
+                description: 'Wilayah Waspada berada dalam kondisi stabil, namun perlu tetap dipantau untuk memastikan respons cepat bila situasi berubah.',
                 onOpenMap: onOpenMap,
               ),
             ],

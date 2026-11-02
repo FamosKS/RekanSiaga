@@ -9,6 +9,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/routing/app_router.dart';
 import '../../../dashboard/presentation/providers/active_reports_provider.dart';
 import '../providers/submit_report_provider.dart';
 
@@ -25,12 +26,23 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
-  final _reportTypeController = TextEditingController();
   final _koordinatController = TextEditingController();
   final _reporterNameController = TextEditingController();
   final _reporterAddressController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   XFile? _fotoBukti;
+  String? _selectedReportType;
+
+  static const List<String> _disasterTypes = [
+    'Banjir',
+    'Gempa Bumi',
+    'Tanah Longsor',
+    'Kebakaran Hutan/Lahan',
+    'Angin Puting Beliung',
+    'Gunung Meletus',
+    'Tsunami',
+    'Lainnya',
+  ];
 
   double? _latitude;
   double? _longitude;
@@ -46,7 +58,6 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
-    _reportTypeController.dispose();
     _koordinatController.dispose();
     _reporterNameController.dispose();
     _reporterAddressController.dispose();
@@ -126,8 +137,6 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
         final onSubmitted = widget.onSubmitted;
         if (onSubmitted != null) {
           onSubmitted();
-        } else {
-          context.pop();
         }
       }
     });
@@ -211,6 +220,14 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                   style: textTheme.headlineMedium?.copyWith(
                     color: const Color(0xFF172033),
                     fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton.icon(
+                    onPressed: () => context.push(AppRoutes.myReports),
+                    icon: const Icon(Icons.receipt_long_outlined, size: 18),
+                    label: const Text('Laporan Saya'),
                   ),
                 ),
                 const SizedBox(height: 7),
@@ -403,17 +420,46 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
                         const SizedBox(height: 11),
                         fieldLabel(Icons.category_outlined, 'Jenis Laporan'),
                         const SizedBox(height: 7),
-                        TextFormField(
+                        DropdownButtonFormField<String>(
                           key: const ValueKey('report-type-field'),
-                          controller: _reportTypeController,
-                          textInputAction: TextInputAction.next,
-                          style: const TextStyle(color: Colors.black87),
+                          initialValue: _selectedReportType,
+                          dropdownColor: Colors.white,
+                          style: const TextStyle(
+                            color: Color(0xFF1E293B),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: Color(0xFF64748B),
+                          ),
                           decoration: fieldDecoration(
-                            hint: 'Contoh: Banjir',
+                            hint: 'Pilih jenis bencana...',
                             icon: Icons.category_outlined,
                           ),
-                          validator: (value) =>
-                              _requiredField(value, 'Jenis laporan'),
+                          hint: const Text('Pilih jenis bencana...'),
+                          items: [
+                            for (final type in _disasterTypes)
+                              DropdownMenuItem<String>(
+                                value: type,
+                                child: Text(
+                                  type,
+                                  style: const TextStyle(
+                                    color: Color(0xFF1E293B),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                          ],
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Jenis bencana wajib dipilih.'
+                              : null,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedReportType = value;
+                            });
+                          },
                         ),
                         const SizedBox(height: 11),
                         fieldLabel(Icons.description_outlined, 'Isi Laporan'),
@@ -564,7 +610,113 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
     }
   }
 
+  void _resetForm() {
+    if (!mounted) return;
+    setState(() {
+      _formKey.currentState?.reset();
+      _reporterNameController.clear();
+      _reporterAddressController.clear();
+      _titleController.clear();
+      _descriptionController.clear();
+      _koordinatController.clear();
+      _latitude = null;
+      _longitude = null;
+      _fotoBukti = null;
+      _selectedReportType = null;
+    });
+  }
+
+  Future<void> _showSuccessDialog(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0, end: 1),
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.elasticOut,
+                  builder: (context, value, child) {
+                    return Transform.scale(scale: value, child: child);
+                  },
+                  child: const Icon(
+                    Icons.check_circle_rounded,
+                    color: Colors.green,
+                    size: 84,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'Laporan Diterima!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF1E293B),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Terima kasih! Informasi yang Anda laporkan telah masuk ke sistem dan akan segera diproses oleh tim RekanSiaga.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF64748B),
+                    fontSize: 14,
+                    height: 1.45,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFC05621),
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      minimumSize: const Size.fromHeight(44),
+                    ),
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop();
+                      _resetForm();
+                    },
+                    child: const Text('Selesai'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _submit() async {
+    if (_selectedReportType == null || _selectedReportType!.isEmpty) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text('Pilih jenis bencana terlebih dahulu'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+      return;
+    }
+
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -589,32 +741,13 @@ class _SubmitReportPageState extends ConsumerState<SubmitReportPage> {
           .submit(
             title: _titleController.text,
             description: _descriptionController.text,
-            reportType: _reportTypeController.text,
+            reportType: _selectedReportType!,
             latitude: _latitude,
             longitude: _longitude,
           );
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text('Laporan berhasil dikirim!'),
-            backgroundColor: Colors.green,
-          ),
-        );
-      setState(() {
-        _formKey.currentState?.reset();
-        _reporterNameController.clear();
-        _reporterAddressController.clear();
-        _titleController.clear();
-        _descriptionController.clear();
-        _reportTypeController.clear();
-        _koordinatController.clear();
-        _latitude = null;
-        _longitude = null;
-        _fotoBukti = null;
-      });
+      await _showSuccessDialog(context);
     } catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context)

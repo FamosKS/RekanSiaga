@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../../../core/accessibility/accessibility_settings.dart';
 import '../widgets/disaster_warning_dialog.dart';
 
 class PublicHomePage extends StatefulWidget {
@@ -29,9 +30,20 @@ class PublicHomePage extends StatefulWidget {
 }
 
 class _PublicHomePageState extends State<PublicHomePage> {
+  String _textSize = 'Normal';
+  bool _highContrast = false;
+  bool _autoReadText = true;
+  bool _showSignLanguage = false;
+
   @override
   void initState() {
     super.initState();
+    _highContrast = isHighContrastNotifier.value;
+    _textSize = switch (fontSizeFactorNotifier.value) {
+      1.2 => 'Besar',
+      1.4 => 'Sangat Besar',
+      _ => 'Normal',
+    };
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(requestLocationPermission());
     });
@@ -83,7 +95,10 @@ class _PublicHomePageState extends State<PublicHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _HomeHeader(onEmergencyTap: widget.onOpenEmergency),
+              _HomeHeader(
+                onEmergencyTap: widget.onOpenEmergency,
+                onAccessibilityTap: () => _showAccessibilityModal(context),
+              ),
               const SizedBox(height: 18),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -136,12 +151,234 @@ class _PublicHomePageState extends State<PublicHomePage> {
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text('$feature segera hadir.')));
   }
+
+  Future<void> _showAccessibilityModal(BuildContext context) {
+    var selectedTextSize = _textSize;
+    var highContrast = _highContrast;
+    var autoReadText = _autoReadText;
+    var showSignLanguage = _showSignLanguage;
+
+    return showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: StatefulBuilder(
+            builder: (context, setDialogState) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            'Aksesibilitas & Bantuan Khusus',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1E293B),
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.of(dialogContext).pop(),
+                          style: IconButton.styleFrom(
+                            backgroundColor: const Color(0xFFF1F5F9),
+                          ),
+                          icon: const Icon(
+                            Icons.close_rounded,
+                            color: Color(0xFF64748B),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+                    Row(
+                      children: const [
+                        Expanded(
+                          child: Text(
+                            'Ukuran Teks',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF1E293B),
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'A-  A+',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF64748B),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        for (final option in const [
+                          'Normal',
+                          'Besar',
+                          'Sangat Besar',
+                        ])
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                right: option == 'Sangat Besar' ? 0 : 6,
+                              ),
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  setDialogState(() {
+                                    selectedTextSize = option;
+                                  });
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  minimumSize: const Size(0, 38),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                  ),
+                                  foregroundColor: selectedTextSize == option
+                                      ? const Color(0xFFC05621)
+                                      : const Color(0xFF64748B),
+                                  backgroundColor: selectedTextSize == option
+                                      ? const Color(0xFFFFF2E7)
+                                      : Colors.white,
+                                  side: BorderSide(
+                                    color: selectedTextSize == option
+                                        ? const Color(0xFFC05621)
+                                        : const Color(0xFFE2E8F0),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: FittedBox(
+                                  child: Text(
+                                    option,
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    SwitchListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text(
+                        'Kontras Tinggi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF1E293B),
+                        ),
+                      ),
+                      subtitle: const Text(
+                        'Mode Gelap/Terang Khusus',
+                        style: TextStyle(color: Color(0xFF64748B)),
+                      ),
+                      value: highContrast,
+                      activeThumbColor: const Color(0xFFC05621),
+                      onChanged: (value) {
+                        setDialogState(() => highContrast = value);
+                      },
+                    ),
+                    SwitchListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text(
+                        'Bacakan Teks Otomatis',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF1E293B),
+                        ),
+                      ),
+                      subtitle: const Text(
+                        'Screen Reader Helper',
+                        style: TextStyle(color: Color(0xFF64748B)),
+                      ),
+                      value: autoReadText,
+                      activeThumbColor: const Color(0xFFC05621),
+                      onChanged: (value) {
+                        setDialogState(() => autoReadText = value);
+                      },
+                    ),
+                    SwitchListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text(
+                        'Tampilkan Video Bahasa Isyarat pada Berita/Darurat',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF1E293B),
+                        ),
+                      ),
+                      value: showSignLanguage,
+                      activeThumbColor: const Color(0xFFC05621),
+                      onChanged: (value) {
+                        setDialogState(() => showSignLanguage = value);
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _textSize = selectedTextSize;
+                            _highContrast = highContrast;
+                            _autoReadText = autoReadText;
+                            _showSignLanguage = showSignLanguage;
+                          });
+                          fontSizeFactorNotifier.value =
+                              switch (selectedTextSize) {
+                                'Besar' => 1.2,
+                                'Sangat Besar' => 1.4,
+                                _ => 1.0,
+                              };
+                          isHighContrastNotifier.value = highContrast;
+                          Navigator.of(dialogContext).pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFC05621),
+                          foregroundColor: Colors.white,
+                          elevation: 0,
+                          minimumSize: const Size.fromHeight(44),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text('Simpan Pengaturan'),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
 }
 
 class _HomeHeader extends StatelessWidget {
-  const _HomeHeader({required this.onEmergencyTap});
+  const _HomeHeader({
+    required this.onEmergencyTap,
+    required this.onAccessibilityTap,
+  });
 
   final VoidCallback onEmergencyTap;
+  final VoidCallback onAccessibilityTap;
 
   @override
   Widget build(BuildContext context) {
@@ -196,6 +433,28 @@ class _HomeHeader extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
+        InkWell(
+          onTap: onAccessibilityTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF2E7),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: const Color(0xFFC05621).withValues(alpha: 0.35),
+              ),
+            ),
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.accessibility_new_rounded,
+              size: 20,
+              color: Color(0xFFC05621),
+            ),
+          ),
+        ),
+        const SizedBox(width: 6),
         ElevatedButton.icon(
           onPressed: onEmergencyTap,
           icon: const Icon(Icons.notifications_active_outlined, size: 15),

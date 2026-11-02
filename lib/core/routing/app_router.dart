@@ -13,6 +13,7 @@ import '../../features/auth/presentation/pages/profile_page.dart';
 import '../../features/admin_review/presentation/pages/report_detail_page.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/reports/presentation/pages/submit_report_page.dart';
+import '../../features/reports/presentation/pages/my_reports_page.dart';
 
 abstract final class AppRoutes {
   static const root = '/';
@@ -23,6 +24,7 @@ abstract final class AppRoutes {
   static const dashboard = '/staff-dashboard';
   static const profile = '/profile';
   static const submitReport = '/submit-report';
+  static const myReports = '/my-reports';
   static const reportDetailName = 'report-detail';
   static const reportDetailPath = '/report-detail/:reportId';
 }
@@ -92,6 +94,10 @@ GoRouter createAppRouter({SupabaseClient? supabaseClient}) {
       GoRoute(
         path: AppRoutes.submitReport,
         builder: (context, state) => const SubmitReportPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.myReports,
+        builder: (context, state) => const MyReportsPage(),
       ),
     ],
   );
