@@ -409,7 +409,7 @@ class _HomeHeader extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 8),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -421,55 +421,71 @@ class _HomeHeader extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Text(
-                'RekanSiaga',
-                style: textTheme.titleLarge?.copyWith(
-                  color: const Color(0xFF172033),
-                  fontWeight: FontWeight.w800,
-                  height: 1.05,
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'RekanSiaga',
+                  maxLines: 1,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.titleMedium?.copyWith(
+                    color: const Color(0xFF172033),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    height: 1.05,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(width: 8),
-        InkWell(
-          onTap: onAccessibilityTap,
-          borderRadius: BorderRadius.circular(12),
-          child: Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFF2E7),
+        const SizedBox(width: 6),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: onAccessibilityTap,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: const Color(0xFFC05621).withValues(alpha: 0.35),
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFF2E7),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: const Color(0xFFC05621).withValues(alpha: 0.35),
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: const Icon(
+                  Icons.accessibility_new_rounded,
+                  size: 20,
+                  color: Color(0xFFC05621),
+                ),
               ),
             ),
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.accessibility_new_rounded,
-              size: 20,
-              color: Color(0xFFC05621),
+            const SizedBox(width: 5),
+            ElevatedButton.icon(
+              onPressed: onEmergencyTap,
+              icon: const Icon(Icons.notifications_active_outlined, size: 15),
+              label: const Text('Darurat (SOS)'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFD34B3B),
+                foregroundColor: Colors.white,
+                elevation: 0,
+                minimumSize: const Size(0, 36),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                shape: const StadiumBorder(),
+                textStyle: textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
-          ),
-        ),
-        const SizedBox(width: 6),
-        ElevatedButton.icon(
-          onPressed: onEmergencyTap,
-          icon: const Icon(Icons.notifications_active_outlined, size: 15),
-          label: const Text('Darurat (SOS)'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFD34B3B),
-            foregroundColor: Colors.white,
-            elevation: 0,
-            minimumSize: const Size(0, 36),
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            shape: const StadiumBorder(),
-            textStyle: textTheme.labelSmall?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          ],
         ),
       ],
     );
