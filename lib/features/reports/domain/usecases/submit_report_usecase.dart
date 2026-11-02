@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import '../entities/report_submission.dart';
 import '../entities/report.dart';
 import '../entities/submitted_report.dart';
@@ -14,6 +16,10 @@ class SubmitReportUseCase {
     required String reportType,
     double? latitude,
     double? longitude,
+    String? provinceCode,
+    String? regencyCode,
+    String? districtCode,
+    String? villageCode,
   }) async {
     final sanitizedTitle = title.trim();
     final sanitizedDescription = description.trim();
@@ -37,6 +43,10 @@ class SubmitReportUseCase {
       reportType: sanitizedReportType,
       latitude: latitude,
       longitude: longitude,
+      provinceCode: provinceCode,
+      regencyCode: regencyCode,
+      districtCode: districtCode,
+      villageCode: villageCode,
     );
 
     return _repository.submitReport(
@@ -47,7 +57,13 @@ class SubmitReportUseCase {
   }
 
   String _generateTrackingCode() {
-    final timestamp = DateTime.now().microsecondsSinceEpoch.toRadixString(36);
-    return 'RPT-${timestamp.toUpperCase()}';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final random = Random.secure();
+    String block() => List.generate(
+      4,
+      (_) => characters[random.nextInt(characters.length)],
+    ).join();
+
+    return 'RK2-${block()}-${block()}-${block()}';
   }
 }

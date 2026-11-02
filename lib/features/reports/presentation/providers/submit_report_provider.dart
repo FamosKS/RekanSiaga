@@ -36,17 +36,21 @@ class SubmitReportController extends Notifier<SubmitReportState> {
   @override
   SubmitReportState build() => const SubmitReportState();
 
-  Future<void> submit({
+  Future<String> submit({
     required String title,
     required String description,
     required String reportType,
     double? latitude,
     double? longitude,
+    String? provinceCode,
+    String? regencyCode,
+    String? districtCode,
+    String? villageCode,
   }) async {
     state = const SubmitReportState(status: SubmitReportStatus.loading);
 
     try {
-      await ref
+      final submittedReport = await ref
           .read(submitReportUseCaseProvider)
           .execute(
             title: title,
@@ -54,8 +58,13 @@ class SubmitReportController extends Notifier<SubmitReportState> {
             reportType: reportType,
             latitude: latitude,
             longitude: longitude,
+            provinceCode: provinceCode,
+            regencyCode: regencyCode,
+            districtCode: districtCode,
+            villageCode: villageCode,
           );
       state = const SubmitReportState(status: SubmitReportStatus.success);
+      return submittedReport.trackingCode;
     } on FormatException catch (error) {
       state = SubmitReportState(
         status: SubmitReportStatus.error,

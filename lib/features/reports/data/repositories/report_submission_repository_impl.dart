@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../domain/entities/report.dart';
@@ -16,31 +17,36 @@ class ReportSubmissionRepositoryImpl implements ReportSubmissionRepository {
     required String trackingCode,
     required ReportStatus status,
   }) async {
-    final resolvedTrackingCode =
-        Supabase.instance.client.auth.currentSession?.accessToken ??
-        DateTime.now().millisecondsSinceEpoch.toString();
-    final row = await _client
-        .from('public_reports')
-        .insert({
-          'tracking_code': resolvedTrackingCode,
-          'status': _statusToDatabaseValue(status),
-          'title': submission.title,
-          'description': submission.description,
-          'report_type': submission.reportType,
-          if (submission.coordinatesWkt != null)
-            'coordinates': submission.coordinatesWkt,
-        })
-        .select('id,tracking_code,title,description,report_type,status')
-        .single();
+    try {
+      final row = await _client
+          .from('public_reports')
+          .insert({
+            'tracking_code': trackingCode,
+            'status': _statusToDatabaseValue(status),
+            'title': submission.title,
+            'description': submission.description,
+            'report_type': submission.reportType,
+            if (submission.coordinatesWkt != null)
+              'coordinates': submission.coordinatesWkt,
+          })
+          .select('id,tracking_code,title,description,report_type,status')
+          .single();
 
-    return SubmittedReport(
-      id: _requiredString(row, 'id'),
-      trackingCode: _requiredString(row, 'tracking_code'),
-      title: _requiredString(row, 'title'),
-      description: _requiredString(row, 'description'),
-      reportType: _requiredString(row, 'report_type'),
-      status: _statusFromDatabaseValue(_requiredString(row, 'status')),
-    );
+      return SubmittedReport(
+        id: _requiredString(row, 'id'),
+        trackingCode: _requiredString(row, 'tracking_code'),
+        title: _requiredString(row, 'title'),
+        description: _requiredString(row, 'description'),
+        reportType: _requiredString(row, 'report_type'),
+        status: _statusFromDatabaseValue(_requiredString(row, 'status')),
+      );
+    } on PostgrestException catch (error) {
+      debugPrint(
+        'ERROR DETAIL PUBLIC_REPORTS: ${error.message}; '
+        'code=${error.code}; details=${error.details}; hint=${error.hint}',
+      );
+      rethrow;
+    }
   }
 
   String _requiredString(Map<String, dynamic> row, String key) {
