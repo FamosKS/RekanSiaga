@@ -3,8 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/accessibility/accessibility_settings.dart';
+import '../../../content/data/article_repository.dart';
+import '../../../content/domain/article.dart';
+import '../../../content/presentation/article_cover.dart';
 import '../widgets/disaster_warning_dialog.dart';
 
 class PublicHomePage extends StatefulWidget {
@@ -18,12 +22,6 @@ class PublicHomePage extends StatefulWidget {
   final VoidCallback onOpenMap;
   final VoidCallback onOpenReport;
   final VoidCallback onOpenEmergency;
-
-  static const _newsImages = [
-    'assets/images/news-image-1.png',
-    'assets/images/news-image-2.png',
-    'assets/images/news-card-3.png',
-  ];
 
   @override
   State<PublicHomePage> createState() => _PublicHomePageState();
@@ -721,6 +719,7 @@ class _NewsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final repository = ArticleRepository();
 
     return Column(
       children: [
@@ -748,35 +747,116 @@ class _NewsSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 4),
-        SizedBox(
-          height: 100,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: PublicHomePage._newsImages.length,
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(
-                right: index == PublicHomePage._newsImages.length - 1 ? 0 : 10,
-              ),
-              child: Card(
-                margin: EdgeInsets.zero,
-                elevation: 1,
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+        FutureBuilder<Article?>(
+          future: repository.featured(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(color: Color(0xFFF57C00)),
+              );
+            }
+            if (snapshot.hasError) {
+              return _newsState(
+                context,
+                Icons.cloud_off_outlined,
+                'Artikel tidak dapat dimuat. Periksa koneksi internet.',
+              );
+            }
+            final article = snapshot.data;
+            if (article == null) {
+              return _newsState(
+                context,
+                Icons.article_outlined,
+                'Belum ada artikel published.',
+              );
+            }
+            return InkWell(
+              onTap: () => context.push('/article/${article.slug}'),
+              borderRadius: BorderRadius.circular(10),
+              child: Ink(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: _HomeImage(
-                    path: PublicHomePage._newsImages[index],
-                    height: 100,
-                    width: 100,
-                  ),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: ArticleCover(
+                        article: article,
+                        repository: repository,
+                        height: 92,
+                        width: 92,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              article.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1E293B),
+                              ),
+                            ),
+                            if (article.publishedAt != null) ...[
+                              const SizedBox(height: 6),
+                              Text(
+                                _formatNewsDate(article.publishedAt!),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF64748B),
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ],
+    );
+  }
+
+  String _formatNewsDate(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}/'
+        '${date.month.toString().padLeft(2, '0')}/${date.year}';
+  }
+
+  Widget _newsState(BuildContext context, IconData icon, String message) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: const Color(0xFF64748B)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              message,
+              style: const TextStyle(color: Color(0xFF64748B), height: 1.35),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

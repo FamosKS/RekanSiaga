@@ -7,7 +7,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../features/public/presentation/pages/public_main_page.dart';
 import '../../features/public/presentation/pages/pemantauan_page.dart';
 import '../../features/public/presentation/pages/panduan_siaga_page.dart';
-import '../../features/public/presentation/pages/sos_page.dart';
+import '../../features/public/presentation/pages/pusat_darurat_page.dart';
+import '../../features/content/presentation/article_detail_page.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/profile_page.dart';
 import '../../features/admin_review/presentation/pages/report_detail_page.dart';
@@ -27,6 +28,7 @@ abstract final class AppRoutes {
   static const myReports = '/my-reports';
   static const reportDetailName = 'report-detail';
   static const reportDetailPath = '/report-detail/:reportId';
+  static const articleDetailPath = '/article/:slug';
 }
 
 GoRouter createAppRouter({SupabaseClient? supabaseClient}) {
@@ -58,7 +60,12 @@ GoRouter createAppRouter({SupabaseClient? supabaseClient}) {
       ),
       GoRoute(
         path: AppRoutes.sos,
-        builder: (context, state) => const SosPage(),
+        builder: (context, state) => const PusatDaruratPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.articleDetailPath,
+        builder: (context, state) =>
+            ArticleDetailPage(slug: state.pathParameters['slug']!),
       ),
       GoRoute(
         path: AppRoutes.monitoring,

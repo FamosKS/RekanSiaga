@@ -1,15 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-Future<void> showDisasterWarningDialog(BuildContext context) {
+Future<void> showDisasterWarningDialog(
+  BuildContext context, {
+  DisasterWarning? warning,
+}) {
   return showDialog<void>(
     context: context,
-    builder: (context) => const DisasterWarningDialog(),
+    builder: (context) => DisasterWarningDialog(warning: warning),
   );
 }
 
+class DisasterWarning {
+  const DisasterWarning({
+    required this.id,
+    required this.version,
+    required this.title,
+    required this.description,
+    required this.location,
+    required this.occurredAt,
+    required this.source,
+    required this.updatedAt,
+    required this.status,
+    this.expectedArrival,
+    this.condition,
+    this.safetyAction,
+    this.evacuations = const [],
+  });
+
+  final String id;
+  final int version;
+  final String title;
+  final String description;
+  final String location;
+  final DateTime occurredAt;
+  final String source;
+  final DateTime updatedAt;
+  final String status;
+  final String? expectedArrival;
+  final String? condition;
+  final String? safetyAction;
+  final List<EvacuationReference> evacuations;
+}
+
+class EvacuationReference {
+  const EvacuationReference({required this.label, required this.note});
+
+  final String label;
+  final String note;
+}
+
 class DisasterWarningDialog extends StatelessWidget {
-  const DisasterWarningDialog({super.key});
+  const DisasterWarningDialog({super.key, this.warning});
+
+  final DisasterWarning? warning;
 
   static const _orange = Color(0xFFE87500);
   static const _mutedText = Color(0xFF68707D);
@@ -55,7 +98,7 @@ class DisasterWarningDialog extends StatelessWidget {
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () => Navigator.of(context).pop(),
                     tooltip: 'Tutup',
                     visualDensity: VisualDensity.compact,
                     icon: const Icon(Icons.close),
@@ -63,9 +106,9 @@ class DisasterWarningDialog extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              const Text(
-                'Peringatan Bencana Banjir Bandang',
-                style: TextStyle(
+              Text(
+                warning?.title ?? 'Informasi peringatan belum tersedia',
+                style: const TextStyle(
                   color: Color(0xFF172033),
                   fontSize: 21,
                   fontWeight: FontWeight.w800,
@@ -73,9 +116,9 @@ class DisasterWarningDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                'Banjir bandang diperkirakan tiba dalam 18 menit. Segera lakukan mitigasi dan evakuasi ke tempat yang lebih tinggi.',
-                style: TextStyle(color: _mutedText, height: 1.45),
+              Text(
+                warning?.description ?? 'Belum ada peringatan aktif yang dapat diverifikasi dari sumber publik.',
+                style: const TextStyle(color: _mutedText, height: 1.45),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 14),
@@ -83,66 +126,79 @@ class DisasterWarningDialog extends StatelessWidget {
               ),
               _buildInfoRow(
                 Icons.location_on,
-                'Lokasi: Kecamatan Koto Tangah, Kota Padang',
+                warning == null
+                    ? 'Lokasi: belum tersedia'
+                    : 'Lokasi: ${warning!.location}',
               ),
               const SizedBox(height: 12),
               _buildInfoRow(
                 Icons.access_time,
-                'Perkiraan tiba: 18 menit (pukul 14:42 WIB)',
+                warning?.expectedArrival == null
+                    ? 'Estimasi kedatangan: belum ada estimasi resmi'
+                    : 'Estimasi kedatangan: ${warning!.expectedArrival}',
               ),
               const SizedBox(height: 12),
               _buildInfoRow(
                 Icons.warning_amber,
-                'Kondisi: Curah hujan tinggi, debit air naik cepat',
+                warning?.condition == null
+                    ? 'Kondisi: belum tersedia'
+                    : 'Kondisi: ${warning!.condition}',
               ),
-              const SizedBox(height: 18),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF1E2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.map_outlined, color: _orange, size: 20),
-                        SizedBox(width: 8),
-                        Text(
-                          'Rute Evakuasi',
-                          style: TextStyle(
-                            color: _orange,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Gunakan rute evakuasi menuju titik kumpul di Masjid Al-Hidayah atau Puskesmas Cisarua.',
-                      style: TextStyle(color: _mutedText, height: 1.4),
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(Icons.arrow_forward, color: _orange, size: 18),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'Ambil Jl. Raya Puncak -> belok kiri ke Jl. Siliwangi -> lanjutkan ke arah Masjid Al-Hidayah',
+              const SizedBox(height: 12),
+              _buildInfoRow(
+                Icons.update,
+                warning == null
+                    ? 'Terakhir diperbarui: belum tersedia'
+                    : 'Terakhir diperbarui: ${_formatDateTime(warning!.updatedAt)}',
+              ),
+              if (warning?.safetyAction case final action?) ...[
+                const SizedBox(height: 18),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFF1E2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.shield_outlined, color: _orange, size: 20),
+                          SizedBox(width: 8),
+                          Text(
+                            'Tindakan Keselamatan',
                             style: TextStyle(
-                              color: Color(0xFF424955),
-                              height: 1.4,
+                              color: _orange,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        action,
+                        style: const TextStyle(color: _mutedText, height: 1.4),
+                      ),
+                    ],
+                  ),
                 ),
+              ],
+              const SizedBox(height: 18),
+              if (warning == null || warning!.evacuations.isEmpty)
+                _buildInfoRow(
+                  Icons.follow_the_signs_outlined,
+                  'Rute evakuasi belum terverifikasi. Ikuti arahan petugas dan informasi resmi setempat.',
+                )
+              else
+                _buildEvacuations(warning!.evacuations),
+              const SizedBox(height: 18),
+              _buildInfoRow(
+                Icons.campaign_outlined,
+                warning == null
+                    ? 'Sumber informasi: belum tersedia'
+                    : 'Sumber: ${warning!.source} • Status: ${warning!.status}',
               ),
             ],
           ),
@@ -165,5 +221,42 @@ class DisasterWarningDialog extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  static Widget _buildEvacuations(List<EvacuationReference> evacuations) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Row(
+          children: [
+            Icon(Icons.follow_the_signs_outlined, color: _orange, size: 20),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                'Referensi Evakuasi Terverifikasi',
+                style: TextStyle(fontWeight: FontWeight.w800),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        for (final evacuation in evacuations)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              '${evacuation.label}: ${evacuation.note}',
+              style: const TextStyle(color: _mutedText, height: 1.4),
+            ),
+          ),
+      ],
+    );
+  }
+
+  static String _formatDateTime(DateTime value) {
+    final local = value.toLocal();
+    return '${local.day.toString().padLeft(2, '0')}/'
+        '${local.month.toString().padLeft(2, '0')}/'
+        '${local.year} ${local.hour.toString().padLeft(2, '0')}:'
+        '${local.minute.toString().padLeft(2, '0')}';
   }
 }

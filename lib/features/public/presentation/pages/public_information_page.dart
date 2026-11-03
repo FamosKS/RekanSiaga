@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../content/data/article_repository.dart';
+import '../../../content/domain/article.dart';
+import '../../../content/presentation/article_cover.dart';
 
 class PublicInformationPage extends StatefulWidget {
   const PublicInformationPage({
@@ -25,6 +30,49 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
   ];
 
   int _selectedCategory = 0;
+  final _repository = ArticleRepository();
+  final _searchController = TextEditingController();
+  List<Article> _articles = const [];
+  bool _loading = true;
+  Object? _error;
+  String _search = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadArticles();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadArticles() async {
+    if (!mounted) return;
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+    try {
+      final articles = await _repository.publishedPage(
+        pageSize: 20,
+        titleSearch: _search,
+      );
+      if (!mounted) return;
+      setState(() {
+        _articles = articles;
+        _loading = false;
+      });
+    } catch (error) {
+      if (!mounted) return;
+      setState(() {
+        _error = error;
+        _loading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +86,13 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
             children: [
               _InformationHeader(onEmergencyTap: widget.onOpenEmergency),
               const SizedBox(height: 14),
-              const _InformationSearchBar(),
+              _InformationSearchBar(
+                controller: _searchController,
+                onChanged: (value) {
+                  _search = value;
+                },
+                onSubmitted: (_) => _loadArticles(),
+              ),
               const SizedBox(height: 12),
               _CategoryChips(
                 categories: _categories,
@@ -48,8 +102,21 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
                 }),
               ),
               const SizedBox(height: 12),
-              _FeaturedStory(
-                onReadMore: () => _showMessage(context, 'Berita utama'),
+              FutureBuilder<Article?>(
+                future: _repository.featured(),
+                builder: (context, snapshot) {
+                  final article = snapshot.data;
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const _FeaturedStoryLoading();
+                  }
+                  if (snapshot.hasError || article == null) {
+                    return const _FeaturedStoryEmpty();
+                  }
+                  return _FeaturedStory(
+                    article: article,
+                    repository: _repository,
+                  );
+                },
               ),
               const SizedBox(height: 14),
               Text(
@@ -66,7 +133,7 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
                   Expanded(
                     child: _MonitoringCard(
                       title: 'Awas',
-                      count: '5',
+                      count: '-',
                       icon: Icons.warning_rounded,
                       accent: const Color(0xFFDC3545),
                       tint: const Color(0xFFFFE3E5),
@@ -77,7 +144,7 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
                   Expanded(
                     child: _MonitoringCard(
                       title: 'Siaga',
-                      count: '5',
+                      count: '-',
                       icon: Icons.notifications_active_rounded,
                       accent: const Color(0xFFB84E00),
                       tint: const Color(0xFFFFECD8),
@@ -88,7 +155,7 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
                   Expanded(
                     child: _MonitoringCard(
                       title: 'Waspada',
-                      count: '5',
+                      count: '-',
                       icon: Icons.visibility_rounded,
                       accent: const Color(0xFF14805E),
                       tint: const Color(0xFFE4F8EF),
@@ -116,6 +183,14 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
                   child: const Text('Lihat selengkapnya'),
                 ),
               ),
+              const SizedBox(height: 14),
+              Text(
+                'Artikel',
+                style: Theme.of(context).textTheme.titleMedium
+                    ?.copyWith(fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 8),
+              _buildArticleContent(context),
             ],
           ),
         ),
@@ -123,10 +198,90 @@ class _PublicInformationPageState extends State<PublicInformationPage> {
     );
   }
 
-  static void _showMessage(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('$message segera hadir.')));
+  Widget _buildArticleContent(BuildContext context) {
+    if (_loading) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 24),
+          child: CircularProgressIndicator(color: Color(0xFFF57C00)),
+        ),
+      );
+    }
+    if (_error != null) {
+      return _ArticleState(
+        icon: Icons.cloud_off_outlined,
+        title: 'Artikel tidak dapat dimuat',
+        message: 'Periksa koneksi internet lalu coba kembali.',
+        onRetry: _loadArticles,
+      );
+    }
+    if (_articles.isEmpty) {
+      return const _ArticleState(
+        icon: Icons.article_outlined,
+        title: 'Belum ada artikel',
+        message: 'Artikel yang dipublikasikan akan tampil di sini.',
+      );
+    }
+    return Column(
+      children: [
+        for (final article in _articles)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: InkWell(
+              onTap: () => context.push('/article/${article.slug}'),
+              borderRadius: BorderRadius.circular(14),
+              child: Ink(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(14),
+                      ),
+                      child: ArticleCover(
+                        article: article,
+                        repository: _repository,
+                        height: 150,
+                        width: double.infinity,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            article.title,
+                            style: Theme.of(context).textTheme.titleSmall
+                                ?.copyWith(fontWeight: FontWeight.w800),
+                          ),
+                          if (article.summary?.trim().isNotEmpty == true) ...[
+                            const SizedBox(height: 6),
+                            Text(
+                              article.summary!,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Color(0xFF64748B),
+                                height: 1.35,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
   }
 }
 
@@ -209,7 +364,15 @@ class _InformationHeader extends StatelessWidget {
 }
 
 class _InformationSearchBar extends StatelessWidget {
-  const _InformationSearchBar();
+  const _InformationSearchBar({
+    required this.controller,
+    required this.onChanged,
+    required this.onSubmitted,
+  });
+
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+  final ValueChanged<String> onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -228,6 +391,9 @@ class _InformationSearchBar extends StatelessWidget {
         ],
       ),
       child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           hintText: 'Cari berita bencana, lokasi, atau panduan...',
@@ -352,134 +518,145 @@ class _CategoryChip extends StatelessWidget {
 }
 
 class _FeaturedStory extends StatelessWidget {
-  const _FeaturedStory({required this.onReadMore});
+  const _FeaturedStory({required this.article, required this.repository});
 
-  final VoidCallback onReadMore;
+  final Article article;
+  final ArticleRepository repository;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final currentDate = DateTime.now();
-    const monthNames = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Mei',
-      'Jun',
-      'Jul',
-      'Agu',
-      'Sep',
-      'Okt',
-      'Nov',
-      'Des',
-    ];
-
-    return SizedBox(
-      width: double.infinity,
-      height: 145,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(14),
-        child: Stack(
-          fit: StackFit.expand,
+    return InkWell(
+      onTap: () => context.push('/article/${article.slug}'),
+      borderRadius: BorderRadius.circular(14),
+      child: Ink(
+        width: double.infinity,
+        height: 145,
+        decoration: BoxDecoration(
+          color: const Color(0xFFF1F5F9),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Row(
           children: [
-            Image.asset(
-              'assets/images/hero-image.png',
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) =>
-                  ColoredBox(color: Colors.grey.shade400),
-            ),
-            const DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Color(0x33000000),
-                    Color(0xE6000000),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(18),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.star_rounded, color: Color(0xFFB84E00)),
+                    const SizedBox(height: 10),
+                    Text(
+                      article.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: const Color(0xFF334155),
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      article.summary?.trim().isNotEmpty == true
+                          ? article.summary!
+                          : 'Informasi utama dipublikasikan dari RekanSiaga.',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall
+                          ?.copyWith(color: const Color(0xFF64748B)),
+                    ),
                   ],
-                  stops: [0.15, 0.48, 1],
                 ),
               ),
             ),
-            Positioned(
-              left: 10,
-              right: 10,
-              bottom: 8,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFB84E00),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          'WASPADA',
-                          style: textTheme.labelSmall?.copyWith(
-                            color: Colors.white,
-                            fontSize: 8,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 7),
-                      Text(
-                        '${currentDate.day} ${monthNames[currentDate.month - 1]} ${currentDate.year}',
-                        style: textTheme.labelSmall?.copyWith(
-                          color: Colors.white70,
-                          fontSize: 9,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'BNPB Pastikan Dukungan Operasional Berlanjut untuk Penanganan Karhutla Kaltim',
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: textTheme.labelLarge?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      height: 1.1,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  InkWell(
-                    onTap: onReadMore,
-                    borderRadius: BorderRadius.circular(12),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 3,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFB84E00),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        'Baca Selengkapnya  →',
-                        style: textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
-                          fontSize: 8,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            if (article.coverImagePath?.isNotEmpty == true)
+              ClipRRect(
+                borderRadius: const BorderRadius.horizontal(
+                  right: Radius.circular(14),
+                ),
+                child: ArticleCover(
+                  article: article,
+                  repository: repository,
+                  height: 145,
+                  width: 120,
+                ),
               ),
-            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _FeaturedStoryLoading extends StatelessWidget {
+  const _FeaturedStoryLoading();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: 145,
+      child: Center(child: CircularProgressIndicator(color: Color(0xFFF57C00))),
+    );
+  }
+}
+
+class _FeaturedStoryEmpty extends StatelessWidget {
+  const _FeaturedStoryEmpty();
+
+  @override
+  Widget build(BuildContext context) {
+    return const _ArticleState(
+      icon: Icons.article_outlined,
+      title: 'Informasi utama belum tersedia',
+      message: 'Belum ada artikel published atau informasi utama aktif.',
+    );
+  }
+}
+
+class _ArticleState extends StatelessWidget {
+  const _ArticleState({
+    required this.icon,
+    required this.title,
+    required this.message,
+    this.onRetry,
+  });
+
+  final IconData icon;
+  final String title;
+  final String message;
+  final VoidCallback? onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: const Color(0xFF64748B)),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleSmall
+                ?.copyWith(fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Color(0xFF64748B)),
+          ),
+          if (onRetry != null) ...[
+            const SizedBox(height: 10),
+            OutlinedButton(onPressed: onRetry, child: const Text('Coba lagi')),
+          ],
+        ],
       ),
     );
   }

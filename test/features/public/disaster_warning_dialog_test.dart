@@ -28,15 +28,18 @@ void main() {
     await tester.tap(find.text('Buka peringatan'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Peringatan Bencana Banjir Bandang'), findsOneWidget);
     expect(find.text('PERINGATAN BENCANA'), findsOneWidget);
-    expect(find.textContaining('Kecamatan Koto Tangah'), findsOneWidget);
-    expect(find.text('Rute Evakuasi'), findsOneWidget);
+    expect(find.text('Informasi peringatan belum tersedia'), findsOneWidget);
+    expect(find.textContaining('estimasi'), findsWidgets);
+    expect(
+      find.textContaining('Rute evakuasi belum terverifikasi'),
+      findsOneWidget,
+    );
 
     await tester.tap(find.byTooltip('Tutup'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Peringatan Bencana Banjir Bandang'), findsNothing);
+    expect(find.text('Informasi peringatan belum tersedia'), findsNothing);
     router.dispose();
   });
 }
