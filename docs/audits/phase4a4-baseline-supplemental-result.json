@@ -1,0 +1,2309 @@
+[
+  {
+    "phase4a4_baseline_supplemental": {
+      "kind": "STAGING_BASELINE_ADDITIONAL_METADATA_NOT_AUTHENTICATED_API_PROOF",
+      "note": "Metadata only. No overall security PASS. Baseline hashes are pre-remediation; after A/B/C use a reviewed phase-specific manifest. Missing default-ACL rows do not imply deny; built-in defaults and role inheritance require review.",
+      "counts": {
+        "tables": 26,
+        "columns": 200,
+        "indexes": 61,
+        "policies": 26,
+        "routines": 6,
+        "rls_enabled": 26
+      },
+      "relations": [
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "api_idempotency_keys",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "app_settings",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "articles",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "audit_logs",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "data_sources",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "disaster_events",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "donation_campaigns",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "emergency_contacts",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "event_locations",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "event_updates",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "mitigation_checklist_items",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "mitigation_guides",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "notification_deliveries",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "notification_rules",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "notification_subscriptions",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "notifications",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "public_reports",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "regions",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=arwd/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "relief_locations",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "report_access_tokens",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "report_attachments",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "report_status_history",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "roles",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "source_sync_logs",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "staff_profiles",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+          "rls": true,
+          "kind": "r",
+          "name": "staff_role_assignments",
+          "owner": "postgres",
+          "options": null,
+          "force_rls": false
+        }
+      ],
+      "role_flags": [
+        {
+          "role": "anon",
+          "login": false,
+          "inherit": true,
+          "superuser": false,
+          "bypass_rls": false,
+          "create_role": false
+        },
+        {
+          "role": "authenticated",
+          "login": false,
+          "inherit": true,
+          "superuser": false,
+          "bypass_rls": false,
+          "create_role": false
+        },
+        {
+          "role": "service_role",
+          "login": false,
+          "inherit": true,
+          "superuser": false,
+          "bypass_rls": true,
+          "create_role": false
+        }
+      ],
+      "role_seeds": [
+        {
+          "code": "information_manager",
+          "name": "Information Manager",
+          "description": "Disaster data and articles"
+        },
+        {
+          "code": "mitigation_editor",
+          "name": "Mitigation Editor",
+          "description": "Maintain disaster guidance"
+        },
+        {
+          "code": "report_verifier",
+          "name": "Report Verifier",
+          "description": "Review community reports"
+        },
+        {
+          "code": "super_admin",
+          "name": "Super Administrator",
+          "description": "System management"
+        }
+      ],
+      "captured_at": "2026-10-22T17:35:58.549622+00:00",
+      "raw_indexes": [
+        {
+          "ready": true,
+          "table": "api_idempotency_keys",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX api_idempotency_keys_pkey ON public.api_idempotency_keys USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "api_idempotency_keys",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX api_idempotency_keys_scope_key_hash_key ON public.api_idempotency_keys USING btree (scope, key_hash)"
+        },
+        {
+          "ready": true,
+          "table": "api_idempotency_keys",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_idempotency_expiry ON public.api_idempotency_keys USING btree (expires_at)"
+        },
+        {
+          "ready": true,
+          "table": "app_settings",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX app_settings_pkey ON public.app_settings USING btree (key)"
+        },
+        {
+          "ready": true,
+          "table": "articles",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX articles_pkey ON public.articles USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "articles",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX articles_slug_key ON public.articles USING btree (slug)"
+        },
+        {
+          "ready": true,
+          "table": "articles",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_articles_pub ON public.articles USING btree (publication_status, published_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "audit_logs",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX audit_logs_pkey ON public.audit_logs USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "audit_logs",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_audit_entity ON public.audit_logs USING btree (entity_type, entity_id, created_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "data_sources",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX data_sources_pkey ON public.data_sources USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "data_sources",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX data_sources_name_key ON public.data_sources USING btree (name)"
+        },
+        {
+          "ready": true,
+          "table": "disaster_events",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX disaster_events_pkey ON public.disaster_events USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "disaster_events",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX uq_disaster_source_external ON public.disaster_events USING btree (source_id, external_id) WHERE (external_id IS NOT NULL)"
+        },
+        {
+          "ready": true,
+          "table": "disaster_events",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_events_region_time ON public.disaster_events USING btree (region_id, occurred_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "disaster_events",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_events_time ON public.disaster_events USING btree (occurred_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "donation_campaigns",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX donation_campaigns_pkey ON public.donation_campaigns USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "emergency_contacts",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX emergency_contacts_pkey ON public.emergency_contacts USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "event_locations",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX event_locations_pkey ON public.event_locations USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "event_locations",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX uq_one_primary_event_location ON public.event_locations USING btree (event_id) WHERE is_primary"
+        },
+        {
+          "ready": true,
+          "table": "event_locations",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_event_locations_event ON public.event_locations USING btree (event_id)"
+        },
+        {
+          "ready": true,
+          "table": "event_locations",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_event_locations_geo ON public.event_locations USING gist (coordinates)"
+        },
+        {
+          "ready": true,
+          "table": "event_updates",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX event_updates_pkey ON public.event_updates USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "event_updates",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_updates_event_time ON public.event_updates USING btree (event_id, recorded_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "mitigation_checklist_items",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX mitigation_checklist_items_pkey ON public.mitigation_checklist_items USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "mitigation_checklist_items",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX mitigation_checklist_items_guide_id_phase_sort_order_key ON public.mitigation_checklist_items USING btree (guide_id, phase, sort_order)"
+        },
+        {
+          "ready": true,
+          "table": "mitigation_checklist_items",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_checklists_guide ON public.mitigation_checklist_items USING btree (guide_id, phase, sort_order)"
+        },
+        {
+          "ready": true,
+          "table": "mitigation_guides",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX mitigation_guides_pkey ON public.mitigation_guides USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "notification_deliveries",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX notification_deliveries_pkey ON public.notification_deliveries USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "notification_deliveries",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX notification_deliveries_notification_id_subscription_id_key ON public.notification_deliveries USING btree (notification_id, subscription_id)"
+        },
+        {
+          "ready": true,
+          "table": "notification_deliveries",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_deliveries_status ON public.notification_deliveries USING btree (status)"
+        },
+        {
+          "ready": true,
+          "table": "notification_rules",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX notification_rules_pkey ON public.notification_rules USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "notification_rules",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX notification_rules_code_key ON public.notification_rules USING btree (code)"
+        },
+        {
+          "ready": true,
+          "table": "notification_subscriptions",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX notification_subscriptions_pkey ON public.notification_subscriptions USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "notification_subscriptions",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX notification_subscriptions_endpoint_hash_key ON public.notification_subscriptions USING btree (endpoint_hash)"
+        },
+        {
+          "ready": true,
+          "table": "notification_subscriptions",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_notifications_region ON public.notification_subscriptions USING btree (region_id, is_active)"
+        },
+        {
+          "ready": true,
+          "table": "notifications",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX notifications_pkey ON public.notifications USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "notifications",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX notifications_dedupe_key_key ON public.notifications USING btree (dedupe_key)"
+        },
+        {
+          "ready": true,
+          "table": "public_reports",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX public_reports_pkey ON public.public_reports USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "public_reports",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX public_reports_tracking_code_key ON public.public_reports USING btree (tracking_code)"
+        },
+        {
+          "ready": true,
+          "table": "public_reports",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_reports_status_time ON public.public_reports USING btree (status, created_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "public_reports",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_reports_region ON public.public_reports USING btree (region_id)"
+        },
+        {
+          "ready": true,
+          "table": "public_reports",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_reports_geo ON public.public_reports USING gist (coordinates)"
+        },
+        {
+          "ready": true,
+          "table": "regions",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX regions_pkey ON public.regions USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "regions",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX regions_code_key ON public.regions USING btree (code)"
+        },
+        {
+          "ready": true,
+          "table": "regions",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_regions_parent ON public.regions USING btree (parent_id)"
+        },
+        {
+          "ready": true,
+          "table": "relief_locations",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX relief_locations_pkey ON public.relief_locations USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "relief_locations",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_relief_geo ON public.relief_locations USING gist (coordinates)"
+        },
+        {
+          "ready": true,
+          "table": "report_access_tokens",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX report_access_tokens_pkey ON public.report_access_tokens USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "report_access_tokens",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX report_access_tokens_token_hash_key ON public.report_access_tokens USING btree (token_hash)"
+        },
+        {
+          "ready": true,
+          "table": "report_access_tokens",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_tokens_report ON public.report_access_tokens USING btree (report_id)"
+        },
+        {
+          "ready": true,
+          "table": "report_attachments",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX report_attachments_pkey ON public.report_attachments USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "report_attachments",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX report_attachments_storage_path_key ON public.report_attachments USING btree (storage_path)"
+        },
+        {
+          "ready": true,
+          "table": "report_attachments",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_report_attachments ON public.report_attachments USING btree (report_id)"
+        },
+        {
+          "ready": true,
+          "table": "report_status_history",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX report_status_history_pkey ON public.report_status_history USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "report_status_history",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_report_history ON public.report_status_history USING btree (report_id, changed_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "roles",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX roles_pkey ON public.roles USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "roles",
+          "valid": true,
+          "unique": true,
+          "primary": false,
+          "definition": "CREATE UNIQUE INDEX roles_code_key ON public.roles USING btree (code)"
+        },
+        {
+          "ready": true,
+          "table": "source_sync_logs",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX source_sync_logs_pkey ON public.source_sync_logs USING btree (id)"
+        },
+        {
+          "ready": true,
+          "table": "source_sync_logs",
+          "valid": true,
+          "unique": false,
+          "primary": false,
+          "definition": "CREATE INDEX idx_sync_source_time ON public.source_sync_logs USING btree (source_id, started_at DESC)"
+        },
+        {
+          "ready": true,
+          "table": "staff_profiles",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX staff_profiles_pkey ON public.staff_profiles USING btree (user_id)"
+        },
+        {
+          "ready": true,
+          "table": "staff_role_assignments",
+          "valid": true,
+          "unique": true,
+          "primary": true,
+          "definition": "CREATE UNIQUE INDEX staff_role_assignments_pkey ON public.staff_role_assignments USING btree (staff_id, role_id)"
+        }
+      ],
+      "target_note": "Dashboard project reference must be recorded separately; postgres database name is not staging identity",
+      "raw_policies": [
+        {
+          "name": "articles_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "articles",
+          "using": "((publication_status = 'published'::text) AND (published_at IS NOT NULL))",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "articles_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "articles",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+        },
+        {
+          "name": "sources_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "data_sources",
+          "using": "is_active",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "events_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "disaster_events",
+          "using": "((published_at IS NOT NULL) AND (verification_status <> 'unconfirmed'::text))",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "events_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "disaster_events",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+        },
+        {
+          "name": "donations_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "donation_campaigns",
+          "using": "(is_active AND is_simulation)",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "donations_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "donation_campaigns",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+        },
+        {
+          "name": "emergency_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "emergency_contacts",
+          "using": "(is_verified AND is_active)",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "emergency_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "emergency_contacts",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+        },
+        {
+          "name": "event_locations_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "event_locations",
+          "using": "(EXISTS ( SELECT 1\n   FROM disaster_events e\n  WHERE ((e.id = event_locations.event_id) AND (e.published_at IS NOT NULL) AND (e.verification_status <> 'unconfirmed'::text))))",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "locations_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "event_locations",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+        },
+        {
+          "name": "event_updates_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "event_updates",
+          "using": "(EXISTS ( SELECT 1\n   FROM disaster_events e\n  WHERE ((e.id = event_updates.event_id) AND (e.published_at IS NOT NULL) AND (e.verification_status <> 'unconfirmed'::text))))",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "updates_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "event_updates",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+        },
+        {
+          "name": "checklist_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "mitigation_checklist_items",
+          "using": "(is_active AND (EXISTS ( SELECT 1\n   FROM mitigation_guides g\n  WHERE ((g.id = mitigation_checklist_items.guide_id) AND (g.publication_status = 'published'::text)))))",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "checklist_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "mitigation_checklist_items",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])"
+        },
+        {
+          "name": "guides_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "mitigation_guides",
+          "using": "(publication_status = 'published'::text)",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "guides_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "mitigation_guides",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])"
+        },
+        {
+          "name": "reports_staff_read",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "public_reports",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'report_verifier'::text])",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "regions_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "regions",
+          "using": "true",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "relief_public_read",
+          "roles": [
+            "anon",
+            "authenticated"
+          ],
+          "table": "relief_locations",
+          "using": "(verification_status = 'verified'::text)",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "relief_staff_all",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "relief_locations",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+          "command": "ALL",
+          "permissive": "PERMISSIVE",
+          "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+        },
+        {
+          "name": "attachments_staff_read",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "report_attachments",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'report_verifier'::text])",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "report_history_staff_read",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "report_status_history",
+          "using": "has_staff_role(ARRAY['super_admin'::text, 'report_verifier'::text])",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "roles_staff_read",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "roles",
+          "using": "has_staff_role(ARRAY['super_admin'::text])",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "staff_profiles_read",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "staff_profiles",
+          "using": "((user_id = ( SELECT auth.uid() AS uid)) OR has_staff_role(ARRAY['super_admin'::text]))",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        },
+        {
+          "name": "assignment_staff_read",
+          "roles": [
+            "authenticated"
+          ],
+          "table": "staff_role_assignments",
+          "using": "((staff_id = ( SELECT auth.uid() AS uid)) OR has_staff_role(ARRAY['super_admin'::text]))",
+          "command": "SELECT",
+          "permissive": "PERMISSIVE",
+          "with_check": null
+        }
+      ],
+      "row_triggers": [
+        {
+          "name": "trg_settings_updated",
+          "table": "app_settings",
+          "enabled": "O",
+          "function": "set_updated_at()",
+          "definition": "CREATE TRIGGER trg_settings_updated BEFORE UPDATE ON app_settings FOR EACH ROW EXECUTE FUNCTION set_updated_at()"
+        },
+        {
+          "name": "trg_articles_updated",
+          "table": "articles",
+          "enabled": "O",
+          "function": "set_updated_at()",
+          "definition": "CREATE TRIGGER trg_articles_updated BEFORE UPDATE ON articles FOR EACH ROW EXECUTE FUNCTION set_updated_at()"
+        },
+        {
+          "name": "trg_events_updated",
+          "table": "disaster_events",
+          "enabled": "O",
+          "function": "set_updated_at()",
+          "definition": "CREATE TRIGGER trg_events_updated BEFORE UPDATE ON disaster_events FOR EACH ROW EXECUTE FUNCTION set_updated_at()"
+        },
+        {
+          "name": "trg_guides_updated",
+          "table": "mitigation_guides",
+          "enabled": "O",
+          "function": "set_updated_at()",
+          "definition": "CREATE TRIGGER trg_guides_updated BEFORE UPDATE ON mitigation_guides FOR EACH ROW EXECUTE FUNCTION set_updated_at()"
+        },
+        {
+          "name": "trg_reports_updated",
+          "table": "public_reports",
+          "enabled": "O",
+          "function": "set_updated_at()",
+          "definition": "CREATE TRIGGER trg_reports_updated BEFORE UPDATE ON public_reports FOR EACH ROW EXECUTE FUNCTION set_updated_at()"
+        },
+        {
+          "name": "trg_relief_updated",
+          "table": "relief_locations",
+          "enabled": "O",
+          "function": "set_updated_at()",
+          "definition": "CREATE TRIGGER trg_relief_updated BEFORE UPDATE ON relief_locations FOR EACH ROW EXECUTE FUNCTION set_updated_at()"
+        }
+      ],
+      "session_user": "postgres",
+      "source_seeds": [
+        {
+          "url": "https://data.bmkg.go.id",
+          "name": "BMKG",
+          "type": "official_api",
+          "active": true,
+          "api_identifier_is_null": true
+        },
+        {
+          "url": null,
+          "name": "RekanSiaga Admin",
+          "type": "manual",
+          "active": true,
+          "api_identifier_is_null": true
+        }
+      ],
+      "database_name": "postgres",
+      "executing_role": "postgres",
+      "fixture_counts": {
+        "tokens": 0,
+        "history": 0,
+        "reports": 0,
+        "profiles": 0,
+        "assignments": 0
+      },
+      "server_version": "17.11",
+      "raw_constraints": [
+        {
+          "name": "api_idempotency_keys_pkey",
+          "type": "p",
+          "table": "api_idempotency_keys",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "api_idempotency_keys_processing_status_check",
+          "type": "c",
+          "table": "api_idempotency_keys",
+          "validated": true,
+          "definition": "CHECK (processing_status = ANY (ARRAY['processing'::text, 'completed'::text, 'failed'::text]))"
+        },
+        {
+          "name": "api_idempotency_keys_scope_key_hash_key",
+          "type": "u",
+          "table": "api_idempotency_keys",
+          "validated": true,
+          "definition": "UNIQUE (scope, key_hash)"
+        },
+        {
+          "name": "app_settings_pkey",
+          "type": "p",
+          "table": "app_settings",
+          "validated": true,
+          "definition": "PRIMARY KEY (key)"
+        },
+        {
+          "name": "app_settings_updated_by_fkey",
+          "type": "f",
+          "table": "app_settings",
+          "validated": true,
+          "definition": "FOREIGN KEY (updated_by) REFERENCES staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "articles_author_id_fkey",
+          "type": "f",
+          "table": "articles",
+          "validated": true,
+          "definition": "FOREIGN KEY (author_id) REFERENCES staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "articles_check",
+          "type": "c",
+          "table": "articles",
+          "validated": true,
+          "definition": "CHECK (publication_status <> 'published'::text OR published_at IS NOT NULL)"
+        },
+        {
+          "name": "articles_pkey",
+          "type": "p",
+          "table": "articles",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "articles_publication_status_check",
+          "type": "c",
+          "table": "articles",
+          "validated": true,
+          "definition": "CHECK (publication_status = ANY (ARRAY['draft'::text, 'published'::text, 'archived'::text]))"
+        },
+        {
+          "name": "articles_slug_key",
+          "type": "u",
+          "table": "articles",
+          "validated": true,
+          "definition": "UNIQUE (slug)"
+        },
+        {
+          "name": "audit_logs_actor_id_fkey",
+          "type": "f",
+          "table": "audit_logs",
+          "validated": true,
+          "definition": "FOREIGN KEY (actor_id) REFERENCES staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "audit_logs_pkey",
+          "type": "p",
+          "table": "audit_logs",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "data_sources_name_key",
+          "type": "u",
+          "table": "data_sources",
+          "validated": true,
+          "definition": "UNIQUE (name)"
+        },
+        {
+          "name": "data_sources_pkey",
+          "type": "p",
+          "table": "data_sources",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "data_sources_source_type_check",
+          "type": "c",
+          "table": "data_sources",
+          "validated": true,
+          "definition": "CHECK (source_type = ANY (ARRAY['official_api'::text, 'manual'::text, 'other'::text]))"
+        },
+        {
+          "name": "disaster_events_event_status_check",
+          "type": "c",
+          "table": "disaster_events",
+          "validated": true,
+          "definition": "CHECK (event_status = ANY (ARRAY['unknown'::text, 'ongoing'::text, 'resolved'::text]))"
+        },
+        {
+          "name": "disaster_events_pkey",
+          "type": "p",
+          "table": "disaster_events",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "disaster_events_region_id_fkey",
+          "type": "f",
+          "table": "disaster_events",
+          "validated": true,
+          "definition": "FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "disaster_events_source_id_fkey",
+          "type": "f",
+          "table": "disaster_events",
+          "validated": true,
+          "definition": "FOREIGN KEY (source_id) REFERENCES data_sources(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "disaster_events_verification_status_check",
+          "type": "c",
+          "table": "disaster_events",
+          "validated": true,
+          "definition": "CHECK (verification_status = ANY (ARRAY['unconfirmed'::text, 'source_confirmed'::text, 'staff_verified'::text]))"
+        },
+        {
+          "name": "donation_campaigns_event_id_fkey",
+          "type": "f",
+          "table": "donation_campaigns",
+          "validated": true,
+          "definition": "FOREIGN KEY (event_id) REFERENCES disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "donation_campaigns_is_simulation_check",
+          "type": "c",
+          "table": "donation_campaigns",
+          "validated": true,
+          "definition": "CHECK (is_simulation)"
+        },
+        {
+          "name": "donation_campaigns_pkey",
+          "type": "p",
+          "table": "donation_campaigns",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "donation_campaigns_region_id_fkey",
+          "type": "f",
+          "table": "donation_campaigns",
+          "validated": true,
+          "definition": "FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "donation_campaigns_simulation_target_amount_check",
+          "type": "c",
+          "table": "donation_campaigns",
+          "validated": true,
+          "definition": "CHECK (simulation_target_amount IS NULL OR simulation_target_amount >= 0::numeric)"
+        },
+        {
+          "name": "emergency_contacts_check",
+          "type": "c",
+          "table": "emergency_contacts",
+          "validated": true,
+          "definition": "CHECK (phone_number IS NOT NULL OR official_url IS NOT NULL)"
+        },
+        {
+          "name": "emergency_contacts_check1",
+          "type": "c",
+          "table": "emergency_contacts",
+          "validated": true,
+          "definition": "CHECK (NOT is_verified OR verified_at IS NOT NULL)"
+        },
+        {
+          "name": "emergency_contacts_pkey",
+          "type": "p",
+          "table": "emergency_contacts",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "emergency_contacts_region_id_fkey",
+          "type": "f",
+          "table": "emergency_contacts",
+          "validated": true,
+          "definition": "FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "event_locations_event_id_fkey",
+          "type": "f",
+          "table": "event_locations",
+          "validated": true,
+          "definition": "FOREIGN KEY (event_id) REFERENCES disaster_events(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "event_locations_location_type_check",
+          "type": "c",
+          "table": "event_locations",
+          "validated": true,
+          "definition": "CHECK (location_type = ANY (ARRAY['epicenter'::text, 'affected_area'::text, 'other'::text]))"
+        },
+        {
+          "name": "event_locations_pkey",
+          "type": "p",
+          "table": "event_locations",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "event_locations_region_id_fkey",
+          "type": "f",
+          "table": "event_locations",
+          "validated": true,
+          "definition": "FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "event_updates_event_id_fkey",
+          "type": "f",
+          "table": "event_updates",
+          "validated": true,
+          "definition": "FOREIGN KEY (event_id) REFERENCES disaster_events(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "event_updates_pkey",
+          "type": "p",
+          "table": "event_updates",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "event_updates_recorded_by_fkey",
+          "type": "f",
+          "table": "event_updates",
+          "validated": true,
+          "definition": "FOREIGN KEY (recorded_by) REFERENCES staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "mitigation_checklist_items_guide_id_fkey",
+          "type": "f",
+          "table": "mitigation_checklist_items",
+          "validated": true,
+          "definition": "FOREIGN KEY (guide_id) REFERENCES mitigation_guides(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "mitigation_checklist_items_guide_id_phase_sort_order_key",
+          "type": "u",
+          "table": "mitigation_checklist_items",
+          "validated": true,
+          "definition": "UNIQUE (guide_id, phase, sort_order)"
+        },
+        {
+          "name": "mitigation_checklist_items_phase_check",
+          "type": "c",
+          "table": "mitigation_checklist_items",
+          "validated": true,
+          "definition": "CHECK (phase = ANY (ARRAY['before'::text, 'during'::text, 'after'::text]))"
+        },
+        {
+          "name": "mitigation_checklist_items_pkey",
+          "type": "p",
+          "table": "mitigation_checklist_items",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "mitigation_checklist_items_sort_order_check",
+          "type": "c",
+          "table": "mitigation_checklist_items",
+          "validated": true,
+          "definition": "CHECK (sort_order >= 0)"
+        },
+        {
+          "name": "mitigation_guides_author_id_fkey",
+          "type": "f",
+          "table": "mitigation_guides",
+          "validated": true,
+          "definition": "FOREIGN KEY (author_id) REFERENCES staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "mitigation_guides_pkey",
+          "type": "p",
+          "table": "mitigation_guides",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "mitigation_guides_publication_status_check",
+          "type": "c",
+          "table": "mitigation_guides",
+          "validated": true,
+          "definition": "CHECK (publication_status = ANY (ARRAY['draft'::text, 'published'::text, 'archived'::text]))"
+        },
+        {
+          "name": "notification_deliveries_attempts_check",
+          "type": "c",
+          "table": "notification_deliveries",
+          "validated": true,
+          "definition": "CHECK (attempts >= 0)"
+        },
+        {
+          "name": "notification_deliveries_notification_id_fkey",
+          "type": "f",
+          "table": "notification_deliveries",
+          "validated": true,
+          "definition": "FOREIGN KEY (notification_id) REFERENCES notifications(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "notification_deliveries_notification_id_subscription_id_key",
+          "type": "u",
+          "table": "notification_deliveries",
+          "validated": true,
+          "definition": "UNIQUE (notification_id, subscription_id)"
+        },
+        {
+          "name": "notification_deliveries_pkey",
+          "type": "p",
+          "table": "notification_deliveries",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "notification_deliveries_status_check",
+          "type": "c",
+          "table": "notification_deliveries",
+          "validated": true,
+          "definition": "CHECK (status = ANY (ARRAY['pending'::text, 'sent'::text, 'failed'::text]))"
+        },
+        {
+          "name": "notification_deliveries_subscription_id_fkey",
+          "type": "f",
+          "table": "notification_deliveries",
+          "validated": true,
+          "definition": "FOREIGN KEY (subscription_id) REFERENCES notification_subscriptions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "notification_rules_code_key",
+          "type": "u",
+          "table": "notification_rules",
+          "validated": true,
+          "definition": "UNIQUE (code)"
+        },
+        {
+          "name": "notification_rules_pkey",
+          "type": "p",
+          "table": "notification_rules",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "notification_subscriptions_endpoint_hash_key",
+          "type": "u",
+          "table": "notification_subscriptions",
+          "validated": true,
+          "definition": "UNIQUE (endpoint_hash)"
+        },
+        {
+          "name": "notification_subscriptions_permission_status_check",
+          "type": "c",
+          "table": "notification_subscriptions",
+          "validated": true,
+          "definition": "CHECK (permission_status = ANY (ARRAY['granted'::text, 'denied'::text, 'unknown'::text]))"
+        },
+        {
+          "name": "notification_subscriptions_pkey",
+          "type": "p",
+          "table": "notification_subscriptions",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "notification_subscriptions_platform_check",
+          "type": "c",
+          "table": "notification_subscriptions",
+          "validated": true,
+          "definition": "CHECK (platform = ANY (ARRAY['web'::text, 'android'::text, 'ios'::text]))"
+        },
+        {
+          "name": "notification_subscriptions_region_id_fkey",
+          "type": "f",
+          "table": "notification_subscriptions",
+          "validated": true,
+          "definition": "FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "notifications_dedupe_key_key",
+          "type": "u",
+          "table": "notifications",
+          "validated": true,
+          "definition": "UNIQUE (dedupe_key)"
+        },
+        {
+          "name": "notifications_event_id_fkey",
+          "type": "f",
+          "table": "notifications",
+          "validated": true,
+          "definition": "FOREIGN KEY (event_id) REFERENCES disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "notifications_pkey",
+          "type": "p",
+          "table": "notifications",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "notifications_rule_id_fkey",
+          "type": "f",
+          "table": "notifications",
+          "validated": true,
+          "definition": "FOREIGN KEY (rule_id) REFERENCES notification_rules(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "notifications_status_check",
+          "type": "c",
+          "table": "notifications",
+          "validated": true,
+          "definition": "CHECK (status = ANY (ARRAY['queued'::text, 'processing'::text, 'completed'::text, 'failed'::text]))"
+        },
+        {
+          "name": "public_reports_description_check",
+          "type": "c",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "CHECK (length(TRIM(BOTH FROM description)) >= 10 AND length(TRIM(BOTH FROM description)) <= 5000)"
+        },
+        {
+          "name": "public_reports_event_id_fkey",
+          "type": "f",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "FOREIGN KEY (event_id) REFERENCES disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "public_reports_pkey",
+          "type": "p",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "public_reports_region_id_fkey",
+          "type": "f",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "public_reports_reviewed_by_fkey",
+          "type": "f",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "FOREIGN KEY (reviewed_by) REFERENCES staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "public_reports_status_check",
+          "type": "c",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "CHECK (status = ANY (ARRAY['unverified'::text, 'under_review'::text, 'verified'::text, 'rejected'::text]))"
+        },
+        {
+          "name": "public_reports_title_check",
+          "type": "c",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "CHECK (length(TRIM(BOTH FROM title)) >= 5 AND length(TRIM(BOTH FROM title)) <= 180)"
+        },
+        {
+          "name": "public_reports_tracking_code_key",
+          "type": "u",
+          "table": "public_reports",
+          "validated": true,
+          "definition": "UNIQUE (tracking_code)"
+        },
+        {
+          "name": "regions_check",
+          "type": "c",
+          "table": "regions",
+          "validated": true,
+          "definition": "CHECK (parent_id IS NULL OR parent_id <> id)"
+        },
+        {
+          "name": "regions_code_key",
+          "type": "u",
+          "table": "regions",
+          "validated": true,
+          "definition": "UNIQUE (code)"
+        },
+        {
+          "name": "regions_parent_id_fkey",
+          "type": "f",
+          "table": "regions",
+          "validated": true,
+          "definition": "FOREIGN KEY (parent_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "regions_pkey",
+          "type": "p",
+          "table": "regions",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "regions_region_type_check",
+          "type": "c",
+          "table": "regions",
+          "validated": true,
+          "definition": "CHECK (region_type = ANY (ARRAY['province'::text, 'regency'::text, 'city'::text, 'district'::text, 'village'::text]))"
+        },
+        {
+          "name": "relief_locations_event_id_fkey",
+          "type": "f",
+          "table": "relief_locations",
+          "validated": true,
+          "definition": "FOREIGN KEY (event_id) REFERENCES disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "relief_locations_location_type_check",
+          "type": "c",
+          "table": "relief_locations",
+          "validated": true,
+          "definition": "CHECK (location_type = ANY (ARRAY['shelter'::text, 'command_post'::text, 'aid_point'::text]))"
+        },
+        {
+          "name": "relief_locations_pkey",
+          "type": "p",
+          "table": "relief_locations",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "relief_locations_region_id_fkey",
+          "type": "f",
+          "table": "relief_locations",
+          "validated": true,
+          "definition": "FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "relief_locations_verification_status_check",
+          "type": "c",
+          "table": "relief_locations",
+          "validated": true,
+          "definition": "CHECK (verification_status = ANY (ARRAY['unverified'::text, 'verified'::text]))"
+        },
+        {
+          "name": "report_access_tokens_pkey",
+          "type": "p",
+          "table": "report_access_tokens",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "report_access_tokens_report_id_fkey",
+          "type": "f",
+          "table": "report_access_tokens",
+          "validated": true,
+          "definition": "FOREIGN KEY (report_id) REFERENCES public_reports(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "report_access_tokens_token_hash_key",
+          "type": "u",
+          "table": "report_access_tokens",
+          "validated": true,
+          "definition": "UNIQUE (token_hash)"
+        },
+        {
+          "name": "report_attachments_file_size_check",
+          "type": "c",
+          "table": "report_attachments",
+          "validated": true,
+          "definition": "CHECK (file_size > 0 AND file_size <= 5242880)"
+        },
+        {
+          "name": "report_attachments_mime_type_check",
+          "type": "c",
+          "table": "report_attachments",
+          "validated": true,
+          "definition": "CHECK (mime_type = ANY (ARRAY['image/jpeg'::text, 'image/png'::text, 'image/webp'::text]))"
+        },
+        {
+          "name": "report_attachments_pkey",
+          "type": "p",
+          "table": "report_attachments",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "report_attachments_report_id_fkey",
+          "type": "f",
+          "table": "report_attachments",
+          "validated": true,
+          "definition": "FOREIGN KEY (report_id) REFERENCES public_reports(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "report_attachments_storage_path_key",
+          "type": "u",
+          "table": "report_attachments",
+          "validated": true,
+          "definition": "UNIQUE (storage_path)"
+        },
+        {
+          "name": "report_status_history_changed_by_fkey",
+          "type": "f",
+          "table": "report_status_history",
+          "validated": true,
+          "definition": "FOREIGN KEY (changed_by) REFERENCES staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "report_status_history_from_status_check",
+          "type": "c",
+          "table": "report_status_history",
+          "validated": true,
+          "definition": "CHECK (from_status IS NULL OR (from_status = ANY (ARRAY['unverified'::text, 'under_review'::text, 'verified'::text, 'rejected'::text])))"
+        },
+        {
+          "name": "report_status_history_pkey",
+          "type": "p",
+          "table": "report_status_history",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "report_status_history_report_id_fkey",
+          "type": "f",
+          "table": "report_status_history",
+          "validated": true,
+          "definition": "FOREIGN KEY (report_id) REFERENCES public_reports(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "report_status_history_to_status_check",
+          "type": "c",
+          "table": "report_status_history",
+          "validated": true,
+          "definition": "CHECK (to_status = ANY (ARRAY['unverified'::text, 'under_review'::text, 'verified'::text, 'rejected'::text]))"
+        },
+        {
+          "name": "roles_code_check",
+          "type": "c",
+          "table": "roles",
+          "validated": true,
+          "definition": "CHECK (code = ANY (ARRAY['super_admin'::text, 'information_manager'::text, 'report_verifier'::text, 'mitigation_editor'::text]))"
+        },
+        {
+          "name": "roles_code_key",
+          "type": "u",
+          "table": "roles",
+          "validated": true,
+          "definition": "UNIQUE (code)"
+        },
+        {
+          "name": "roles_pkey",
+          "type": "p",
+          "table": "roles",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "source_sync_logs_check",
+          "type": "c",
+          "table": "source_sync_logs",
+          "validated": true,
+          "definition": "CHECK (finished_at IS NULL OR finished_at >= started_at)"
+        },
+        {
+          "name": "source_sync_logs_pkey",
+          "type": "p",
+          "table": "source_sync_logs",
+          "validated": true,
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "name": "source_sync_logs_records_processed_check",
+          "type": "c",
+          "table": "source_sync_logs",
+          "validated": true,
+          "definition": "CHECK (records_processed >= 0)"
+        },
+        {
+          "name": "source_sync_logs_source_id_fkey",
+          "type": "f",
+          "table": "source_sync_logs",
+          "validated": true,
+          "definition": "FOREIGN KEY (source_id) REFERENCES data_sources(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "source_sync_logs_sync_status_check",
+          "type": "c",
+          "table": "source_sync_logs",
+          "validated": true,
+          "definition": "CHECK (sync_status = ANY (ARRAY['success'::text, 'partial'::text, 'failed'::text]))"
+        },
+        {
+          "name": "staff_profiles_pkey",
+          "type": "p",
+          "table": "staff_profiles",
+          "validated": true,
+          "definition": "PRIMARY KEY (user_id)"
+        },
+        {
+          "name": "staff_profiles_user_id_fkey",
+          "type": "f",
+          "table": "staff_profiles",
+          "validated": true,
+          "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+        },
+        {
+          "name": "staff_role_assignments_pkey",
+          "type": "p",
+          "table": "staff_role_assignments",
+          "validated": true,
+          "definition": "PRIMARY KEY (staff_id, role_id)"
+        },
+        {
+          "name": "staff_role_assignments_role_id_fkey",
+          "type": "f",
+          "table": "staff_role_assignments",
+          "validated": true,
+          "definition": "FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "staff_role_assignments_staff_id_fkey",
+          "type": "f",
+          "table": "staff_role_assignments",
+          "validated": true,
+          "definition": "FOREIGN KEY (staff_id) REFERENCES staff_profiles(user_id) ON DELETE CASCADE"
+        }
+      ],
+      "all_default_acls": [
+        {
+          "acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+          "global": false,
+          "schema": "public",
+          "creator": "supabase_admin",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+          "global": false,
+          "schema": "public",
+          "creator": "supabase_admin",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+          "global": false,
+          "schema": "public",
+          "creator": "supabase_admin",
+          "object_type": "r"
+        },
+        {
+          "acl": "{postgres=r*w*U*/supabase_admin}",
+          "global": false,
+          "schema": "extensions",
+          "creator": "supabase_admin",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X*/supabase_admin}",
+          "global": false,
+          "schema": "extensions",
+          "creator": "supabase_admin",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=a*r*w*d*D*x*t*m*/supabase_admin}",
+          "global": false,
+          "schema": "extensions",
+          "creator": "supabase_admin",
+          "object_type": "r"
+        },
+        {
+          "acl": "{postgres=rwU/supabase_admin,dashboard_user=rwU/supabase_admin}",
+          "global": false,
+          "schema": "realtime",
+          "creator": "supabase_admin",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X/supabase_admin,dashboard_user=X/supabase_admin}",
+          "global": false,
+          "schema": "realtime",
+          "creator": "supabase_admin",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=a*r*wdDxtm/supabase_admin,dashboard_user=arwdDxtm/supabase_admin}",
+          "global": false,
+          "schema": "realtime",
+          "creator": "supabase_admin",
+          "object_type": "r"
+        },
+        {
+          "acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+          "global": false,
+          "schema": "graphql_public",
+          "creator": "supabase_admin",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+          "global": false,
+          "schema": "graphql_public",
+          "creator": "supabase_admin",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+          "global": false,
+          "schema": "graphql_public",
+          "creator": "supabase_admin",
+          "object_type": "r"
+        },
+        {
+          "acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+          "global": false,
+          "schema": "graphql",
+          "creator": "supabase_admin",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+          "global": false,
+          "schema": "graphql",
+          "creator": "supabase_admin",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+          "global": false,
+          "schema": "graphql",
+          "creator": "supabase_admin",
+          "object_type": "r"
+        },
+        {
+          "acl": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}",
+          "global": false,
+          "schema": "public",
+          "creator": "postgres",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+          "global": false,
+          "schema": "public",
+          "creator": "postgres",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "global": false,
+          "schema": "public",
+          "creator": "postgres",
+          "object_type": "r"
+        },
+        {
+          "acl": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}",
+          "global": false,
+          "schema": "storage",
+          "creator": "postgres",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+          "global": false,
+          "schema": "storage",
+          "creator": "postgres",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+          "global": false,
+          "schema": "storage",
+          "creator": "postgres",
+          "object_type": "r"
+        },
+        {
+          "acl": "{postgres=rwU/supabase_auth_admin,dashboard_user=rwU/supabase_auth_admin}",
+          "global": false,
+          "schema": "auth",
+          "creator": "supabase_auth_admin",
+          "object_type": "S"
+        },
+        {
+          "acl": "{postgres=X/supabase_auth_admin,dashboard_user=X/supabase_auth_admin}",
+          "global": false,
+          "schema": "auth",
+          "creator": "supabase_auth_admin",
+          "object_type": "f"
+        },
+        {
+          "acl": "{postgres=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+          "global": false,
+          "schema": "auth",
+          "creator": "supabase_auth_admin",
+          "object_type": "r"
+        }
+      ],
+      "constraint_counts": {
+        "c": 34,
+        "f": 33,
+        "p": 26,
+        "u": 13
+      },
+      "schema_privileges": [
+        {
+          "role": "anon",
+          "usage": true,
+          "create": false
+        },
+        {
+          "role": "authenticated",
+          "usage": true,
+          "create": false
+        },
+        {
+          "role": "service_role",
+          "usage": true,
+          "create": false
+        }
+      ],
+      "all_public_routines": [
+        {
+          "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+          "oid": "22315",
+          "kind": "f",
+          "name": "has_staff_role",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "boolean",
+          "definer": true,
+          "definition": "CREATE OR REPLACE FUNCTION public.has_staff_role(p_codes text[])\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\r\n SELECT EXISTS(\r\n  SELECT 1 FROM public.staff_profiles sp\r\n  JOIN public.staff_role_assignments sra ON sra.staff_id=sp.user_id\r\n  JOIN public.roles r ON r.id=sra.role_id\r\n  WHERE sp.user_id=(SELECT auth.uid()) AND sp.is_active AND r.code=ANY(p_codes)\r\n ); $function$\n",
+          "identity_arguments": "p_codes text[]"
+        },
+        {
+          "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+          "oid": "22345",
+          "kind": "f",
+          "name": "review_public_report",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "boolean",
+          "definer": true,
+          "definition": "CREATE OR REPLACE FUNCTION public.review_public_report(p_report_id uuid, p_new_status text, p_reason text DEFAULT NULL::text)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\r\nDECLARE v_old text;\r\nBEGIN\r\n IF NOT public.has_staff_role(ARRAY['super_admin','report_verifier']) THEN\r\n  RAISE EXCEPTION 'Forbidden' USING ERRCODE='42501';\r\n END IF;\r\n IF p_new_status NOT IN ('under_review','verified','rejected') THEN\r\n  RAISE EXCEPTION 'Invalid target status' USING ERRCODE='22023';\r\n END IF;\r\n SELECT status INTO v_old FROM public.public_reports WHERE id=p_report_id FOR UPDATE;\r\n IF NOT FOUND THEN RETURN false; END IF;\r\n IF NOT ((v_old='unverified' AND p_new_status IN ('under_review','verified','rejected'))\r\n OR (v_old='under_review' AND p_new_status IN ('verified','rejected'))) THEN\r\n  RAISE EXCEPTION 'Invalid status transition' USING ERRCODE='22023';\r\n END IF;\r\n UPDATE public.public_reports SET status=p_new_status,reviewed_by=auth.uid(),reviewed_at=now()\r\n WHERE id=p_report_id;\r\n INSERT INTO public.report_status_history(report_id,from_status,to_status,changed_by,reason)\r\n VALUES(p_report_id,v_old,p_new_status,auth.uid(),p_reason);\r\n RETURN true;\r\nEND; $function$\n",
+          "identity_arguments": "p_report_id uuid, p_new_status text, p_reason text"
+        },
+        {
+          "acl": "{=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+          "oid": "17481",
+          "kind": "f",
+          "name": "rls_auto_enable",
+          "owner": "postgres",
+          "config": [
+            "search_path=pg_catalog"
+          ],
+          "result": "event_trigger",
+          "definer": true,
+          "definition": "CREATE OR REPLACE FUNCTION public.rls_auto_enable()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n  cmd record;\n  tbl name;\nBEGIN\n  FOR cmd IN\n    SELECT *\n    FROM pg_event_trigger_ddl_commands()\n    WHERE command_tag IN ('CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO')\n      AND object_type IN ('table','partitioned table')\n  LOOP\n     IF cmd.schema_name IS NOT NULL AND cmd.schema_name IN ('public') AND cmd.schema_name NOT IN ('pg_catalog','information_schema') AND cmd.schema_name NOT LIKE 'pg_toast%' AND cmd.schema_name NOT LIKE 'pg_temp%' THEN\n      BEGIN\n        SELECT c.relname INTO tbl FROM pg_catalog.pg_class c WHERE c.oid = cmd.objid;\n        EXECUTE format('alter table if exists %I.%I enable row level security', cmd.schema_name, tbl);\n        RAISE LOG 'rls_auto_enable: enabled RLS on %', cmd.object_identity;\n      EXCEPTION\n        WHEN OTHERS THEN\n          RAISE LOG 'rls_auto_enable: failed to enable RLS on %', cmd.object_identity;\n      END;\n     ELSE\n        RAISE LOG 'rls_auto_enable: skip % (either system schema or not in enforced list: %.)', cmd.object_identity, cmd.schema_name;\n     END IF;\n  END LOOP;\nEND;\n$function$\n",
+          "identity_arguments": ""
+        },
+        {
+          "acl": "{postgres=X/postgres,service_role=X/postgres}",
+          "oid": "22308",
+          "kind": "f",
+          "name": "set_updated_at",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "trigger",
+          "definer": false,
+          "definition": "CREATE OR REPLACE FUNCTION public.set_updated_at()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\r\nBEGIN NEW.updated_at=now(); RETURN NEW; END; $function$\n",
+          "identity_arguments": ""
+        },
+        {
+          "acl": "{postgres=X/postgres,service_role=X/postgres}",
+          "oid": "22343",
+          "kind": "f",
+          "name": "submit_public_report",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "TABLE(tracking_code text, access_token text)",
+          "definer": true,
+          "definition": "CREATE OR REPLACE FUNCTION public.submit_public_report(p_report_type text, p_title text, p_description text, p_region_id uuid DEFAULT NULL::uuid, p_location_description text DEFAULT NULL::text, p_latitude double precision DEFAULT NULL::double precision, p_longitude double precision DEFAULT NULL::double precision)\n RETURNS TABLE(tracking_code text, access_token text)\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\r\nDECLARE v_report_id uuid; v_code text; v_token text; v_coordinates extensions.geography;\r\nBEGIN\r\n IF p_report_type IS NULL OR length(trim(p_report_type)) NOT BETWEEN 2 AND 50\r\n OR p_title IS NULL OR length(trim(p_title)) NOT BETWEEN 5 AND 180\r\n OR p_description IS NULL OR length(trim(p_description)) NOT BETWEEN 10 AND 5000\r\n OR (p_latitude IS NULL) <> (p_longitude IS NULL)\r\n OR (p_latitude IS NOT NULL AND (p_latitude < -90 OR p_latitude > 90 OR p_longitude < -180 OR p_longitude > 180))\r\n OR length(coalesce(p_location_description,''))>500 THEN\r\n  RAISE EXCEPTION 'Invalid report fields' USING ERRCODE='22023';\r\n END IF;\r\n IF p_latitude IS NOT NULL THEN\r\n  v_coordinates := extensions.ST_SetSRID(extensions.ST_MakePoint(p_longitude,p_latitude),4326)::extensions.geography;\r\n END IF;\r\n v_code := 'RS-' || upper(substr(replace(gen_random_uuid()::text,'-',''),1,16));\r\n v_token := replace(gen_random_uuid()::text,'-','') || replace(gen_random_uuid()::text,'-','');\r\n INSERT INTO public.public_reports(tracking_code,region_id,report_type,title,description,coordinates,location_description)\r\n VALUES(v_code,p_region_id,trim(p_report_type),trim(p_title),trim(p_description),v_coordinates,nullif(trim(p_location_description),''))\r\n RETURNING id INTO v_report_id;\r\n INSERT INTO public.report_access_tokens(report_id,token_hash,expires_at)\r\n VALUES(v_report_id,encode(sha256(convert_to(v_token,'UTF8')),'hex'),now()+interval '90 days');\r\n INSERT INTO public.report_status_history(report_id,to_status,reason)\r\n VALUES(v_report_id,'unverified','Initial anonymous submission');\r\n tracking_code:=v_code; access_token:=v_token; RETURN NEXT;\r\nEND; $function$\n",
+          "identity_arguments": "p_report_type text, p_title text, p_description text, p_region_id uuid, p_location_description text, p_latitude double precision, p_longitude double precision"
+        },
+        {
+          "acl": "{postgres=X/postgres,service_role=X/postgres}",
+          "oid": "22344",
+          "kind": "f",
+          "name": "track_public_report",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "TABLE(report_status text, created_at timestamp with time zone, updated_at timestamp with time zone)",
+          "definer": true,
+          "definition": "CREATE OR REPLACE FUNCTION public.track_public_report(p_tracking_code text, p_access_token text)\n RETURNS TABLE(report_status text, created_at timestamp with time zone, updated_at timestamp with time zone)\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\r\n SELECT r.status,r.created_at,r.updated_at\r\n FROM public.public_reports r\r\n JOIN public.report_access_tokens t ON t.report_id=r.id\r\n WHERE r.tracking_code=p_tracking_code\r\n AND t.token_hash=encode(sha256(convert_to(p_access_token,'UTF8')),'hex')\r\n AND t.expires_at>now() AND t.revoked_at IS NULL\r\n LIMIT 1; $function$\n",
+          "identity_arguments": "p_tracking_code text, p_access_token text"
+        }
+      ],
+      "explicit_column_acls": [],
+      "transaction_read_only": "on",
+      "application_function_checks": [
+        {
+          "kind": "f",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "boolean",
+          "present": true,
+          "anon_denied": true,
+          "anon_execute": false,
+          "owner_matches": true,
+          "public_execute": false,
+          "result_matches": true,
+          "definer_matches": true,
+          "result_expected": "boolean",
+          "service_execute": true,
+          "service_expected": true,
+          "expected_signature": "public.has_staff_role(text[])",
+          "authenticated_execute": true,
+          "authenticated_matches": true,
+          "body_matches_baseline": true,
+          "empty_search_path_matches": true,
+          "service_matches_when_specified": true
+        },
+        {
+          "kind": "f",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "boolean",
+          "present": true,
+          "anon_denied": true,
+          "anon_execute": false,
+          "owner_matches": true,
+          "public_execute": false,
+          "result_matches": true,
+          "definer_matches": true,
+          "result_expected": "boolean",
+          "service_execute": true,
+          "service_expected": true,
+          "expected_signature": "public.review_public_report(uuid,text,text)",
+          "authenticated_execute": true,
+          "authenticated_matches": true,
+          "body_matches_baseline": true,
+          "empty_search_path_matches": true,
+          "service_matches_when_specified": true
+        },
+        {
+          "kind": "f",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "trigger",
+          "present": true,
+          "anon_denied": true,
+          "anon_execute": false,
+          "owner_matches": true,
+          "public_execute": false,
+          "result_matches": true,
+          "definer_matches": true,
+          "result_expected": "trigger",
+          "service_execute": true,
+          "service_expected": null,
+          "expected_signature": "public.set_updated_at()",
+          "authenticated_execute": false,
+          "authenticated_matches": true,
+          "body_matches_baseline": true,
+          "empty_search_path_matches": true,
+          "service_matches_when_specified": null
+        },
+        {
+          "kind": "f",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "TABLE(tracking_code text, access_token text)",
+          "present": true,
+          "anon_denied": true,
+          "anon_execute": false,
+          "owner_matches": true,
+          "public_execute": false,
+          "result_matches": true,
+          "definer_matches": true,
+          "result_expected": "TABLE(tracking_code text, access_token text)",
+          "service_execute": true,
+          "service_expected": true,
+          "expected_signature": "public.submit_public_report(text,text,text,uuid,text,double precision,double precision)",
+          "authenticated_execute": false,
+          "authenticated_matches": true,
+          "body_matches_baseline": true,
+          "empty_search_path_matches": true,
+          "service_matches_when_specified": true
+        },
+        {
+          "kind": "f",
+          "owner": "postgres",
+          "config": [
+            "search_path=\"\""
+          ],
+          "result": "TABLE(report_status text, created_at timestamp with time zone, updated_at timestamp with time zone)",
+          "present": true,
+          "anon_denied": true,
+          "anon_execute": false,
+          "owner_matches": true,
+          "public_execute": false,
+          "result_matches": true,
+          "definer_matches": true,
+          "result_expected": "TABLE(report_status text, created_at timestamp with time zone, updated_at timestamp with time zone)",
+          "service_execute": true,
+          "service_expected": true,
+          "expected_signature": "public.track_public_report(text,text)",
+          "authenticated_execute": false,
+          "authenticated_matches": true,
+          "body_matches_baseline": true,
+          "empty_search_path_matches": true,
+          "service_matches_when_specified": true
+        }
+      ]
+    }
+  }
+]

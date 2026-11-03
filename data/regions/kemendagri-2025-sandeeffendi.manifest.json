@@ -1,0 +1,51 @@
+{
+  "dataset": "kemendagri-2025",
+  "selected_repository": "https://github.com/sandeeffendi/indonesia-administrative-area-data",
+  "selected_commit": "6c48646fa6347926aa8d4c00d972e764e3c89ef6",
+  "artifact_url": "https://raw.githubusercontent.com/sandeeffendi/indonesia-administrative-area-data/6c48646fa6347926aa8d4c00d972e764e3c89ef6/data/wilayah-2025.csv",
+  "source_reference": "Kepmendagri No. 300.2.2-2138 Tahun 2025",
+  "upstream_repository": "https://github.com/yonatanyl/KODE-WILAYAH-KEPMENDAGRI-2025",
+  "upstream_artifact": "KODE-WILAYAH-KEPMENDAGRI-2025.xlsx",
+  "upstream_artifact_url": "https://raw.githubusercontent.com/yonatanyl/KODE-WILAYAH-KEPMENDAGRI-2025/e312223cd14eb0e344be3a735c51fa4f801a4fab/KODE-WILAYAH-KEPMENDAGRI-2025.xlsx",
+  "upstream_sha256": "5e5c7188a59c837981280fc63086b6eaa0ee440b181c85c8ef2388dc6166a4f9",
+  "published_csv_sha256": "fb33c08f8e3270c38a7a12fb2775a125713395d31d459d28a477a2f5b620ef82",
+  "converted_ndjson_sha256": "40e6b087d9c6059edb191ad18445577e66556683cc48b26d09189a79ebd1cfbf",
+  "dry_run_seed_sql_sha256": "e5b02d2a59ca177e79a3f147cc19207506c481ade15e45dc6ca8864e60ca5ce3",
+  "license": {
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution_required": true,
+    "caveat": "Declared by the upstream repository; not an independent government publication license."
+  },
+  "counts": {
+    "province": 38,
+    "regency": 416,
+    "city": 98,
+    "district": 7285,
+    "village": 83762,
+    "total": 91599
+  },
+  "validation": {
+    "status": "passed",
+    "checks": [
+      "canonical source header",
+      "unique official codes",
+      "all parent codes available",
+      "province roots have no parent",
+      "regency/city parent is province",
+      "district parent is regency or city",
+      "village parent is district",
+      "all four application levels represented"
+    ],
+    "city_classification": "KABUPATEN_KOTA rows whose official name starts with Kota are classified as city; remaining rows are regency.",
+    "source_report_url": "https://raw.githubusercontent.com/sandeeffendi/indonesia-administrative-area-data/6c48646fa6347926aa8d4c00d972e764e3c89ef6/reports/kemendagri-2025.validation.json"
+  },
+  "remote_seed_status": "NOT_RUN",
+  "remote_migration_status": "NOT_RUN",
+  "retrieved_at": "2026-10-28",
+  "notes": [
+    "The public artifact is a derived normalized CSV; retain upstream checksum and attribution.",
+    "No dataset file is committed to this workspace.",
+    "Do not run generated SQL against Supabase until operator approval and dev catalog preflight pass."
+  ]
+}

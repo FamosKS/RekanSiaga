@@ -1,0 +1,50 @@
+{
+  "kind": "LOCAL PostgreSQL/WASM; synthetic articles/auth role fixture; no Cloud connection",
+  "cloudCalls": 0,
+  "checks": [
+    {
+      "name": "unapproved SQL stops before schema mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "read-only preflight validates existing published-only RLS and absent feature objects",
+      "status": "PASS"
+    },
+    {
+      "name": "approved proposal adds constrained single-feature schema, RPCs, and audit triggers",
+      "status": "PASS"
+    },
+    {
+      "name": "public read returns latest published fallback and excludes drafts",
+      "status": "PASS"
+    },
+    {
+      "name": "RBAC denies non-content staff and public callers from feature mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "published article can be selected and audited; draft selection is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "replacement is atomic, leaves exactly one featured article, and logs both transitions",
+      "status": "PASS"
+    },
+    {
+      "name": "archive automatically clears featured and public query falls back to newest published",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit clear is version-guarded, and published_at removal clears atomically",
+      "status": "PASS"
+    },
+    {
+      "name": "empty published catalog gives empty public result and Admin sync invalidates shared public cache",
+      "status": "PASS"
+    },
+    {
+      "name": "focused SQL postflight confirms migration and RPC privilege boundaries",
+      "status": "PASS"
+    }
+  ]
+}

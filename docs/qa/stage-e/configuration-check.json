@@ -1,0 +1,9 @@
+{
+  "kind": "Local effective configuration, no values or credentials",
+  "devTarget": true,
+  "globalWritesEnabled": false,
+  "contentWritesEnabled": false,
+  "routineReviewEnabled": true,
+  "singleReportScopeEnabled": false,
+  "gatewayFlagEnabled": true
+}

@@ -1,0 +1,2961 @@
+{
+  "kind": "Offline bounded extractor for this Master SQL, not PostgreSQL parse/execute or complete SQL semantic equivalence",
+  "masterPath": "supabase/migrations/001_rekansiaga_initial_schema.sql",
+  "masterSha256": "6e7db11bee992ad34ff534f71198d6fe4ab59c373b8986859e1144d1404b77fb",
+  "metadataPath": "docs/audits/phase4a-security-audit-result.json",
+  "remoteCapturedAt": "2026-10-22T14:07:56.340869+00:00",
+  "tables": [
+    {
+      "name": "regions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "parent_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "code",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "region_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(region_type IN ('province','regency','city','district','village'))"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 6,
+      "remoteColumnCount": 6,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "parent_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "region_type text NOT NULL CHECK(region_type IN ('province','regency','city','district','village'))",
+        "CHECK(parent_id IS NULL OR parent_id <> id)"
+      ],
+      "remoteChecks": [
+        "CHECK (parent_id IS NULL OR parent_id <> id)",
+        "CHECK (region_type = ANY (ARRAY['province'::text, 'regency'::text, 'city'::text, 'district'::text, 'village'::text]))"
+      ]
+    },
+    {
+      "name": "data_sources",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "source_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(source_type IN ('official_api','manual','other'))"
+        },
+        {
+          "name": "official_url",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "api_identifier",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 7,
+      "remoteColumnCount": 7,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 1
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 1
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "source_type text NOT NULL CHECK(source_type IN ('official_api','manual','other'))"
+      ],
+      "remoteChecks": [
+        "CHECK (source_type = ANY (ARRAY['official_api'::text, 'manual'::text, 'other'::text]))"
+      ]
+    },
+    {
+      "name": "source_sync_logs",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "source_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.data_sources(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "sync_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(sync_status IN ('success','partial','failed'))"
+        },
+        {
+          "name": "records_processed",
+          "type": "integer",
+          "notNull": true,
+          "definition": "integer NOT NULL DEFAULT 0 CHECK(records_processed>=0)"
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        },
+        {
+          "name": "finished_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        }
+      ],
+      "columnCount": 7,
+      "remoteColumnCount": 7,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 3
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 3
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "source_id",
+          "target": "public.data_sources",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "sync_status text NOT NULL CHECK(sync_status IN ('success','partial','failed'))",
+        "records_processed integer NOT NULL DEFAULT 0 CHECK(records_processed>=0)",
+        "CHECK(finished_at IS NULL OR finished_at>=started_at)"
+      ],
+      "remoteChecks": [
+        "CHECK (finished_at IS NULL OR finished_at >= started_at)",
+        "CHECK (records_processed >= 0)",
+        "CHECK (sync_status = ANY (ARRAY['success'::text, 'partial'::text, 'failed'::text]))"
+      ]
+    },
+    {
+      "name": "staff_profiles",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE"
+        },
+        {
+          "name": "display_name",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 4,
+      "remoteColumnCount": 4,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 0
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 0
+      },
+      "pk": [
+        "user_id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "target": "auth.users",
+          "targetColumn": "id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [],
+      "remoteChecks": []
+    },
+    {
+      "name": "roles",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "code",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE CHECK(code IN ('super_admin','information_manager','report_verifier','mitigation_editor'))"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        }
+      ],
+      "columnCount": 4,
+      "remoteColumnCount": 4,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 1
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 1
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "code text NOT NULL UNIQUE CHECK(code IN ('super_admin','information_manager','report_verifier','mitigation_editor'))"
+      ],
+      "remoteChecks": [
+        "CHECK (code = ANY (ARRAY['super_admin'::text, 'information_manager'::text, 'report_verifier'::text, 'mitigation_editor'::text]))"
+      ]
+    },
+    {
+      "name": "staff_role_assignments",
+      "columns": [
+        {
+          "name": "staff_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.staff_profiles(user_id) ON DELETE CASCADE"
+        },
+        {
+          "name": "role_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.roles(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "assigned_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 3,
+      "remoteColumnCount": 3,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 0
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 0
+      },
+      "pk": [
+        "staff_id",
+        "role_id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "staff_id",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "role_id",
+          "target": "public.roles",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [],
+      "remoteChecks": []
+    },
+    {
+      "name": "disaster_events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "source_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.data_sources(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "external_id",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "region_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "disaster_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "severity",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "verification_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'unconfirmed' CHECK(verification_status IN ('unconfirmed','source_confirmed','staff_verified'))"
+        },
+        {
+          "name": "event_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'unknown' CHECK(event_status IN ('unknown','ongoing','resolved'))"
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "source_updated_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "fetched_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 16,
+      "remoteColumnCount": 16,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "source_id",
+          "target": "public.data_sources",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "region_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "verification_status text NOT NULL DEFAULT 'unconfirmed' CHECK(verification_status IN ('unconfirmed','source_confirmed','staff_verified'))",
+        "event_status text NOT NULL DEFAULT 'unknown' CHECK(event_status IN ('unknown','ongoing','resolved'))"
+      ],
+      "remoteChecks": [
+        "CHECK (event_status = ANY (ARRAY['unknown'::text, 'ongoing'::text, 'resolved'::text]))",
+        "CHECK (verification_status = ANY (ARRAY['unconfirmed'::text, 'source_confirmed'::text, 'staff_verified'::text]))"
+      ]
+    },
+    {
+      "name": "event_updates",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "event_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.disaster_events(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "update_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "source_updated_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "recorded_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        },
+        {
+          "name": "recorded_by",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.staff_profiles(user_id) ON DELETE SET NULL"
+        }
+      ],
+      "columnCount": 7,
+      "remoteColumnCount": 7,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 0
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 0
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "event_id",
+          "target": "public.disaster_events",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "recorded_by",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [],
+      "remoteChecks": []
+    },
+    {
+      "name": "event_locations",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "event_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.disaster_events(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "region_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "location_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(location_type IN ('epicenter','affected_area','other'))"
+        },
+        {
+          "name": "coordinates",
+          "type": "geography(Point,4326)",
+          "notNull": false,
+          "definition": "geography(Point,4326)"
+        },
+        {
+          "name": "is_primary",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT false"
+        }
+      ],
+      "columnCount": 7,
+      "remoteColumnCount": 7,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 1
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 1
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "event_id",
+          "target": "public.disaster_events",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "region_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "location_type text NOT NULL CHECK(location_type IN ('epicenter','affected_area','other'))"
+      ],
+      "remoteChecks": [
+        "CHECK (location_type = ANY (ARRAY['epicenter'::text, 'affected_area'::text, 'other'::text]))"
+      ]
+    },
+    {
+      "name": "public_reports",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "tracking_code",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "event_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "region_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "report_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "coordinates",
+          "type": "geography(Point,4326)",
+          "notNull": false,
+          "definition": "geography(Point,4326)"
+        },
+        {
+          "name": "location_description",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'unverified' CHECK(status IN ('unverified','under_review','verified','rejected'))"
+        },
+        {
+          "name": "reviewed_by",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "reviewed_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 14,
+      "remoteColumnCount": 14,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 3,
+        "u": 1,
+        "c": 3
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 3,
+        "u": 1,
+        "c": 3
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "event_id",
+          "target": "public.disaster_events",
+          "targetColumn": "id",
+          "onDelete": "SET NULL"
+        },
+        {
+          "column": "region_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "reviewed_by",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "status text NOT NULL DEFAULT 'unverified' CHECK(status IN ('unverified','under_review','verified','rejected'))",
+        "CHECK(length(trim(title)) BETWEEN 5 AND 180)",
+        "CHECK(length(trim(description)) BETWEEN 10 AND 5000)"
+      ],
+      "remoteChecks": [
+        "CHECK (length(TRIM(BOTH FROM description)) >= 10 AND length(TRIM(BOTH FROM description)) <= 5000)",
+        "CHECK (status = ANY (ARRAY['unverified'::text, 'under_review'::text, 'verified'::text, 'rejected'::text]))",
+        "CHECK (length(TRIM(BOTH FROM title)) >= 5 AND length(TRIM(BOTH FROM title)) <= 180)"
+      ]
+    },
+    {
+      "name": "report_attachments",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "report_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.public_reports(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "storage_path",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "mime_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(mime_type IN ('image/jpeg','image/png','image/webp'))"
+        },
+        {
+          "name": "file_size",
+          "type": "bigint",
+          "notNull": true,
+          "definition": "bigint NOT NULL CHECK(file_size>0 AND file_size<=5242880)"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 6,
+      "remoteColumnCount": 6,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "report_id",
+          "target": "public.public_reports",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "mime_type text NOT NULL CHECK(mime_type IN ('image/jpeg','image/png','image/webp'))",
+        "file_size bigint NOT NULL CHECK(file_size>0 AND file_size<=5242880)"
+      ],
+      "remoteChecks": [
+        "CHECK (file_size > 0 AND file_size <= 5242880)",
+        "CHECK (mime_type = ANY (ARRAY['image/jpeg'::text, 'image/png'::text, 'image/webp'::text]))"
+      ]
+    },
+    {
+      "name": "report_status_history",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "report_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.public_reports(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "from_status",
+          "type": "text",
+          "notNull": false,
+          "definition": "text CHECK(from_status IS NULL OR from_status IN ('unverified','under_review','verified','rejected'))"
+        },
+        {
+          "name": "to_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(to_status IN ('unverified','under_review','verified','rejected'))"
+        },
+        {
+          "name": "changed_by",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "changed_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 7,
+      "remoteColumnCount": 7,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "report_id",
+          "target": "public.public_reports",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "changed_by",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "from_status text CHECK(from_status IS NULL OR from_status IN ('unverified','under_review','verified','rejected'))",
+        "to_status text NOT NULL CHECK(to_status IN ('unverified','under_review','verified','rejected'))"
+      ],
+      "remoteChecks": [
+        "CHECK (from_status IS NULL OR (from_status = ANY (ARRAY['unverified'::text, 'under_review'::text, 'verified'::text, 'rejected'::text])))",
+        "CHECK (to_status = ANY (ARRAY['unverified'::text, 'under_review'::text, 'verified'::text, 'rejected'::text]))"
+      ]
+    },
+    {
+      "name": "report_access_tokens",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "report_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.public_reports(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "token_hash",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL"
+        },
+        {
+          "name": "revoked_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 6,
+      "remoteColumnCount": 6,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 0
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 0
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "report_id",
+          "target": "public.public_reports",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [],
+      "remoteChecks": []
+    },
+    {
+      "name": "articles",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "author_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "slug",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "cover_image_path",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "source_url",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "publication_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'draft' CHECK(publication_status IN ('draft','published','archived'))"
+        },
+        {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 12,
+      "remoteColumnCount": 12,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "author_id",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "publication_status text NOT NULL DEFAULT 'draft' CHECK(publication_status IN ('draft','published','archived'))",
+        "CHECK(publication_status<>'published' OR published_at IS NOT NULL)"
+      ],
+      "remoteChecks": [
+        "CHECK (publication_status <> 'published'::text OR published_at IS NOT NULL)",
+        "CHECK (publication_status = ANY (ARRAY['draft'::text, 'published'::text, 'archived'::text]))"
+      ]
+    },
+    {
+      "name": "mitigation_guides",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "author_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "disaster_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "source_url",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "publication_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'draft' CHECK(publication_status IN ('draft','published','archived'))"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 10,
+      "remoteColumnCount": 10,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 1
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 1
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "author_id",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "publication_status text NOT NULL DEFAULT 'draft' CHECK(publication_status IN ('draft','published','archived'))"
+      ],
+      "remoteChecks": [
+        "CHECK (publication_status = ANY (ARRAY['draft'::text, 'published'::text, 'archived'::text]))"
+      ]
+    },
+    {
+      "name": "mitigation_checklist_items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "guide_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.mitigation_guides(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "phase",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(phase IN ('before','during','after'))"
+        },
+        {
+          "name": "instruction",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "notNull": true,
+          "definition": "integer NOT NULL DEFAULT 0 CHECK(sort_order>=0)"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT true"
+        }
+      ],
+      "columnCount": 6,
+      "remoteColumnCount": 6,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "guide_id",
+          "target": "public.mitigation_guides",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "phase text NOT NULL CHECK(phase IN ('before','during','after'))",
+        "sort_order integer NOT NULL DEFAULT 0 CHECK(sort_order>=0)"
+      ],
+      "remoteChecks": [
+        "CHECK (phase = ANY (ARRAY['before'::text, 'during'::text, 'after'::text]))",
+        "CHECK (sort_order >= 0)"
+      ]
+    },
+    {
+      "name": "emergency_contacts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "region_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "organization_name",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "service_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "phone_number",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "official_url",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "is_verified",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT false"
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 10,
+      "remoteColumnCount": 10,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "region_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "CHECK(phone_number IS NOT NULL OR official_url IS NOT NULL)",
+        "CHECK(NOT is_verified OR verified_at IS NOT NULL)"
+      ],
+      "remoteChecks": [
+        "CHECK (phone_number IS NOT NULL OR official_url IS NOT NULL)",
+        "CHECK (NOT is_verified OR verified_at IS NOT NULL)"
+      ]
+    },
+    {
+      "name": "relief_locations",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "event_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "region_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "location_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(location_type IN ('shelter','command_post','aid_point'))"
+        },
+        {
+          "name": "coordinates",
+          "type": "geography(Point,4326)",
+          "notNull": false,
+          "definition": "geography(Point,4326)"
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "verification_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'unverified' CHECK(verification_status IN ('unverified','verified'))"
+        },
+        {
+          "name": "source_url",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 10,
+      "remoteColumnCount": 10,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "event_id",
+          "target": "public.disaster_events",
+          "targetColumn": "id",
+          "onDelete": "SET NULL"
+        },
+        {
+          "column": "region_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "location_type text NOT NULL CHECK(location_type IN ('shelter','command_post','aid_point'))",
+        "verification_status text NOT NULL DEFAULT 'unverified' CHECK(verification_status IN ('unverified','verified'))"
+      ],
+      "remoteChecks": [
+        "CHECK (location_type = ANY (ARRAY['shelter'::text, 'command_post'::text, 'aid_point'::text]))",
+        "CHECK (verification_status = ANY (ARRAY['unverified'::text, 'verified'::text]))"
+      ]
+    },
+    {
+      "name": "donation_campaigns",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "event_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "region_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "organization_name",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "simulation_target_amount",
+          "type": "numeric(15,2)",
+          "notNull": false,
+          "definition": "numeric(15,2) CHECK(simulation_target_amount IS NULL OR simulation_target_amount>=0)"
+        },
+        {
+          "name": "is_simulation",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT true CHECK(is_simulation)"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 10,
+      "remoteColumnCount": 10,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 0,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "event_id",
+          "target": "public.disaster_events",
+          "targetColumn": "id",
+          "onDelete": "SET NULL"
+        },
+        {
+          "column": "region_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "simulation_target_amount numeric(15,2) CHECK(simulation_target_amount IS NULL OR simulation_target_amount>=0)",
+        "is_simulation boolean NOT NULL DEFAULT true CHECK(is_simulation)"
+      ],
+      "remoteChecks": [
+        "CHECK (is_simulation)",
+        "CHECK (simulation_target_amount IS NULL OR simulation_target_amount >= 0::numeric)"
+      ]
+    },
+    {
+      "name": "notification_rules",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "code",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "disaster_type",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "minimum_severity",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT false"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 6,
+      "remoteColumnCount": 6,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 0
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 0
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [],
+      "remoteChecks": []
+    },
+    {
+      "name": "notification_subscriptions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "region_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.regions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "platform",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL CHECK(platform IN ('web','android','ios'))"
+        },
+        {
+          "name": "endpoint_hash",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "token_encrypted",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "permission_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'unknown' CHECK(permission_status IN ('granted','denied','unknown'))"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "notNull": true,
+          "definition": "boolean NOT NULL DEFAULT true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 8,
+      "remoteColumnCount": 8,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 1,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "region_id",
+          "target": "public.regions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "platform text NOT NULL CHECK(platform IN ('web','android','ios'))",
+        "permission_status text NOT NULL DEFAULT 'unknown' CHECK(permission_status IN ('granted','denied','unknown'))"
+      ],
+      "remoteChecks": [
+        "CHECK (permission_status = ANY (ARRAY['granted'::text, 'denied'::text, 'unknown'::text]))",
+        "CHECK (platform = ANY (ARRAY['web'::text, 'android'::text, 'ios'::text]))"
+      ]
+    },
+    {
+      "name": "notifications",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "rule_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.notification_rules(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "event_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.disaster_events(id) ON DELETE SET NULL"
+        },
+        {
+          "name": "dedupe_key",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL UNIQUE"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "body",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'queued' CHECK(status IN ('queued','processing','completed','failed'))"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 8,
+      "remoteColumnCount": 8,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 1,
+        "c": 1
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 1,
+        "c": 1
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "rule_id",
+          "target": "public.notification_rules",
+          "targetColumn": "id",
+          "onDelete": "SET NULL"
+        },
+        {
+          "column": "event_id",
+          "target": "public.disaster_events",
+          "targetColumn": "id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "status text NOT NULL DEFAULT 'queued' CHECK(status IN ('queued','processing','completed','failed'))"
+      ],
+      "remoteChecks": [
+        "CHECK (status = ANY (ARRAY['queued'::text, 'processing'::text, 'completed'::text, 'failed'::text]))"
+      ]
+    },
+    {
+      "name": "notification_deliveries",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "notification_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.notifications(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "subscription_id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid NOT NULL REFERENCES public.notification_subscriptions(id) ON DELETE RESTRICT"
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','sent','failed'))"
+        },
+        {
+          "name": "attempts",
+          "type": "integer",
+          "notNull": true,
+          "definition": "integer NOT NULL DEFAULT 0 CHECK(attempts>=0)"
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "notNull": false,
+          "definition": "text"
+        },
+        {
+          "name": "sent_at",
+          "type": "timestamp with time zone",
+          "notNull": false,
+          "definition": "timestamptz"
+        }
+      ],
+      "columnCount": 7,
+      "remoteColumnCount": 7,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 2,
+        "u": 1,
+        "c": 2
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 2,
+        "u": 1,
+        "c": 2
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "notification_id",
+          "target": "public.notifications",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "subscription_id",
+          "target": "public.notification_subscriptions",
+          "targetColumn": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "status text NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','sent','failed'))",
+        "attempts integer NOT NULL DEFAULT 0 CHECK(attempts>=0)"
+      ],
+      "remoteChecks": [
+        "CHECK (attempts >= 0)",
+        "CHECK (status = ANY (ARRAY['pending'::text, 'sent'::text, 'failed'::text]))"
+      ]
+    },
+    {
+      "name": "audit_logs",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "action",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "entity_type",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "entity_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid"
+        },
+        {
+          "name": "old_values",
+          "type": "jsonb",
+          "notNull": false,
+          "definition": "jsonb"
+        },
+        {
+          "name": "new_values",
+          "type": "jsonb",
+          "notNull": false,
+          "definition": "jsonb"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 8,
+      "remoteColumnCount": 8,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 0
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 0
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "actor_id",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [],
+      "remoteChecks": []
+    },
+    {
+      "name": "app_settings",
+      "columns": [
+        {
+          "name": "key",
+          "type": "text",
+          "notNull": true,
+          "definition": "text PRIMARY KEY"
+        },
+        {
+          "name": "value",
+          "type": "jsonb",
+          "notNull": true,
+          "definition": "jsonb NOT NULL"
+        },
+        {
+          "name": "updated_by",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid REFERENCES public.staff_profiles(user_id) ON DELETE SET NULL"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL DEFAULT now()"
+        }
+      ],
+      "columnCount": 4,
+      "remoteColumnCount": 4,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 0
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 1,
+        "u": 0,
+        "c": 0
+      },
+      "pk": [
+        "key"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [
+        {
+          "column": "updated_by",
+          "target": "public.staff_profiles",
+          "targetColumn": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [],
+      "remoteChecks": []
+    },
+    {
+      "name": "api_idempotency_keys",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notNull": true,
+          "definition": "uuid PRIMARY KEY DEFAULT gen_random_uuid()"
+        },
+        {
+          "name": "scope",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "key_hash",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "request_hash",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL"
+        },
+        {
+          "name": "processing_status",
+          "type": "text",
+          "notNull": true,
+          "definition": "text NOT NULL DEFAULT 'processing' CHECK(processing_status IN ('processing','completed','failed'))"
+        },
+        {
+          "name": "resource_id",
+          "type": "uuid",
+          "notNull": false,
+          "definition": "uuid"
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "notNull": true,
+          "definition": "timestamptz NOT NULL"
+        }
+      ],
+      "columnCount": 7,
+      "remoteColumnCount": 7,
+      "columnDifferences": [],
+      "missingSourceColumns": [],
+      "counts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 1
+      },
+      "remoteCounts": {
+        "p": 1,
+        "f": 0,
+        "u": 1,
+        "c": 1
+      },
+      "pk": [
+        "id"
+      ],
+      "pkMatches": true,
+      "foreignKeys": [],
+      "fkDifferences": [],
+      "uniqueDifferences": [],
+      "sourceChecks": [
+        "processing_status text NOT NULL DEFAULT 'processing' CHECK(processing_status IN ('processing','completed','failed'))"
+      ],
+      "remoteChecks": [
+        "CHECK (processing_status = ANY (ARRAY['processing'::text, 'completed'::text, 'failed'::text]))"
+      ]
+    }
+  ],
+  "missingMasterTables": [],
+  "functions": [
+    {
+      "name": "set_updated_at",
+      "masterBodyMd5CRLF": "ffb3ff5139a6e88cbb83b985596cc18b",
+      "remoteBodyMd5": "ffb3ff5139a6e88cbb83b985596cc18b",
+      "matchesAfterLineEndingNormalization": true
+    },
+    {
+      "name": "has_staff_role",
+      "masterBodyMd5CRLF": "9e70eaadd27c167b311359955f2ccc65",
+      "remoteBodyMd5": "9e70eaadd27c167b311359955f2ccc65",
+      "matchesAfterLineEndingNormalization": true
+    },
+    {
+      "name": "submit_public_report",
+      "masterBodyMd5CRLF": "5f1553a7b57601e1d0bc3a277f84e9df",
+      "remoteBodyMd5": "5f1553a7b57601e1d0bc3a277f84e9df",
+      "matchesAfterLineEndingNormalization": true
+    },
+    {
+      "name": "track_public_report",
+      "masterBodyMd5CRLF": "cb82eb06b1a0c57b90630c29502aa7f4",
+      "remoteBodyMd5": "cb82eb06b1a0c57b90630c29502aa7f4",
+      "matchesAfterLineEndingNormalization": true
+    },
+    {
+      "name": "review_public_report",
+      "masterBodyMd5CRLF": "937aecde21a310b767494fc60de9d389",
+      "remoteBodyMd5": "937aecde21a310b767494fc60de9d389",
+      "matchesAfterLineEndingNormalization": true
+    }
+  ],
+  "explicitIndexes": [
+    {
+      "name": "uq_disaster_source_external",
+      "table": "disaster_events",
+      "definition": "CREATE UNIQUE INDEX uq_disaster_source_external ON public.disaster_events(source_id,external_id) WHERE external_id IS NOT NULL;",
+      "matchesRemote": true
+    },
+    {
+      "name": "uq_one_primary_event_location",
+      "table": "event_locations",
+      "definition": "CREATE UNIQUE INDEX uq_one_primary_event_location ON public.event_locations(event_id) WHERE is_primary;",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_regions_parent",
+      "table": "regions",
+      "definition": "CREATE INDEX idx_regions_parent ON public.regions(parent_id);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_sync_source_time",
+      "table": "source_sync_logs",
+      "definition": "CREATE INDEX idx_sync_source_time ON public.source_sync_logs(source_id,started_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_events_region_time",
+      "table": "disaster_events",
+      "definition": "CREATE INDEX idx_events_region_time ON public.disaster_events(region_id,occurred_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_events_time",
+      "table": "disaster_events",
+      "definition": "CREATE INDEX idx_events_time ON public.disaster_events(occurred_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_updates_event_time",
+      "table": "event_updates",
+      "definition": "CREATE INDEX idx_updates_event_time ON public.event_updates(event_id,recorded_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_event_locations_event",
+      "table": "event_locations",
+      "definition": "CREATE INDEX idx_event_locations_event ON public.event_locations(event_id);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_event_locations_geo",
+      "table": "event_locations",
+      "definition": "CREATE INDEX idx_event_locations_geo ON public.event_locations USING gist(coordinates);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_reports_status_time",
+      "table": "public_reports",
+      "definition": "CREATE INDEX idx_reports_status_time ON public.public_reports(status,created_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_reports_region",
+      "table": "public_reports",
+      "definition": "CREATE INDEX idx_reports_region ON public.public_reports(region_id);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_reports_geo",
+      "table": "public_reports",
+      "definition": "CREATE INDEX idx_reports_geo ON public.public_reports USING gist(coordinates);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_report_history",
+      "table": "report_status_history",
+      "definition": "CREATE INDEX idx_report_history ON public.report_status_history(report_id,changed_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_report_attachments",
+      "table": "report_attachments",
+      "definition": "CREATE INDEX idx_report_attachments ON public.report_attachments(report_id);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_tokens_report",
+      "table": "report_access_tokens",
+      "definition": "CREATE INDEX idx_tokens_report ON public.report_access_tokens(report_id);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_articles_pub",
+      "table": "articles",
+      "definition": "CREATE INDEX idx_articles_pub ON public.articles(publication_status,published_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_checklists_guide",
+      "table": "mitigation_checklist_items",
+      "definition": "CREATE INDEX idx_checklists_guide ON public.mitigation_checklist_items(guide_id,phase,sort_order);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_relief_geo",
+      "table": "relief_locations",
+      "definition": "CREATE INDEX idx_relief_geo ON public.relief_locations USING gist(coordinates);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_notifications_region",
+      "table": "notification_subscriptions",
+      "definition": "CREATE INDEX idx_notifications_region ON public.notification_subscriptions(region_id,is_active);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_deliveries_status",
+      "table": "notification_deliveries",
+      "definition": "CREATE INDEX idx_deliveries_status ON public.notification_deliveries(status);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_audit_entity",
+      "table": "audit_logs",
+      "definition": "CREATE INDEX idx_audit_entity ON public.audit_logs(entity_type,entity_id,created_at DESC);",
+      "matchesRemote": true
+    },
+    {
+      "name": "idx_idempotency_expiry",
+      "table": "api_idempotency_keys",
+      "definition": "CREATE INDEX idx_idempotency_expiry ON public.api_idempotency_keys(expires_at);",
+      "matchesRemote": true
+    }
+  ],
+  "policies": [
+    {
+      "name": "regions_public_read",
+      "table": "regions",
+      "definition": "CREATE POLICY regions_public_read ON public.regions FOR SELECT TO anon,authenticated USING(true);",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "true",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "regions",
+        "permissive": "PERMISSIVE",
+        "policyname": "regions_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "sources_public_read",
+      "table": "data_sources",
+      "definition": "CREATE POLICY sources_public_read ON public.data_sources FOR SELECT TO anon,authenticated USING(is_active);",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "is_active",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "data_sources",
+        "permissive": "PERMISSIVE",
+        "policyname": "sources_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "events_public_read",
+      "table": "disaster_events",
+      "definition": "CREATE POLICY events_public_read ON public.disaster_events FOR SELECT TO anon,authenticated USING(published_at IS NOT NULL AND verification_status <> 'unconfirmed');",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "((published_at IS NOT NULL) AND (verification_status <> 'unconfirmed'::text))",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "disaster_events",
+        "permissive": "PERMISSIVE",
+        "policyname": "events_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "event_updates_public_read",
+      "table": "event_updates",
+      "definition": "CREATE POLICY event_updates_public_read ON public.event_updates FOR SELECT TO anon,authenticated USING(\n EXISTS(SELECT 1 FROM public.disaster_events e WHERE e.id=event_id AND e.published_at IS NOT NULL AND e.verification_status<>'unconfirmed'));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "(EXISTS ( SELECT 1\n   FROM disaster_events e\n  WHERE ((e.id = event_updates.event_id) AND (e.published_at IS NOT NULL) AND (e.verification_status <> 'unconfirmed'::text))))",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "event_updates",
+        "permissive": "PERMISSIVE",
+        "policyname": "event_updates_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "event_locations_public_read",
+      "table": "event_locations",
+      "definition": "CREATE POLICY event_locations_public_read ON public.event_locations FOR SELECT TO anon,authenticated USING(\n EXISTS(SELECT 1 FROM public.disaster_events e WHERE e.id=event_id AND e.published_at IS NOT NULL AND e.verification_status<>'unconfirmed'));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "(EXISTS ( SELECT 1\n   FROM disaster_events e\n  WHERE ((e.id = event_locations.event_id) AND (e.published_at IS NOT NULL) AND (e.verification_status <> 'unconfirmed'::text))))",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "event_locations",
+        "permissive": "PERMISSIVE",
+        "policyname": "event_locations_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "articles_public_read",
+      "table": "articles",
+      "definition": "CREATE POLICY articles_public_read ON public.articles FOR SELECT TO anon,authenticated USING(publication_status='published' AND published_at IS NOT NULL);",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "((publication_status = 'published'::text) AND (published_at IS NOT NULL))",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "articles",
+        "permissive": "PERMISSIVE",
+        "policyname": "articles_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "guides_public_read",
+      "table": "mitigation_guides",
+      "definition": "CREATE POLICY guides_public_read ON public.mitigation_guides FOR SELECT TO anon,authenticated USING(publication_status='published');",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "(publication_status = 'published'::text)",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "mitigation_guides",
+        "permissive": "PERMISSIVE",
+        "policyname": "guides_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "checklist_public_read",
+      "table": "mitigation_checklist_items",
+      "definition": "CREATE POLICY checklist_public_read ON public.mitigation_checklist_items FOR SELECT TO anon,authenticated USING(is_active AND EXISTS(\n SELECT 1 FROM public.mitigation_guides g WHERE g.id=guide_id AND g.publication_status='published'));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "(is_active AND (EXISTS ( SELECT 1\n   FROM mitigation_guides g\n  WHERE ((g.id = mitigation_checklist_items.guide_id) AND (g.publication_status = 'published'::text)))))",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "mitigation_checklist_items",
+        "permissive": "PERMISSIVE",
+        "policyname": "checklist_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "emergency_public_read",
+      "table": "emergency_contacts",
+      "definition": "CREATE POLICY emergency_public_read ON public.emergency_contacts FOR SELECT TO anon,authenticated USING(is_verified AND is_active);",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "(is_verified AND is_active)",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "emergency_contacts",
+        "permissive": "PERMISSIVE",
+        "policyname": "emergency_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "relief_public_read",
+      "table": "relief_locations",
+      "definition": "CREATE POLICY relief_public_read ON public.relief_locations FOR SELECT TO anon,authenticated USING(verification_status='verified');",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "(verification_status = 'verified'::text)",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "relief_locations",
+        "permissive": "PERMISSIVE",
+        "policyname": "relief_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "donations_public_read",
+      "table": "donation_campaigns",
+      "definition": "CREATE POLICY donations_public_read ON public.donation_campaigns FOR SELECT TO anon,authenticated USING(is_active AND is_simulation);",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "(is_active AND is_simulation)",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "donation_campaigns",
+        "permissive": "PERMISSIVE",
+        "policyname": "donations_public_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "staff_profiles_read",
+      "table": "staff_profiles",
+      "definition": "CREATE POLICY staff_profiles_read ON public.staff_profiles FOR SELECT TO authenticated USING(\n user_id=(SELECT auth.uid()) OR public.has_staff_role(ARRAY['super_admin']));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "((user_id = ( SELECT auth.uid() AS uid)) OR has_staff_role(ARRAY['super_admin'::text]))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "staff_profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "staff_profiles_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "roles_staff_read",
+      "table": "roles",
+      "definition": "CREATE POLICY roles_staff_read ON public.roles FOR SELECT TO authenticated USING(public.has_staff_role(ARRAY['super_admin']));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "has_staff_role(ARRAY['super_admin'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "roles",
+        "permissive": "PERMISSIVE",
+        "policyname": "roles_staff_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "assignment_staff_read",
+      "table": "staff_role_assignments",
+      "definition": "CREATE POLICY assignment_staff_read ON public.staff_role_assignments FOR SELECT TO authenticated USING(\n staff_id=(SELECT auth.uid()) OR public.has_staff_role(ARRAY['super_admin']));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "((staff_id = ( SELECT auth.uid() AS uid)) OR has_staff_role(ARRAY['super_admin'::text]))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "staff_role_assignments",
+        "permissive": "PERMISSIVE",
+        "policyname": "assignment_staff_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "events_staff_all",
+      "table": "disaster_events",
+      "definition": "CREATE POLICY events_staff_all ON public.disaster_events FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','information_manager'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','information_manager']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "disaster_events",
+        "permissive": "PERMISSIVE",
+        "policyname": "events_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+      }
+    },
+    {
+      "name": "updates_staff_all",
+      "table": "event_updates",
+      "definition": "CREATE POLICY updates_staff_all ON public.event_updates FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','information_manager'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','information_manager']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "event_updates",
+        "permissive": "PERMISSIVE",
+        "policyname": "updates_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+      }
+    },
+    {
+      "name": "locations_staff_all",
+      "table": "event_locations",
+      "definition": "CREATE POLICY locations_staff_all ON public.event_locations FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','information_manager'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','information_manager']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "event_locations",
+        "permissive": "PERMISSIVE",
+        "policyname": "locations_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+      }
+    },
+    {
+      "name": "articles_staff_all",
+      "table": "articles",
+      "definition": "CREATE POLICY articles_staff_all ON public.articles FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','information_manager'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','information_manager']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "articles",
+        "permissive": "PERMISSIVE",
+        "policyname": "articles_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+      }
+    },
+    {
+      "name": "guides_staff_all",
+      "table": "mitigation_guides",
+      "definition": "CREATE POLICY guides_staff_all ON public.mitigation_guides FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','mitigation_editor'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','mitigation_editor']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "mitigation_guides",
+        "permissive": "PERMISSIVE",
+        "policyname": "guides_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])"
+      }
+    },
+    {
+      "name": "checklist_staff_all",
+      "table": "mitigation_checklist_items",
+      "definition": "CREATE POLICY checklist_staff_all ON public.mitigation_checklist_items FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','mitigation_editor'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','mitigation_editor']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "mitigation_checklist_items",
+        "permissive": "PERMISSIVE",
+        "policyname": "checklist_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'mitigation_editor'::text])"
+      }
+    },
+    {
+      "name": "emergency_staff_all",
+      "table": "emergency_contacts",
+      "definition": "CREATE POLICY emergency_staff_all ON public.emergency_contacts FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','information_manager'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','information_manager']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "emergency_contacts",
+        "permissive": "PERMISSIVE",
+        "policyname": "emergency_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+      }
+    },
+    {
+      "name": "relief_staff_all",
+      "table": "relief_locations",
+      "definition": "CREATE POLICY relief_staff_all ON public.relief_locations FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','information_manager'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','information_manager']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "relief_locations",
+        "permissive": "PERMISSIVE",
+        "policyname": "relief_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+      }
+    },
+    {
+      "name": "donations_staff_all",
+      "table": "donation_campaigns",
+      "definition": "CREATE POLICY donations_staff_all ON public.donation_campaigns FOR ALL TO authenticated USING(public.has_staff_role(ARRAY['super_admin','information_manager'])) WITH CHECK(public.has_staff_role(ARRAY['super_admin','information_manager']));",
+      "remote": {
+        "cmd": "ALL",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "donation_campaigns",
+        "permissive": "PERMISSIVE",
+        "policyname": "donations_staff_all",
+        "schemaname": "public",
+        "with_check": "has_staff_role(ARRAY['super_admin'::text, 'information_manager'::text])"
+      }
+    },
+    {
+      "name": "reports_staff_read",
+      "table": "public_reports",
+      "definition": "CREATE POLICY reports_staff_read ON public.public_reports FOR SELECT TO authenticated USING(public.has_staff_role(ARRAY['super_admin','report_verifier']));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'report_verifier'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "public_reports",
+        "permissive": "PERMISSIVE",
+        "policyname": "reports_staff_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "attachments_staff_read",
+      "table": "report_attachments",
+      "definition": "CREATE POLICY attachments_staff_read ON public.report_attachments FOR SELECT TO authenticated USING(public.has_staff_role(ARRAY['super_admin','report_verifier']));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'report_verifier'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "report_attachments",
+        "permissive": "PERMISSIVE",
+        "policyname": "attachments_staff_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    },
+    {
+      "name": "report_history_staff_read",
+      "table": "report_status_history",
+      "definition": "CREATE POLICY report_history_staff_read ON public.report_status_history FOR SELECT TO authenticated USING(public.has_staff_role(ARRAY['super_admin','report_verifier']));",
+      "remote": {
+        "cmd": "SELECT",
+        "qual": "has_staff_role(ARRAY['super_admin'::text, 'report_verifier'::text])",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "report_status_history",
+        "permissive": "PERMISSIVE",
+        "policyname": "report_history_staff_read",
+        "schemaname": "public",
+        "with_check": null
+      }
+    }
+  ],
+  "droppedPolicies": [
+    "reports_staff_update"
+  ],
+  "counts": {
+    "tables": 26,
+    "columns": 200,
+    "constraints": {
+      "p": 26,
+      "f": 33,
+      "u": 13,
+      "c": 34
+    },
+    "explicitIndexes": 22,
+    "finalPolicies": 26,
+    "appFunctions": 5
+  },
+  "limitations": [
+    "CHECK expression equivalence reviewed manually; source and remote definitions included per table",
+    "Defaults absent from old metadata; source defaults not proven equal to dev",
+    "Policy expressions retained for manual semantic review; name/shape alone is insufficient",
+    "Owner, inherited ACL, extension schema and managed objects depend on target environment",
+    "No SQL compiled, applied, or authenticated API tested"
+  ]
+}

@@ -1,0 +1,5 @@
+import { Select } from '../../components/ui/Select'
+import { RegionSelector } from '../regions/RegionSelector'
+export function MapFilterPanel({ kind, region, onKind, onRegion }: { kind: string; region: string; onKind: (value: string) => void; onRegion: (value: string) => void }) {
+  return <div className="form-stack"><Select label="Jenis bencana" value={kind} onChange={event => onKind(event.target.value)}><option value="">Semua jenis</option>{['Banjir', 'Gempa bumi', 'Kebakaran', 'Gunung api', 'Tanah longsor'].map(value => <option key={value}>{value}</option>)}</Select><RegionSelector onChange={selection => onRegion(selection?.name ?? '')} hint={region ? `Filter aktif: ${region}` : 'Pilih wilayah untuk memfilter peta.'}/><fieldset className="map-layers"><legend>Lapisan peta</legend><label className="check"><input type="checkbox" disabled/>Tampilkan relawan</label><label className="check"><input type="checkbox" disabled/>Tampilkan posko</label><small>Lapisan belum tersedia; peta dan sumber lokasi belum terhubung.</small></fieldset></div>
+}

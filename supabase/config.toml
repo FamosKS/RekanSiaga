@@ -1,0 +1,23 @@
+project_id = "rekansiaga-dev"
+
+[functions.report-gateway]
+# Public submit/track use mandatory CAPTCHA + durable quotas. Attachment action
+# verifies the actual user JWT through Auth and role/RLS in the handler.
+verify_jwt = false
+
+[functions.article-media]
+# Staff JWT and role verified via Auth inside the handler before any upload.
+verify_jwt = false
+
+[functions.public-article-cover]
+# Public image redirects are limited to the current cover of a published article.
+verify_jwt = false
+
+[functions.event-media]
+# Staff JWT and role verified via Auth inside the handler before any upload.
+verify_jwt = false
+
+[functions.sos-relay]
+# Public submit/status are rate limited in the Edge Function; Admin operations
+# verify the staff JWT and role before invoking service-only RPCs.
+verify_jwt = false

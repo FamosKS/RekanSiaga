@@ -1,0 +1,23 @@
+{
+  "kind": "Anonymous read-only probe; not a catalog or authenticated RLS audit",
+  "tables": [
+    {
+      "table": "staff_profiles",
+      "status": 401,
+      "outcome": "access_denied",
+      "code": "42501"
+    },
+    {
+      "table": "staff_role_assignments",
+      "status": 401,
+      "outcome": "access_denied",
+      "code": "42501"
+    },
+    {
+      "table": "roles",
+      "status": 401,
+      "outcome": "access_denied",
+      "code": "42501"
+    }
+  ]
+}

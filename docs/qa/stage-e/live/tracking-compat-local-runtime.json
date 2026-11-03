@@ -1,0 +1,34 @@
+{
+  "kind": "LOCAL PostgreSQL/WASM tracking compatibility only; not LIVE",
+  "cloudRequests": 0,
+  "checks": [
+    {
+      "name": "Baseline reproduces RPT rejection while RS works",
+      "status": "PASS"
+    },
+    {
+      "name": "Unapproved patch rolls back without modifying function ACL",
+      "status": "PASS"
+    },
+    {
+      "name": "Approved predicate enables both formats and preserves owner/ACL/security definer",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong, malformed, expired and revoked private tokens remain rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Anonymous and authenticated direct RPC execution remain denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Reapplying patch is idempotent and changes no report rows",
+      "status": "PASS"
+    },
+    {
+      "name": "Rollback restores RS-only predicate without changing owner/ACL or records",
+      "status": "PASS"
+    }
+  ]
+}

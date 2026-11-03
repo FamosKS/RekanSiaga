@@ -1,0 +1,87 @@
+/* Base palette uses sampled PNG pixels; hover/error/contrast shades are derived.
+   These are not extracted Figma variables.
+   Type, spacing, radii, shadows and breakpoints are implementation estimates. */
+:root {
+  --primary: #b45309;
+  --primary-hover: #92400e;
+  --background: #f6f5f2;
+  --background-cool: #f3f4f6;
+  --surface: #ffffff;
+  --surface-subtle: #f9fafb;
+  --text: #111827;
+  --muted: #626a78; /* Darkened from sampled #6b7280 for warm-white contrast. */
+  --border: #e5e7eb;
+  --success: #1b4332;
+  --success-soft: #e6f4ed;
+  --warning: #92400e;
+  --warning-soft: #fff0d9;
+  --danger: #b42318;
+  --danger-fill: #c94e3b;
+  --danger-hover: #a63b2d;
+  --danger-soft: #fce8e5;
+  --tint: #fff7ed;
+  --focus-ring: var(--primary);
+  --on-primary: #ffffff;
+  --on-danger: #ffffff;
+  --disabled-opacity: .55;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space: var(--space-2);
+  --font-body: 'Segoe UI', system-ui, sans-serif;
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.75rem;
+  --line-body: 1.6;
+  --line-heading: 1.25;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --radius-sm: .5rem;
+  --radius-control: .75rem;
+  --radius-card: var(--radius);
+  --radius-dialog: 1rem;
+  --radius-pill: 999px;
+  --radius: 1rem;
+  --elevation-card: 0 6px 14px rgb(17 24 39 / .07);
+  --shadow-card: var(--elevation-card);
+  --shadow-dialog: 0 24px 64px rgb(17 24 39 / .18);
+  --container-width: 75rem;
+  --dialog-width: 30rem;
+  --control-height: 2.75rem;
+  --duration-fast: 150ms;
+  --overlay: rgb(17 24 39 / .36);
+}
+/* Inline mappings keep utilities and existing semantic CSS on one source of truth,
+   including high-contrast overrides. Breakpoint values must be static in Tailwind. */
+@theme inline {
+  --color-primary: var(--primary);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-body);
+  --radius-card: var(--radius);
+  --shadow-card: var(--elevation-card);
+}
+@theme {
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 50rem;
+  --breakpoint-lg: 75rem;
+}

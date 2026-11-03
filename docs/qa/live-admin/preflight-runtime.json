@@ -1,0 +1,105 @@
+{
+  "kind": "Local PostgreSQL runtime / contract fixtures, never Cloud",
+  "checks": [
+    {
+      "name": "Catalog export is one read-only metadata JSON with no user data/function bodies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Unapproved release fails before changing the local schema",
+      "outcome": "PASS"
+    },
+    {
+      "name": "An existing RPC overload is preserved and blocks conflicting new RPC deployment",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Inherited client EXECUTE aborts release without changing provider defaults or installing objects",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Approved release executes on the compatible local contract schema",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Release narrows postgres/public defaults while leaving internal provider defaults exactly unchanged",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Postflight passes with provider defaults intact and detects an effective grant regression",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Regions migration requires its own approval, preserves UUIDs and rejects invalid parents",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Release preserves pre-existing content/settings and their original values",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Public config remains SELECT-only under broad default grants",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Backup/quota remain private despite managed default grants",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Assigned role labels resolve without granting administrative writes",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Manager/editor writes obey actual table RLS and public publication filters",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Staff/settings/queue RPCs execute with server RBAC and bounded contracts",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Service-only submission persists report, receipt hash and initial history",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Reason NULL succeeds; blank/overflow rejected; update/history are atomic on failure",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Tracking rejects a foreign token and does not expose private report fields",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Last Super Admin is protected and rate quotas enforce durable client bounds",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Private evidence policy blocks even an existing permissive storage policy",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Repeat release fails closed without replacing existing objects/data",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Rollback refuses later table grants/policy changes instead of overwriting them",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Rollback restores the original review body/ACL and preserves app data/evidence",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Repeated rollback/release after recovery stop safely and preserve retained data",
+      "outcome": "PASS"
+    }
+  ],
+  "cloudWrites": 0,
+  "limitations": [
+    "PostGIS replaced with text fixture",
+    "Auth/storage schemas are fixtures, not external services",
+    "No concurrent-session or real JWT acceptance"
+  ],
+  "phase4a": "BLOCKED",
+  "engine": "PostgreSQL 18.6 (PGlite 0.5.12) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit"
+}

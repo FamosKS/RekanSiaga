@@ -1,0 +1,34 @@
+{
+    "checkedAt":  "2026-11-03",
+    "projectRef":  "uiuiouosblyuqgnvfpeh",
+    "feature":  "optional-admin-disaster-event-image",
+    "status":  "CLOUD_DEPLOYED_AWAITING_SYNTHETIC_LIVE_ACCEPTANCE",
+    "local":  {
+                  "adminPicker":  "implemented; VITE_EVENT_MEDIA_ENABLED=true set locally; restart Vite before browser test",
+                  "publicSurfaces":  "image resolver wired to monitoring cards, event detail, and map summary; not runtime-verified",
+                  "securityDesign":  "separate private event-media bucket and registry; PNG sanitization reused; staff role/version guarded RPCs; audit rows proposed",
+                  "cloud":  "Operator terminal confirms event-media SQL postflight PASS and Edge Function deployment on rekansiaga-dev.",
+                  "flutter":  "contract documented only; Flutter project untouched",
+                  "staging":  "untouched"
+              },
+    "needsOperatorApproval":  [
+
+                              ],
+    "tests":  {
+                  "targetedLint":  "PASS",
+                  "productionBuild":  "PASS after local feature flag activation (existing \u003e500 kB chunk warning)",
+                  "edgeTypecheck":  "PASS",
+                  "sqlParser":  "BLOCKED (local pglast native DLL blocked by Application Control)",
+                  "cloudDeployment":  "PASS (operator terminal screenshot: SQL postflight PASS and Edge Function deployed to exact dev ref)",
+                  "live":  "NOT_RUN; synthetic event upload/public read/replace/revoke acceptance remains",
+                  "reusedPngSanitizerSuite":  "PASS 7/7"
+              },
+    "knownLimitations":  [
+                             "No gallery/multiple photo support; existing contract had no gallery requirement",
+                             "EXIF stripping does not moderate faces or determine whether image is appropriate",
+                             "Previously issued signed URLs remain usable until their 60-second expiry"
+                         ],
+    "nextAgent":  "Cloud deployment is confirmed PASS by operator output. Local .env.local flag VITE_EVENT_MEDIA_ENABLED=true is now set. Restart Vite and conduct a browser acceptance with one synthetic TEST event: upload, verify /pemantauan/detail/map display, replace, revoke; then update QA/status/handoff. Do not claim LIVE PASS until observed. Flutter/staging/report gateway unchanged.",
+    "cloud":  "Operator-provided terminal evidence confirms dev-event-media SQL postflight PASS and event-media Edge Function deployed on rekansiaga-dev. VITE_EVENT_MEDIA_ENABLED=true set locally. Browser acceptance remains outstanding.",
+    "operatorNextStep":  "Restart Vite, sign in as information_manager or super_admin, use one synthetic TEST disaster event, upload an appropriate non-identifying image, verify public read in /pemantauan, event detail and /peta, then replace and revoke. Report only outcome; do not share personal data or signed URLs."
+}

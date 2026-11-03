@@ -1,0 +1,9 @@
+{
+  "kind": "local fixture only; no Cloud requests",
+  "checkOnly": "PASS",
+  "approvedFlagFixture": "PASS",
+  "unrelatedSettingsPreserved": "PASS",
+  "wrongProjectRejected": "PASS",
+  "credentialOutput": "NONE",
+  "cloudWrites": 0
+}

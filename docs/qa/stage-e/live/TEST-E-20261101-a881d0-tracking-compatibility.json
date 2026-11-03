@@ -1,0 +1,7 @@
+{
+  "kind": "LOCAL validation of observed legacy code shape, not a Gateway request",
+  "webAcceptsRPT": false,
+  "gatewaySourceAcceptsRPT": false,
+  "cloudRequests": 0,
+  "at": "2026-11-02T00:26:36.459Z"
+}

@@ -1,0 +1,8 @@
+{
+  "at": "2026-11-02T15:32:14.147Z",
+  "kind": "LIVE read-only OPTIONS only; no photo or auth payload",
+  "http": 204,
+  "allowedHeaders": "authorization, apikey, content-type",
+  "allowsSdkClientInfo": false,
+  "cloudMutations": 0
+}

@@ -1,0 +1,28 @@
+# Satu checklist operator untuk seluruh run LIVE E
+
+## Kelanjutan aktual, 2 November 2026
+
+**Steering terbaru menggantikan langkah create2 laporan di bawah:** operator memberikan laporan Flutter existing untuk bukti. Runner telah membaca verified/history/audit tanpa mutasi; tidak ada2 laporan baru dibuat. Masalah actual: format RPT tracking dan HEAD anonim kolom privat count1. Patch lokal/tes PASS; satu paket perubahan Cloud masih PROPOSED di `docs/runbooks/stage-e-report-compat-privacy.md`. Prioritaskan paket itu setelah persetujuan tambahan. Tidak membuka ulang/menghapus laporan Flutter. Daftar create/review2 laporan berikut dipertahankan sebagai riwayat rencana awal, bukan tugas yang wajib diulang operator.
+
+Scope seluruh paket sudah disetujui; tidak perlu approval Cloud tambahan per modul. Sembilan konten/dependensi selesai diuji LIVE dan ditutup logis,22 audit cocok; jangan membuat ulang konten atau menjalankan ulang paket cleanup yang committed.
+
+1. CAPTCHA pada Chrome biasa localhost5173 berhasil menurut operator. CAPTCHA pada Chrome QA otomasi gagal600010. Gunakan **Chrome biasa** untuk dua laporan anonim dan tracking; key/secret tidak perlu diganti. Jangan memakai test-token atau menurunkan CAPTCHA/kuota.
+2. Maksimal dua judul exact: `TEST-E-20261101-a881d0 laporan 1` dan `TEST-E-20261101-a881d0 laporan 2`. Deskripsi/lokasi jelas SIMULASI, jenis Lainnya, tanpa foto atau identitas pribadi. Klik Kirim laporan sekali per laporan. Simpan masing-masing kode/token secara pribadi; tidak ke chat, log, screenshot, repository atau URL. Bila hasil commit tidak pasti, jangan retry sebelum lookup exact-title/UUID direkonsiliasi.
+3. Tracking awal masing-masing memerlukan CAPTCHA baru dan harus menunjukkan unverified (HTTP200). Cukup laporkan hasil HTTP/status; jangan menyalin payload/response lengkap atau HAR.
+4. Runner merekonsiliasi kedua UUID melalui sesi staf existing, lalu UI/RPC review laporan1 -> under_review. Operator tracking ulang laporan1 dengan CAPTCHA baru dan melaporkan status/history under_review. Ini tindakan CAPTCHA, bukan permintaan approval Cloud baru.
+5. Runner menutup laporan1 -> rejected dan laporan2 -> verified melalui RPC. Operator tracking ulang keduanya: HTTP200 dengan status/history final sesuai UUID yang sama. Runner memeriksa history/audit/anon-denial. Laporan final dipertahankan privat beserta audit/history (RETAINED_TERMINAL), tanpa DELETE atau buka ulang ilegal. Maksimal5 tracking terencana, tetap di bawah batas10 paket; berhenti pada429 dan jangan memodifikasi quota/header.
+6. Untuk sisa konfirmasi foreground browser: isi draft tanpa submit di Chrome biasa, pindah tab dan kembali, periksa input/fokus/scroll; pindah menu internal lalu lanjutkan draft. Terapkan pola yang sama pada editor artikel/kejadian/kontak/panduan/lokasi, settings/staf yang tetap terkunci, laporan/tracking dan review. Batalkan draft sintetis settings/staf; jangan simpan perubahan akses. Bukti lokal10 pola sudah PASS, LIVE kontak/menu/retry PASS; pola yang foreground-nya belum dapat diamati tidak disebut PASS penuh.
+7. Setelah seluruh pengujian dan rekonsiliasi selesai, nonaktifkan hanya flag lokal `VITE_DEV_CONTENT_WRITES_ENABLED` sesuai runbook, pertahankan global writes false dan review rutin existing. Restart saat formulir/receipt sudah diamankan. Tidak deploy ulang, migration, impor, perubahan secrets/grants/RLS/Flutter/staging atau physical delete.
+
+Runtime Flutter/native CAPTCHA tidak diuji pada paket Web ini; kontrak existing tetap kompatibel dalam lingkup yang telah diperiksa. Lihat STATUS.md untuk hasil sebenarnya; catatan persiapan di bawah merupakan riwayat.
+
+## Riwayat persiapan awal (bukan status eksekusi terbaru)
+
+Persetujuan diterima 1 November 2026. Run aktif `TEST-E-20261101-a881d0`, target dev `uiuiouosblyuqgnvfpeh`. Maksimal2 laporan dan9 row konten/dependensi TEST, tidak ada penghapusan fisik, tidak mengubah security/schema/grants/Flutter/staging. Seluruh tindakan di bawah memakai scope yang sama, bukan persetujuan per modul.
+
+1. Pada jendela Chrome pengujian LIVE yang baru dibuka, masuk di `http://localhost:5173/admin/login` dengan akun Web Admin dev existing ber-role Super Admin. Akun Dashboard Supabase belum tentu akun Web. Jangan mengirim email/password/JWT ke chat atau menyimpannya dalam skrip. Jika tidak punya akun/role existing, laporkan kendala tersebut; runner tidak membuat akun atau mengubah role.
+2. Setelah Dashboard muncul, biarkan jendela pengujian tetap terbuka dan beri kabar **Sudah login di Chrome pengujian**. Runner akan memakai sesi yang sama untuk artikel, kejadian/child, kontak, panduan/checklist, lokasi, audit dan cleanup logis sesuai runbook. Jangan menambah data TEST sendiri di luar rangkaian runner agar batas row dan journal tetap tepat.
+3. Bila Turnstile pada laporan/tracking memerlukan tindakan manusia, selesaikan di jendela yang sama lalu beri kabar **CAPTCHA selesai**. Token hanya dipakai di runtime browser/runner untuk request existing, tidak ditampilkan, ditulis ke repository/log atau diisi dalam chat. CAPTCHA tidak dibypass atau diganti respons palsu.
+4. Sesudah seluruh hasil dicatat, operator dapat meninjau journal yang berisi ID/status/HTTP/audit metadata saja. Data baru ditutup logis (archive/nonaktif/unpublish/rejected bila belum final); laporan final tetap privat, audit/history tidak dihapus. Jangan memakai tombol Hapus; seluruh DELETE diblokir pada runner.
+
+Saat checklist disiapkan, browser masih /admin/login, roles kosong, receipts0, created0. Ini **BLOCKED untuk LIVE**, bukan PASS. Tes lokal yang sudah PASS tidak diulang. Tidak perlu menjalankan skrip aktivasi/deployment Gateway atau SQL A-D lagi. Chrome pengujian terpisah dari sesi browser lain; cukup login satu kali untuk seluruh paket.

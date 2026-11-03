@@ -1,0 +1,250 @@
+{
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "routeChecks": [
+    {
+      "route": "/admin",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/laporan",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/laporan/id-uji",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/kejadian",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/artikel",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/panduan",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/kontak-darurat",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/staf",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/notifikasi",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/sumber-data",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/pengaturan",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/login",
+      "width": 390,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/laporan",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/laporan/id-uji",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/kejadian",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/artikel",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/panduan",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/kontak-darurat",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/staf",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/notifikasi",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/sumber-data",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/pengaturan",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/login",
+      "width": 768,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/laporan",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/laporan/id-uji",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/kejadian",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/artikel",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/panduan",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/kontak-darurat",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/staf",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/notifikasi",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/sumber-data",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/pengaturan",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    },
+    {
+      "route": "/admin/login",
+      "width": 1440,
+      "overflow": false,
+      "isolatedPresentation": true
+    }
+  ],
+  "interactions": [
+    "Login password toggle and required validation; no credentials submitted",
+    "Mobile sidebar opens, navigates and closes",
+    "/admin/kejadian: search/reset, required validation, editor, preview, confirmation blocked, return/close",
+    "/admin/artikel: search/reset, required validation, editor, preview, confirmation blocked, return/close",
+    "/admin/panduan: search/reset, required validation, editor, preview, confirmation blocked, return/close",
+    "/admin/kontak-darurat: search/reset, required validation, editor, preview, confirmation blocked, return/close",
+    "/admin/staf: search/reset, required validation, editor, preview, confirmation blocked, return/close",
+    "/admin/notifikasi: search/reset, required validation, editor, preview, confirmation blocked, return/close",
+    "/admin/sumber-data: search/reset, required validation, editor, preview, confirmation blocked, return/close",
+    "Report status filter uses supplied contract",
+    "Report verification draft confirmation; apply remains disabled",
+    "Settings density updates local preview",
+    "Production protected routes, including unknown admin URL, redirect without a session"
+  ],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "screenshots": [
+    "dashboard-390.png",
+    "articles-390.png",
+    "login-390.png",
+    "dashboard-1440.png",
+    "articles-1440.png",
+    "login-1440.png"
+  ]
+}

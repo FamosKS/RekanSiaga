@@ -1,0 +1,37 @@
+{
+  "kind": "LOCAL PGlite + synthetic data only; no network/cloud calls",
+  "checks": [
+    {
+      "name": "approved package creates private alert schema, reader, RBAC, and audit",
+      "status": "PASS"
+    },
+    {
+      "name": "matching selected child region receives active published alert with safe fields",
+      "status": "PASS"
+    },
+    {
+      "name": "another province area, expired/revoked alert, or unresolved event does not leak into response",
+      "status": "PASS"
+    },
+    {
+      "name": "non-super-admin cannot classify an alert as an official source",
+      "status": "PASS"
+    },
+    {
+      "name": "anonymous caller can use the minimized reader but cannot select private alert rows",
+      "status": "PASS"
+    },
+    {
+      "name": "every insert/update is audited and updates advance version",
+      "status": "PASS"
+    },
+    {
+      "name": "client requires the scoped alert feature flag and uses region RPC",
+      "status": "PASS"
+    },
+    {
+      "name": "local policy filters expiry, prioritizes urgency, deduplicates versions, and hides unverified routes",
+      "status": "PASS"
+    }
+  ]
+}

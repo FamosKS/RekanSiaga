@@ -1,0 +1,2218 @@
+[
+  {
+    "phase4a4_final_readonly_gaps": {
+      "kind": "STAGING_METADATA_GAPS_NOT_AUTHENTICATED_API_PROOF",
+      "note": "No overall PASS. Compare 200 defaults to approved Master; inspect membership direction/options. Exposed schemas and real JWT decisions still need separate evidence.",
+      "captured_at": "2026-10-22T17:56:00.150674+00:00",
+      "target_note": "Operator must record verified Dashboard staging reference separately",
+      "database_name": "postgres",
+      "executing_role": "postgres",
+      "server_version": "17.11",
+      "column_defaults": [
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "api_idempotency_keys",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "api_idempotency_keys",
+          "column_name": "scope",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "api_idempotency_keys",
+          "column_name": "key_hash",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "api_idempotency_keys",
+          "column_name": "request_hash",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "api_idempotency_keys",
+          "column_name": "processing_status",
+          "column_type": "text",
+          "default_expr": "'processing'::text"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "api_idempotency_keys",
+          "column_name": "resource_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "api_idempotency_keys",
+          "column_name": "expires_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "app_settings",
+          "column_name": "key",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "app_settings",
+          "column_name": "value",
+          "column_type": "jsonb",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "app_settings",
+          "column_name": "updated_by",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "app_settings",
+          "column_name": "updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "author_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "title",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "slug",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "summary",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "content",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "cover_image_path",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "source_url",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "publication_status",
+          "column_type": "text",
+          "default_expr": "'draft'::text"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "published_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "articles",
+          "column_name": "updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "actor_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "action",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "entity_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "entity_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "old_values",
+          "column_type": "jsonb",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "new_values",
+          "column_type": "jsonb",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "audit_logs",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "data_sources",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "data_sources",
+          "column_name": "name",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "data_sources",
+          "column_name": "source_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "data_sources",
+          "column_name": "official_url",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "data_sources",
+          "column_name": "api_identifier",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "data_sources",
+          "column_name": "is_active",
+          "column_type": "boolean",
+          "default_expr": "true"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "data_sources",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "source_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "external_id",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "region_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "disaster_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "title",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "description",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "severity",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "verification_status",
+          "column_type": "text",
+          "default_expr": "'unconfirmed'::text"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "event_status",
+          "column_type": "text",
+          "default_expr": "'unknown'::text"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "occurred_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "source_updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "fetched_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "published_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "disaster_events",
+          "column_name": "updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "event_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "region_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "title",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "organization_name",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "description",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "simulation_target_amount",
+          "column_type": "numeric(15,2)",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "is_simulation",
+          "column_type": "boolean",
+          "default_expr": "true"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "is_active",
+          "column_type": "boolean",
+          "default_expr": "true"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "donation_campaigns",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "region_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "organization_name",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "service_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "phone_number",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "official_url",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "is_verified",
+          "column_type": "boolean",
+          "default_expr": "false"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "verified_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "is_active",
+          "column_type": "boolean",
+          "default_expr": "true"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "emergency_contacts",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_locations",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_locations",
+          "column_name": "event_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "event_locations",
+          "column_name": "region_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_locations",
+          "column_name": "label",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_locations",
+          "column_name": "location_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "event_locations",
+          "column_name": "coordinates",
+          "column_type": "geography(Point,4326)",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_locations",
+          "column_name": "is_primary",
+          "column_type": "boolean",
+          "default_expr": "false"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_updates",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_updates",
+          "column_name": "event_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_updates",
+          "column_name": "update_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_updates",
+          "column_name": "description",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "event_updates",
+          "column_name": "source_updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "event_updates",
+          "column_name": "recorded_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "event_updates",
+          "column_name": "recorded_by",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_checklist_items",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_checklist_items",
+          "column_name": "guide_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_checklist_items",
+          "column_name": "phase",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_checklist_items",
+          "column_name": "instruction",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_checklist_items",
+          "column_name": "sort_order",
+          "column_type": "integer",
+          "default_expr": "0"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_checklist_items",
+          "column_name": "is_active",
+          "column_type": "boolean",
+          "default_expr": "true"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "author_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "disaster_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "title",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "summary",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "content",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "source_url",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "publication_status",
+          "column_type": "text",
+          "default_expr": "'draft'::text"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "mitigation_guides",
+          "column_name": "updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_deliveries",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_deliveries",
+          "column_name": "notification_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_deliveries",
+          "column_name": "subscription_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_deliveries",
+          "column_name": "status",
+          "column_type": "text",
+          "default_expr": "'pending'::text"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_deliveries",
+          "column_name": "attempts",
+          "column_type": "integer",
+          "default_expr": "0"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notification_deliveries",
+          "column_name": "error_message",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notification_deliveries",
+          "column_name": "sent_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_rules",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_rules",
+          "column_name": "code",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notification_rules",
+          "column_name": "disaster_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notification_rules",
+          "column_name": "minimum_severity",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_rules",
+          "column_name": "enabled",
+          "column_type": "boolean",
+          "default_expr": "false"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_rules",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "region_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "platform",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "endpoint_hash",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "token_encrypted",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "permission_status",
+          "column_type": "text",
+          "default_expr": "'unknown'::text"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "is_active",
+          "column_type": "boolean",
+          "default_expr": "true"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notification_subscriptions",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "rule_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "event_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "dedupe_key",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "title",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "body",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "status",
+          "column_type": "text",
+          "default_expr": "'queued'::text"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "notifications",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "tracking_code",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "event_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "region_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "report_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "title",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "description",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "coordinates",
+          "column_type": "geography(Point,4326)",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "location_description",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "status",
+          "column_type": "text",
+          "default_expr": "'unverified'::text"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "reviewed_by",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "reviewed_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "public_reports",
+          "column_name": "updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "regions",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "regions",
+          "column_name": "parent_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "regions",
+          "column_name": "code",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "regions",
+          "column_name": "name",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "regions",
+          "column_name": "region_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "regions",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "event_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "region_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "name",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "location_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "coordinates",
+          "column_type": "geography(Point,4326)",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "address",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "verification_status",
+          "column_type": "text",
+          "default_expr": "'unverified'::text"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "source_url",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "relief_locations",
+          "column_name": "updated_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_access_tokens",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_access_tokens",
+          "column_name": "report_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_access_tokens",
+          "column_name": "token_hash",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_access_tokens",
+          "column_name": "expires_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "report_access_tokens",
+          "column_name": "revoked_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_access_tokens",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_attachments",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_attachments",
+          "column_name": "report_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_attachments",
+          "column_name": "storage_path",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_attachments",
+          "column_name": "mime_type",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_attachments",
+          "column_name": "file_size",
+          "column_type": "bigint",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_attachments",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_status_history",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_status_history",
+          "column_name": "report_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "report_status_history",
+          "column_name": "from_status",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_status_history",
+          "column_name": "to_status",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "report_status_history",
+          "column_name": "changed_by",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "report_status_history",
+          "column_name": "reason",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "report_status_history",
+          "column_name": "changed_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "roles",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "roles",
+          "column_name": "code",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "roles",
+          "column_name": "name",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "roles",
+          "column_name": "description",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "source_sync_logs",
+          "column_name": "id",
+          "column_type": "uuid",
+          "default_expr": "extensions.gen_random_uuid()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "source_sync_logs",
+          "column_name": "source_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "source_sync_logs",
+          "column_name": "sync_status",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "source_sync_logs",
+          "column_name": "records_processed",
+          "column_type": "integer",
+          "default_expr": "0"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "source_sync_logs",
+          "column_name": "error_message",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "source_sync_logs",
+          "column_name": "started_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": false,
+          "generated": "",
+          "table_name": "source_sync_logs",
+          "column_name": "finished_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "staff_profiles",
+          "column_name": "user_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "staff_profiles",
+          "column_name": "display_name",
+          "column_type": "text",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "staff_profiles",
+          "column_name": "is_active",
+          "column_type": "boolean",
+          "default_expr": "true"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "staff_profiles",
+          "column_name": "created_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "staff_role_assignments",
+          "column_name": "staff_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "staff_role_assignments",
+          "column_name": "role_id",
+          "column_type": "uuid",
+          "default_expr": null
+        },
+        {
+          "identity": "",
+          "not_null": true,
+          "generated": "",
+          "table_name": "staff_role_assignments",
+          "column_name": "assigned_at",
+          "column_type": "timestamp with time zone",
+          "default_expr": "now()"
+        }
+      ],
+      "membership_options": [
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "authenticator",
+          "admin_option": false,
+          "granted_role": "anon",
+          "inherit_option": false
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "authenticator",
+          "admin_option": false,
+          "granted_role": "authenticated",
+          "inherit_option": false
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "authenticator",
+          "admin_option": false,
+          "granted_role": "service_role",
+          "inherit_option": false
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "pg_monitor",
+          "admin_option": false,
+          "granted_role": "pg_read_all_settings",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "pg_monitor",
+          "admin_option": false,
+          "granted_role": "pg_read_all_stats",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "pg_monitor",
+          "admin_option": false,
+          "granted_role": "pg_stat_scan_tables",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "anon",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "authenticated",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "authenticator",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "pg_create_subscription",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "pg_monitor",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "pg_read_all_data",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "pg_signal_backend",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": true,
+          "granted_role": "service_role",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "postgres",
+          "admin_option": false,
+          "granted_role": "supabase_privileged_role",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_etl_admin",
+          "admin_option": false,
+          "granted_role": "pg_monitor",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_etl_admin",
+          "admin_option": false,
+          "granted_role": "pg_read_all_data",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_etl_admin",
+          "admin_option": false,
+          "granted_role": "supabase_privileged_role",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_read_only_user",
+          "admin_option": false,
+          "granted_role": "pg_monitor",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_read_only_user",
+          "admin_option": false,
+          "granted_role": "pg_read_all_data",
+          "inherit_option": true
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_realtime_admin",
+          "admin_option": false,
+          "granted_role": "anon",
+          "inherit_option": false
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_realtime_admin",
+          "admin_option": false,
+          "granted_role": "authenticated",
+          "inherit_option": false
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_realtime_admin",
+          "admin_option": false,
+          "granted_role": "service_role",
+          "inherit_option": false
+        },
+        {
+          "grantor": "supabase_admin",
+          "set_option": true,
+          "member_role": "supabase_storage_admin",
+          "admin_option": false,
+          "granted_role": "authenticator",
+          "inherit_option": false
+        }
+      ],
+      "schema_client_access": [
+        {
+          "role": "anon",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "auth"
+        },
+        {
+          "role": "authenticated",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "auth"
+        },
+        {
+          "role": "service_role",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "auth"
+        },
+        {
+          "role": "anon",
+          "owner": "postgres",
+          "usage": true,
+          "create": false,
+          "schema": "extensions"
+        },
+        {
+          "role": "authenticated",
+          "owner": "postgres",
+          "usage": true,
+          "create": false,
+          "schema": "extensions"
+        },
+        {
+          "role": "service_role",
+          "owner": "postgres",
+          "usage": true,
+          "create": false,
+          "schema": "extensions"
+        },
+        {
+          "role": "anon",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "graphql"
+        },
+        {
+          "role": "authenticated",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "graphql"
+        },
+        {
+          "role": "service_role",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "graphql"
+        },
+        {
+          "role": "anon",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "graphql_public"
+        },
+        {
+          "role": "authenticated",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "graphql_public"
+        },
+        {
+          "role": "service_role",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "graphql_public"
+        },
+        {
+          "role": "anon",
+          "owner": "pgbouncer",
+          "usage": false,
+          "create": false,
+          "schema": "pgbouncer"
+        },
+        {
+          "role": "authenticated",
+          "owner": "pgbouncer",
+          "usage": false,
+          "create": false,
+          "schema": "pgbouncer"
+        },
+        {
+          "role": "service_role",
+          "owner": "pgbouncer",
+          "usage": false,
+          "create": false,
+          "schema": "pgbouncer"
+        },
+        {
+          "role": "anon",
+          "owner": "pg_database_owner",
+          "usage": true,
+          "create": false,
+          "schema": "public"
+        },
+        {
+          "role": "authenticated",
+          "owner": "pg_database_owner",
+          "usage": true,
+          "create": false,
+          "schema": "public"
+        },
+        {
+          "role": "service_role",
+          "owner": "pg_database_owner",
+          "usage": true,
+          "create": false,
+          "schema": "public"
+        },
+        {
+          "role": "anon",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "realtime"
+        },
+        {
+          "role": "authenticated",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "realtime"
+        },
+        {
+          "role": "service_role",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "realtime"
+        },
+        {
+          "role": "anon",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "storage"
+        },
+        {
+          "role": "authenticated",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "storage"
+        },
+        {
+          "role": "service_role",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "storage"
+        },
+        {
+          "role": "anon",
+          "owner": "supabase_admin",
+          "usage": false,
+          "create": false,
+          "schema": "vault"
+        },
+        {
+          "role": "authenticated",
+          "owner": "supabase_admin",
+          "usage": false,
+          "create": false,
+          "schema": "vault"
+        },
+        {
+          "role": "service_role",
+          "owner": "supabase_admin",
+          "usage": true,
+          "create": false,
+          "schema": "vault"
+        }
+      ],
+      "transaction_read_only": "on",
+      "database_client_access": [
+        {
+          "role": "anon",
+          "create": false,
+          "temporary": true
+        },
+        {
+          "role": "authenticated",
+          "create": false,
+          "temporary": true
+        },
+        {
+          "role": "service_role",
+          "create": false,
+          "temporary": true
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,740 @@
+{
+  "kind": "LIVE Supabase E, approved 2026-11-01; no mocks",
+  "projectRef": "uiuiouosblyuqgnvfpeh",
+  "runLabel": "TEST-E-20261101-a881d0",
+  "approval": "User approved full stage-e-complete.md scope; max 2 reports / 9 content rows; logical cleanup only",
+  "status": "E_CONTENT_CLEANUP_PASS_REPORT_PRIVACY_AND_RPT_COMPAT_BLOCKED_APPROVAL",
+  "created": [
+    {
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e"
+    },
+    {
+      "table": "data_sources",
+      "id": "2412fd0f-efcb-4ea5-a554-a79e6ea09535"
+    },
+    {
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98"
+    },
+    {
+      "table": "event_updates",
+      "id": "678eddb6-a6f2-4962-a5d5-152e0de42998"
+    },
+    {
+      "table": "event_locations",
+      "id": "ec88d302-0af5-4889-a195-52777bb62519"
+    },
+    {
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc"
+    },
+    {
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346"
+    },
+    {
+      "table": "mitigation_checklist_items",
+      "id": "68f214af-23cf-4099-9de9-80bd12cc34df"
+    },
+    {
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e"
+    }
+  ],
+  "reports": [],
+  "steps": [
+    {
+      "kind": "create",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 201,
+      "version": "2026-11-01T13:25:21.786035+00:00",
+      "publicationStatus": "draft",
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:25:21.350Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:25:54.691Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:27:00.595Z"
+    },
+    {
+      "kind": "update",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "version": "2026-11-01T13:28:02.577302+00:00",
+      "publicationStatus": "published",
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": "2026-11-01T13:28:00.614+00:00",
+      "at": "2026-11-01T13:28:02.157Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:28:21.508Z"
+    },
+    {
+      "kind": "update",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "version": "2026-11-01T13:28:24.625196+00:00",
+      "publicationStatus": "published",
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": "2026-11-01T13:28:00.614+00:00",
+      "at": "2026-11-01T13:28:24.193Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:28:44.932Z"
+    },
+    {
+      "kind": "update",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "version": "2026-11-01T13:28:48.443604+00:00",
+      "publicationStatus": "archived",
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": "2026-11-01T13:28:00.614+00:00",
+      "at": "2026-11-01T13:28:48.001Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:29:30.484Z"
+    },
+    {
+      "kind": "create",
+      "table": "data_sources",
+      "id": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+      "http": 201,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": true,
+      "publishedAt": null,
+      "at": "2026-11-01T13:29:33.203Z"
+    },
+    {
+      "kind": "create",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 201,
+      "version": "2026-11-01T13:29:55.81207+00:00",
+      "publicationStatus": null,
+      "verificationStatus": "unconfirmed",
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:29:55.360Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:31:03.014Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:31:34.899Z"
+    },
+    {
+      "kind": "update",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "version": "2026-11-01T13:33:16.00728+00:00",
+      "publicationStatus": null,
+      "verificationStatus": "staff_verified",
+      "active": null,
+      "publishedAt": "2026-11-01T13:00:00+00:00",
+      "at": "2026-11-01T13:33:15.646Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:33:58.241Z"
+    },
+    {
+      "kind": "create",
+      "table": "event_updates",
+      "id": "678eddb6-a6f2-4962-a5d5-152e0de42998",
+      "http": 201,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:34:22.877Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:36:16.259Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:37:28.162Z"
+    },
+    {
+      "kind": "create",
+      "table": "event_locations",
+      "id": "ec88d302-0af5-4889-a195-52777bb62519",
+      "http": 201,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:38:07.531Z"
+    },
+    {
+      "kind": "create",
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "http": 201,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": false,
+      "publishedAt": null,
+      "at": "2026-11-01T13:38:28.194Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:38:50.929Z"
+    },
+    {
+      "kind": "update",
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "http": 200,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": true,
+      "publishedAt": null,
+      "at": "2026-11-01T13:38:56.290Z"
+    },
+    {
+      "kind": "create",
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "http": 201,
+      "version": "2026-11-01T13:39:23.888492+00:00",
+      "publicationStatus": "draft",
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:39:23.510Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:39:26.618Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:39:34.270Z"
+    },
+    {
+      "kind": "update",
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "http": 200,
+      "version": "2026-11-01T13:39:44.832296+00:00",
+      "publicationStatus": "published",
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:39:44.467Z"
+    },
+    {
+      "kind": "create",
+      "table": "mitigation_checklist_items",
+      "id": "68f214af-23cf-4099-9de9-80bd12cc34df",
+      "http": 201,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": true,
+      "publishedAt": null,
+      "at": "2026-11-01T13:39:47.519Z"
+    },
+    {
+      "kind": "create",
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "http": 201,
+      "version": "2026-11-01T13:40:09.131412+00:00",
+      "publicationStatus": null,
+      "verificationStatus": "unverified",
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:40:08.771Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:40:11.921Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-01T13:40:18.839Z"
+    },
+    {
+      "kind": "update",
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "http": 200,
+      "version": "2026-11-01T13:40:24.52821+00:00",
+      "publicationStatus": null,
+      "verificationStatus": "verified",
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-01T13:40:24.224Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-01T13:41:05.031Z"
+    },
+    {
+      "kind": "resume",
+      "createdRetained": 9,
+      "at": "2026-11-02T00:10:36.786Z"
+    },
+    {
+      "kind": "resume",
+      "createdRetained": 9,
+      "at": "2026-11-02T00:11:07.808Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-02T00:11:37.201Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-02T00:11:37.512Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-02T00:11:37.653Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-02T00:11:37.777Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "http": 200,
+      "visible": true,
+      "at": "2026-11-02T00:11:37.889Z"
+    },
+    {
+      "kind": "public-ui-check",
+      "path": "/darurat",
+      "text": "TEST-E-20261101-a881d0 lokasi bantuan SIMULASI diperbarui",
+      "visible": true,
+      "at": "2026-11-02T00:11:56.959Z"
+    },
+    {
+      "kind": "audit",
+      "auditId": "d541e5c4-ab20-414a-9c68-303b1ff9cb99",
+      "entityId": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "table": "relief_locations",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:40:24.52821+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "bc5f62d8-0033-4413-adc8-d38eebb61a3f",
+      "entityId": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "table": "relief_locations",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:40:09.131412+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "42c633d2-d5ab-4d1e-86f5-e8226347c3df",
+      "entityId": "68f214af-23cf-4099-9de9-80bd12cc34df",
+      "table": "mitigation_checklist_items",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:39:47.90697+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "854bd9c4-6684-480e-a290-71c68625a400",
+      "entityId": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "table": "mitigation_guides",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:39:44.832296+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "9f2cd207-5a4d-4725-b040-c41a987839d2",
+      "entityId": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "table": "mitigation_guides",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:39:23.888492+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "e0fe3b3a-12f4-42ad-8527-d44eea870c5c",
+      "entityId": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "table": "emergency_contacts",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:38:56.681584+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "d4129ec7-ced2-4398-91a6-f0f980f8df75",
+      "entityId": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "table": "emergency_contacts",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:38:28.577273+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "419bf189-d97f-4537-8fb1-405c7351cdea",
+      "entityId": "ec88d302-0af5-4889-a195-52777bb62519",
+      "table": "event_locations",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:38:07.606224+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "37d583a2-0f6c-4bf3-b092-ab381d60e57d",
+      "entityId": "678eddb6-a6f2-4962-a5d5-152e0de42998",
+      "table": "event_updates",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:34:23.25441+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "6be6ccd2-9c2a-4e6e-ba1e-905a2085a8a5",
+      "entityId": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "table": "disaster_events",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:33:16.00728+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "c303abd7-8305-4671-b7b0-51105367803c",
+      "entityId": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "table": "disaster_events",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:29:55.81207+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "65b89b65-9bb3-488c-83a7-7936139287dc",
+      "entityId": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+      "table": "data_sources",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:29:33.642064+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "a5b777ac-8d95-431b-ac4f-35540f7c0e99",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "table": "articles",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:28:48.443604+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "ce14beb6-83d5-4fb0-97c6-9b305848d450",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "table": "articles",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:28:24.625196+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "02139787-5f58-48d5-be94-97a339c05ddd",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "table": "articles",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:28:02.577302+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "47335495-2ef5-4bda-b2ae-e9bebda80ca3",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "table": "articles",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:25:21.786035+00:00"
+    },
+    {
+      "kind": "update",
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "http": 200,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": false,
+      "publishedAt": null,
+      "at": "2026-11-02T00:14:06.899Z"
+    },
+    {
+      "kind": "update",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "version": "2026-11-02T00:14:25.493791+00:00",
+      "publicationStatus": null,
+      "verificationStatus": "staff_verified",
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-02T00:14:25.302Z"
+    },
+    {
+      "kind": "update",
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "http": 200,
+      "version": "2026-11-02T00:14:29.234228+00:00",
+      "publicationStatus": "archived",
+      "verificationStatus": null,
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-02T00:14:29.078Z"
+    },
+    {
+      "kind": "update",
+      "table": "mitigation_checklist_items",
+      "id": "68f214af-23cf-4099-9de9-80bd12cc34df",
+      "http": 200,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": false,
+      "publishedAt": null,
+      "at": "2026-11-02T00:14:32.092Z"
+    },
+    {
+      "kind": "update",
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "http": 200,
+      "version": "2026-11-02T00:14:36.143332+00:00",
+      "publicationStatus": null,
+      "verificationStatus": "unverified",
+      "active": null,
+      "publishedAt": null,
+      "at": "2026-11-02T00:14:36.234Z"
+    },
+    {
+      "kind": "update",
+      "table": "data_sources",
+      "id": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+      "http": 200,
+      "version": null,
+      "publicationStatus": null,
+      "verificationStatus": null,
+      "active": false,
+      "publishedAt": null,
+      "at": "2026-11-02T00:14:41.629Z"
+    },
+    {
+      "kind": "audit",
+      "auditId": "cf2ca0cc-509d-4258-be8c-d9000ea36b0a",
+      "entityId": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+      "table": "data_sources",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:41.767533+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "976995a6-7470-452f-b7e4-73b4fe8a12b6",
+      "entityId": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "table": "relief_locations",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:36.143332+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "ec315569-333a-4a4c-913b-35a2f3faac39",
+      "entityId": "68f214af-23cf-4099-9de9-80bd12cc34df",
+      "table": "mitigation_checklist_items",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:32.267271+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "fc8cddb9-9d2c-4e41-b7b8-5cdfcc885e0b",
+      "entityId": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "table": "mitigation_guides",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:29.234228+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "0fbda3f4-69e7-4ff2-95f6-b0863c541767",
+      "entityId": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "table": "disaster_events",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:25.493791+00:00"
+    },
+    {
+      "kind": "audit",
+      "auditId": "edf2ee67-218b-4e4d-831c-6a75dd52805b",
+      "entityId": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "table": "emergency_contacts",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:07.010231+00:00"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "articles",
+      "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-02T00:15:06.492Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "disaster_events",
+      "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-02T00:15:06.813Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "emergency_contacts",
+      "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-02T00:15:07.063Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "mitigation_guides",
+      "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-02T00:15:07.347Z"
+    },
+    {
+      "kind": "public-owned-read",
+      "table": "relief_locations",
+      "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "http": 200,
+      "visible": false,
+      "at": "2026-11-02T00:15:07.647Z"
+    }
+  ],
+  "http": [],
+  "blocked": [],
+  "features": {},
+  "securityChanges": 0,
+  "physicalDeletes": 0
+}

@@ -1,0 +1,152 @@
+{
+  "kind": "LOCAL_PHASE4A5A_FIXTURE_READINESS_NOT_BASELINE_REAUDIT_OR_REMOTE_EXECUTION",
+  "minimum_auth_identities": 2,
+  "serial_states": 9,
+  "checks": {
+    "single_begin_rollback_no_commit": true,
+    "exact_executable_policy": true,
+    "one_named_policy_only": true,
+    "bad_comment_fragment_removed": true,
+    "two_physical_identities": true,
+    "null_uuids_no_approval": true,
+    "manifest_ref_crosscheck": true,
+    "reject_existing_app_fixtures": true,
+    "no_auth_user_writes": true,
+    "explicit_serial_order": true,
+    "nine_state_cases": true,
+    "all_actual_not_run": true,
+    "no_upsert_or_policy_overwrite": true,
+    "links:docs/phase4a5a-fixture-review.md": true,
+    "links:docs/phase4a-remediation-a-test-plan.md": true,
+    "links:docs/phase4a-final-report.md": true,
+    "all_proposals_unchanged": true
+  },
+  "top_level_statement_keywords": [
+    "BEGIN",
+    "SET",
+    "SET",
+    "DO",
+    "CREATE",
+    "INSERT",
+    "DO",
+    "INSERT",
+    "INSERT",
+    "CREATE",
+    "DO",
+    "DO",
+    "SELECT",
+    "ROLLBACK"
+  ],
+  "policy_source_sha256": "dab2a3a9a7cda3e2e37c1e2fc5132f82a62cc8f88d8c7fbee717015c3f9f00db",
+  "sql_sha256": "06120072d79b31b1b9d8d3858f051ffed2f36f2f2cd08beeb71aab372e9d4ea4",
+  "lint": "PASS exit0",
+  "build": "PASS exit0; main585.95kB gzip171.03kB, existing bundle warning>500kB",
+  "sql_parser_or_postgresql_runtime": "NOT_TESTED",
+  "jwt_api": "NOT_RUN",
+  "provisioning": "NOT_PERFORMED",
+  "phase4a": "BLOCKED",
+  "next_operator_action": "Run node scripts/run-phase4a-acceptance.mjs --diagnose in the same PowerShell session. Set only reported missing/invalid variables via private process environment. Do not retry live or run fixture/recovery/migration before resolving local configuration; if an earlier commit prompt or HTTP was reached, verify committed state first.",
+  "historical_scope": "Original checks and hashes above describe the earlier rollback-only rehearsal; they are not claims about the current committed release package.",
+  "current_execution": {
+    "date": "2026-10-23",
+    "timezone": "Asia/Jakarta",
+    "provenance": "CODEX_LOCAL_ORCHESTRATOR_IMPLEMENTATION_AND_EXECUTION_ONLY",
+    "phase4a": "BLOCKED",
+    "remote_operations_performed": false,
+    "approvals": {
+      "fixture_api": "APPROVED_WITH_CONDITIONS_EXISTING_STAGING_RUN_ONLY",
+      "b_business_contract": "APPROVED_NULL_OR_NONBLANK_MAX4000_AFTER_ASCII_WHITESPACE_TRIM",
+      "b_migration": "NOT_AUTHORIZED",
+      "c1_scope": "PUBLIC_ONLY_PRINCIPLE_PARTIALLY_APPROVED",
+      "c1_global_default_execute": "NOT_APPROVED"
+    },
+    "results": {
+      "package": {
+        "status": "PASS",
+        "passed": 34,
+        "total": 34,
+        "scope": "local mocks/static/orchestration plus read-only diagnostics; no remote HTTP or SQL"
+      },
+      "auth": {
+        "status": "PASS",
+        "passed": 23,
+        "total": 23,
+        "scope": "isolated application auth scenarios; rerun after orchestrator implementation"
+      },
+      "private_sql_parity": {
+        "status": "PASS",
+        "matched": 12,
+        "total": 12
+      },
+      "lint": {
+        "status": "PASS",
+        "exit_code": 0
+      },
+      "build": {
+        "status": "PASS",
+        "exit_code": 0,
+        "warning": "main chunk 585.95 kB/gzip171.03 kB exceeds 500 kB"
+      },
+      "javascript_syntax": {
+        "status": "PASS",
+        "files": 3,
+        "scope": "orchestrator, API runner, package tests"
+      },
+      "default_entrypoint": {
+        "status": "PASS",
+        "observed": "Orchestrator NOT_RUN without --live; live preflight missing approval rejects before prompts/network (local regression)"
+      },
+      "sql_runtime": {
+        "status": "NOT_RUN",
+        "reason": "PostgreSQL/psql/Docker/pglast unavailable in local checks"
+      },
+      "live_a": {
+        "status": "BLOCKED",
+        "reason": "No direct SQL connection or required staging key/user JWT process environment"
+      },
+      "live_b": {
+        "status": "BLOCKED",
+        "reason": "Acceptance A and explicit B migration execution approval required"
+      },
+      "live_c1": {
+        "status": "BLOCKED",
+        "reason": "Acceptance B and concrete public-only deployment/probe execution required"
+      },
+      "atomicity_contention": {
+        "status": "BLOCKED",
+        "reason": "No live fixture/connections/observer or approved DDL injection execution"
+      },
+      "phase4b": {
+        "status": "NOT_RUN",
+        "reason": "Security gate not passed"
+      },
+      "orchestrator_private_preflight": {
+        "status": "PASS",
+        "matched": 9,
+        "total": 9,
+        "scope": "actual existing local fixture files; canonical SHA256-LF and real path checks only"
+      },
+      "orchestrator_live": {
+        "status": "BLOCKED",
+        "reason": "No direct SQL Cloud tool or staging public key/user JWT/refresh environment. Operator commits one verified fixture per prompt; no automatic SQL writes."
+      },
+      "diagnostic": {
+        "status": "PASS",
+        "scope": "local-only mode; rejects --live combination; reports missing/invalid configuration categories with no secret values",
+        "actual_tool_environment": "Seven required PHASE4A variables missing; cwd/runtime PASS. This does not observe operator PowerShell environment.",
+        "actual_local_artifacts": "Existing manifest and nine SQL files PASS when supplied only nonsecret configuration in a diagnostic object.",
+        "remote_operations": "NOT_RUN"
+      }
+    },
+    "source_sha256": {
+      "scripts/test-phase4a-api.mjs": "8c98ddd5b7eb52e70a2ada93a4fe45216063499b8d5840efe79f8377f693abba",
+      "scripts/prepare-phase4a-fixture.mjs": "a421c6a624a75e1075631e159d30e29451fe083c44488b8b985ad0d470fc63ea",
+      "scripts/test-phase4a-package.mjs": "60b94cba73eb0851679ca8f471fe29313063508808eb4c08b5eb755d81755520",
+      "docs/sql/staging/security-completion/02-b-deploy-review.sql": "7d897d489122571c09b20d6a61b315b56bb803c08d85a652e3eaa968e614f307",
+      "docs/sql/staging/security-completion/03-c1-deploy-review.sql": "b8e339bd70690ae1e12f3334e4202680d5b59a91b2e5d94d818751e00843f813",
+      "docs/sql/staging/security-completion/03-c1-regression.sql": "818bba6410b3625dd7d3f89dbdb699d4ce5e86eb0eb497389bfbc6b80dafe6e8",
+      "docs/sql/staging/security-completion/04-stage-validation-readonly.sql": "57d61a64d2e48857890dbe704c5875d1502778fa826eaa29e6d4cbc9790935dc",
+      "scripts/run-phase4a-acceptance.mjs": "eb231e74667f77e9aebf4eda2d98f7c149856baee9d3ad4b8394b8262055024f"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+case_id,identity,fixture_state,action,expected_after_A,actual,status,evidence
+A-CONTROL,CONTROL,active super_admin (except CROSS_RV),GET roles; foreign SUBJECT profile/assignment when present,All four roles; known foreign rows readable when super,,NOT_RUN,
+A-USER,SUBJECT,USER,GET roles?select=code&order=code,[],,NOT_RUN,
+A-NO_ROLE,SUBJECT,NO_ROLE,GET roles?select=code&order=code,[],,NOT_RUN,
+A-IM,SUBJECT,IM,GET roles?select=code&order=code,"[""information_manager""]",,NOT_RUN,
+A-RV,SUBJECT,RV,GET roles?select=code&order=code,"[""report_verifier""]",,NOT_RUN,
+A-ME,SUBJECT,ME,GET roles?select=code&order=code,"[""mitigation_editor""]",,NOT_RUN,
+A-MULTI,SUBJECT,MULTI,GET roles?select=code&order=code,"[""information_manager"", ""mitigation_editor""]",,NOT_RUN,
+A-INACTIVE,SUBJECT,INACTIVE,GET roles?select=code&order=code,[],,NOT_RUN,
+A-INACTIVE_SA,SUBJECT,INACTIVE_SA,GET roles?select=code&order=code,[],,NOT_RUN,
+A-CROSS_RV,SUBJECT,CROSS_RV,GET roles?select=code&order=code,"[""report_verifier""]",,NOT_RUN,
+A-FOREIGN,SUBJECT,all states with CONTROL=super,GET CONTROL profile/assignment known to exist,200 []; no foreign data,,NOT_RUN,
+A-SAME-ROLE,CONTROL+SUBJECT,both active report_verifier,GET other UID profile/assignment,200 [] in both directions; own roles only RV,,NOT_RUN,
+A-ANON,ANON,no JWT,GET roles,Grant denial; no role rows,,NOT_RUN,
+A-NULL-UID,SQL simulation,authenticated without sub,SELECT roles,[]; not a real Auth session,,NOT_RUN,
+A-WRITES,both identities,all applicable states,"Role CRUD / self-reactivation / self-assignment probes, fixture-safe targets only",Grant denial/42501; no changes,,NOT_RUN,
+A-CLAIMS,SUBJECT,USER/IM,Spoof UI/user_metadata super,No additional roles,,NOT_RUN,
+A-SESSION,both identities,USER/IM/INACTIVE + CONTROL super,login/refresh/logout/deep-link in isolated test session,Identity and DB access revalidated; no unauthorized access,,NOT_RUN,
+A-REVOCATION,SUBJECT,"MULTI -> INACTIVE/NO_ROLE, owner-approved state transition",New request after state COMMIT,New DB permissions; record replay/in-flight separately,,NOT_RUN,
+A-RESTORE,CONTROL+SUBJECT,after CROSS_RV before report mutations,Guarded restore CONTROL super and unreferenced SUBJECT to USER,CONTROL all four; SUBJECT []; retain Auth and all report history; refuse inbound SUBJECT references,,NOT_RUN,Prepared private restore-user SQL; no remote execution
+A-ROLLBACK,operator,dry-run whole transaction,Final ROLLBACK,"26 policies, 0 app fixture profiles/assignments; Auth accounts persist","26 policies / 0 profiles / 0 assignments",PASS,Operator report in latest request 2026-10-23; not independently queried by Codex
+A-DEPLOY,operator,permanent A,Policy count and presence,27 policies and one roles_assigned_active_staff_read,27 policies and one roles_assigned_active_staff_read,PASS,Operator report in latest request 2026-10-23; exact expression and JWT acceptance remain BLOCKED
+A-CHECKPOINT,CONTROL,restored CONTROL-only,in-transaction aggregate checkpoint,"27 policies / 1 profile / 1 assignment","27 policies / 1 profile / 1 assignment",PASS,USER-REPORTED CHECKPOINT ONLY 2026-10-23; not JWT/API or post-rollback evidence

@@ -1,0 +1,170 @@
+{
+  "widths": [
+    1440
+  ],
+  "routeChecks": [],
+  "interactions": [
+    {
+      "test": "tab-focus-preserves-article",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "internal-routing-and-memory-draft",
+      "passed": true
+    },
+    {
+      "test": "article-draft-publish-update-archive",
+      "passed": true,
+      "kind": "synthetic REST"
+    },
+    {
+      "test": "tab-focus-preserves-disaster",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "disaster-create-update-public",
+      "passed": true
+    },
+    {
+      "test": "tab-focus-preserves-contact",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "contact-create-update-public",
+      "passed": true
+    },
+    {
+      "test": "tab-focus-preserves-guide",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "guide-checklist-public",
+      "passed": true
+    },
+    {
+      "test": "tab-focus-preserves-relief",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "relief-public",
+      "passed": true
+    },
+    {
+      "test": "tab-focus-preserves-settings",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "tab-focus-preserves-staff",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "staff-settings-remain-write-blocked",
+      "passed": true
+    },
+    {
+      "test": "tab-focus-preserves-public-report",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "encrypted-tab-reload-recovery-with-region",
+      "passed": true
+    },
+    {
+      "test": "public-submit-after-draft-recovery",
+      "passed": true,
+      "kind": "synthetic gateway"
+    },
+    {
+      "test": "tab-focus-preserves-tracking",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "tab-focus-preserves-report-review",
+      "passed": true,
+      "backgroundVisibility": "hidden",
+      "realSecondTab": true
+    },
+    {
+      "test": "admin-review-under-review-rejected-track-matches",
+      "passed": true,
+      "kind": "synthetic RPC/gateway"
+    },
+    {
+      "test": "logical-cleanup-hidden-from-public",
+      "passed": true
+    },
+    {
+      "test": "audit-metadata-reader",
+      "passed": true,
+      "kind": "synthetic audit rows, not a LIVE trigger proof"
+    },
+    {
+      "test": "insufficient-role-denied",
+      "passed": true
+    }
+  ],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "screenshots": [],
+  "status": "PASS_LOCAL_ONLY",
+  "kind": "Local UI with intercepted synthetic Auth/REST/gateway; not live Supabase, CAPTCHA, SQL, or RLS acceptance",
+  "documentNavigations": [
+    "/admin/login",
+    "/admin/artikel",
+    "/informasi",
+    "/admin/artikel",
+    "/informasi/test-local-e-article",
+    "/admin/artikel",
+    "/informasi/test-local-e-article",
+    "/admin/artikel",
+    "/informasi",
+    "/admin/kejadian",
+    "/pemantauan/c2e6632a-a300-4fde-9e6d-0bb2677bf600",
+    "/admin/kejadian",
+    "/pemantauan/c2e6632a-a300-4fde-9e6d-0bb2677bf600",
+    "/admin/kontak-darurat",
+    "/darurat",
+    "/admin/kontak-darurat",
+    "/darurat",
+    "/admin/panduan",
+    "/panduan/9f527e90-0f9c-4b71-a60c-f3d25078a64c",
+    "/admin/lokasi-bantuan",
+    "/darurat",
+    "/admin/pengaturan",
+    "/admin/staf",
+    "/laporan",
+    "/laporan",
+    "/laporan/lacak",
+    "/admin/laporan/00000000-0000-4000-8000-000000000001",
+    "/laporan/lacak",
+    "/admin/laporan/00000000-0000-4000-8000-000000000001",
+    "/laporan/lacak",
+    "/admin/kejadian",
+    "/admin/kontak-darurat",
+    "/admin/panduan",
+    "/admin/lokasi-bantuan",
+    "/darurat",
+    "/admin/audit",
+    "/admin/staf"
+  ],
+  "syntheticRequests": 1174,
+  "liveDatabaseWrites": 0
+}

@@ -1,0 +1,59 @@
+﻿{
+    "checkedOn":  "2026-11-03",
+    "projectRef":  "uiuiouosblyuqgnvfpeh",
+    "status":  "CLOUD_DEPLOYMENT_OPERATOR_CONFIRMED_LIVE_ACCEPTANCE_PENDING",
+    "cloudApproval":  "APPROVED_BY_USER_2026-11-03_FOR_REKANSiaga_DEV_ONLY",
+    "localEvidence":  {
+                          "contractSanitizer":  "PASS 7/7",
+                          "sqlPostgresWasm":  "PASS 18/18",
+                          "lint":  "PASS",
+                          "build":  "PASS (existing \u003e500kB bundle warning)",
+                          "edgeTypecheck":  "PASS",
+                          "integratedChrome":  "BLOCKED CDP command timeout before app assertions",
+                          "publicationCorsChrome":  "BLOCKED CDP command timeout; most recent artifact has 0 assertions",
+                          "deploymentPreflightParser":  "PASS direct and wrapped JSON parse",
+                          "baselineMatcher":  "PASS expected baseline and exact mismatch label",
+                          "frontendFlag":  "PASS .env.local targets approved dev ref; VITE_INTEGRATED_CONTENT_ENABLED=true",
+                          "viteRoute":  "PASS http://localhost:5173/pemantauan HTTP 200",
+                          "publicCloudSmoke":  "BLOCKED agent shell outbound network; no API behavior inferred"
+                      },
+    "features":  {
+                     "monitoringFeed":  "DEPLOYED_PENDING_LIVE_BROWSER_ACCEPTANCE",
+                     "leafletMap":  "DEPLOYED_PENDING_LIVE_BROWSER_ACCEPTANCE",
+                     "reportEventLink":  "DEPLOYED_PENDING_LIVE_BROWSER_ACCEPTANCE",
+                     "articleCMS":  "DEPLOYED_PENDING_LIVE_BROWSER_ACCEPTANCE",
+                     "articleImageUpload":  "DEPLOYED_PENDING_LIVE_BROWSER_ACCEPTANCE",
+                     "reportPhotoPublicationCors":  "DEPLOYED_PENDING_LIVE_BROWSER_ACCEPTANCE",
+                     "rbacAndAudit":  "SQL DEPLOYED; LIVE ROLE/AUDIT ACCEPTANCE PENDING",
+                     "flutterContract":  "DOCUMENTED_NEEDS_MOBILE_CLIENT_UPDATE",
+                     "draftAndTabRetention":  "EARLIER_LOCAL_BROWSER_PASS_CURRENT_RERUN_BLOCKED"
+                 },
+    "changedScope":  [
+                         "curated public event feed and legacy map projection",
+                         "role/version guarded report-event linking",
+                         "private article-media bucket/functions and sanitized image processing",
+                         "report-publication CORS allow-header hotfix",
+                         "monitoring/map/article frontend and mobile contract docs"
+                     ],
+    "runbook":  "docs/runbooks/integrated-content-v1.md",
+    "manifest":  "docs/qa/stage-e/integrated-content-manifest.json",
+    "latestBrowserArtifacts":  [
+                                   "docs/qa/stage-e/integrated-content-browser.json",
+                                   "docs/qa/stage-e/publication-cors-local.json"
+                               ],
+    "blockers":  [
+                     "Browser automation/CDP cannot assert UI flows; run approved synthetic acceptance in normal Chrome.",
+                     "Outbound Supabase REST requests from this agent shell failed at network layer; operator browser is needed to verify live feed/list and anon report privacy."
+                 ],
+    "excluded":  [
+                     "A-D reruns",
+                     "staging",
+                     "Flutter source",
+                     "report-gateway/RK2/secrets",
+                     "physical deletes"
+                 ],
+    "cloudCallsThisTurn":  "operator deployment reported; agent REST smoke was network-blocked",
+    "cloudMutationsThisTurn":  "operator ran approved deployment; none performed by agent",
+    "priorCloudAttempt":  "Operator preflight JSON identified public_reports_rls=false; every other returned check matched. This is the sole reported preflight mismatch. Updated guarded runner now first applies the separately approved report privacy transaction (RLS enablement + restrictive SELECT policies), then reruns read-only content preflight before content SQL/functions. No Cloud mutation by this agent.",
+    "operatorDeployment":  "Operator terminal confirms SQL/postflight and report-publication/article-media deployments on dev"
+}

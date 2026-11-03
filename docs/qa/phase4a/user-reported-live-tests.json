@@ -1,0 +1,26 @@
+{
+  "recordedDate": "2026-10-22",
+  "timezone": "Asia/Jakarta",
+  "provenance": "USER-REPORTED LIVE BROWSER TEST",
+  "source": "User-provided Phase 4A finalization instructions",
+  "executedByCodex": false,
+  "executionTimeProvided": false,
+  "tests": [
+    {
+      "id": "A",
+      "status": "PASS",
+      "reportedResult": "Supabase Super Admin login succeeded and /admin displayed the RekanSiaga dashboard"
+    },
+    {
+      "id": "B",
+      "status": "PASS",
+      "reportedResult": "Regular account without administrator role was redirected to /403 and saw Akses belum terotorisasi"
+    }
+  ],
+  "limitations": [
+    "Not independently executed or observed by Codex",
+    "Does not prove remote schema, constraints, RLS or grants",
+    "Does not identify why the regular account lacked authorization",
+    "Does not prove live refresh, logout, expiry or direct API authorization"
+  ]
+}

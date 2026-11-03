@@ -1,0 +1,13 @@
+{
+  "widths": [
+    1440
+  ],
+  "routeChecks": [],
+  "interactions": [],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "screenshots": [],
+  "status": "BLOCKED_HARNESS",
+  "kind": "Local UI with intercepted synthetic Auth/REST/gateway; not live Supabase, CAPTCHA, SQL, or RLS acceptance",
+  "failure": "CDP timeout: Page.enable"
+}

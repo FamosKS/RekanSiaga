@@ -1,0 +1,181 @@
+{
+  "http": 200,
+  "rows": [
+    {
+      "auditId": "cf2ca0cc-509d-4258-be8c-d9000ea36b0a",
+      "table": "data_sources",
+      "entityId": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:41.767533+00:00"
+    },
+    {
+      "auditId": "976995a6-7470-452f-b7e4-73b4fe8a12b6",
+      "table": "relief_locations",
+      "entityId": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:36.143332+00:00"
+    },
+    {
+      "auditId": "ec315569-333a-4a4c-913b-35a2f3faac39",
+      "table": "mitigation_checklist_items",
+      "entityId": "68f214af-23cf-4099-9de9-80bd12cc34df",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:32.267271+00:00"
+    },
+    {
+      "auditId": "fc8cddb9-9d2c-4e41-b7b8-5cdfcc885e0b",
+      "table": "mitigation_guides",
+      "entityId": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:29.234228+00:00"
+    },
+    {
+      "auditId": "0fbda3f4-69e7-4ff2-95f6-b0863c541767",
+      "table": "disaster_events",
+      "entityId": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:25.493791+00:00"
+    },
+    {
+      "auditId": "edf2ee67-218b-4e4d-831c-6a75dd52805b",
+      "table": "emergency_contacts",
+      "entityId": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-02T00:14:07.010231+00:00"
+    },
+    {
+      "auditId": "d541e5c4-ab20-414a-9c68-303b1ff9cb99",
+      "table": "relief_locations",
+      "entityId": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:40:24.52821+00:00"
+    },
+    {
+      "auditId": "bc5f62d8-0033-4413-adc8-d38eebb61a3f",
+      "table": "relief_locations",
+      "entityId": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:40:09.131412+00:00"
+    },
+    {
+      "auditId": "42c633d2-d5ab-4d1e-86f5-e8226347c3df",
+      "table": "mitigation_checklist_items",
+      "entityId": "68f214af-23cf-4099-9de9-80bd12cc34df",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:39:47.90697+00:00"
+    },
+    {
+      "auditId": "854bd9c4-6684-480e-a290-71c68625a400",
+      "table": "mitigation_guides",
+      "entityId": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:39:44.832296+00:00"
+    },
+    {
+      "auditId": "9f2cd207-5a4d-4725-b040-c41a987839d2",
+      "table": "mitigation_guides",
+      "entityId": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:39:23.888492+00:00"
+    },
+    {
+      "auditId": "e0fe3b3a-12f4-42ad-8527-d44eea870c5c",
+      "table": "emergency_contacts",
+      "entityId": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:38:56.681584+00:00"
+    },
+    {
+      "auditId": "d4129ec7-ced2-4398-91a6-f0f980f8df75",
+      "table": "emergency_contacts",
+      "entityId": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:38:28.577273+00:00"
+    },
+    {
+      "auditId": "419bf189-d97f-4537-8fb1-405c7351cdea",
+      "table": "event_locations",
+      "entityId": "ec88d302-0af5-4889-a195-52777bb62519",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:38:07.606224+00:00"
+    },
+    {
+      "auditId": "37d583a2-0f6c-4bf3-b092-ab381d60e57d",
+      "table": "event_updates",
+      "entityId": "678eddb6-a6f2-4962-a5d5-152e0de42998",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:34:23.25441+00:00"
+    },
+    {
+      "auditId": "6be6ccd2-9c2a-4e6e-ba1e-905a2085a8a5",
+      "table": "disaster_events",
+      "entityId": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:33:16.00728+00:00"
+    },
+    {
+      "auditId": "c303abd7-8305-4671-b7b0-51105367803c",
+      "table": "disaster_events",
+      "entityId": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:29:55.81207+00:00"
+    },
+    {
+      "auditId": "65b89b65-9bb3-488c-83a7-7936139287dc",
+      "table": "data_sources",
+      "entityId": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:29:33.642064+00:00"
+    },
+    {
+      "auditId": "a5b777ac-8d95-431b-ac4f-35540f7c0e99",
+      "table": "articles",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:28:48.443604+00:00"
+    },
+    {
+      "auditId": "ce14beb6-83d5-4fb0-97c6-9b305848d450",
+      "table": "articles",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:28:24.625196+00:00"
+    },
+    {
+      "auditId": "02139787-5f58-48d5-be94-97a339c05ddd",
+      "table": "articles",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T13:28:02.577302+00:00"
+    },
+    {
+      "auditId": "47335495-2ef5-4bda-b2ae-e9bebda80ca3",
+      "table": "articles",
+      "entityId": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+      "action": "INSERT",
+      "actorMatches": true,
+      "at": "2026-11-01T13:25:21.786035+00:00"
+    }
+  ]
+}

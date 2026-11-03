@@ -1,0 +1,391 @@
+{
+  "widths": [
+    360,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "routeChecks": [
+    {
+      "route": "/",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/informasi",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/informasi/artikel-uji",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan/id-uji",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/peta",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/laporan",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/laporan/lacak",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/donasi",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/panduan",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/panduan/id-uji",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/darurat",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/403",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/tidak-ada",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/informasi",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/informasi/artikel-uji",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan/id-uji",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/peta",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/laporan",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/laporan/lacak",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/donasi",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/panduan",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/panduan/id-uji",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/darurat",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/403",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/tidak-ada",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/informasi",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/informasi/artikel-uji",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan/id-uji",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/peta",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/laporan",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/laporan/lacak",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/donasi",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/panduan",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/panduan/id-uji",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/darurat",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/403",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/tidak-ada",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/informasi",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/informasi/artikel-uji",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan/id-uji",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/peta",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/laporan",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/laporan/lacak",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/donasi",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/panduan",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/panduan/id-uji",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/darurat",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/403",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/tidak-ada",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/informasi",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/informasi/artikel-uji",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/pemantauan/id-uji",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/peta",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/laporan",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/laporan/lacak",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/donasi",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/panduan",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/panduan/id-uji",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/darurat",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/403",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "/tidak-ada",
+      "width": 1440,
+      "overflow": false
+    }
+  ],
+  "interactions": [
+    "Mobile menu opens with Enter and closes with Escape",
+    "Accessibility dialog traps focus, Escape closes, focus returns",
+    "Warning dialog opens only on request and displays no fictional alert",
+    "Empty report shows validation errors",
+    "Valid report confirms local validation only, with privacy consent",
+    "GPS denial shows manual-location fallback after explicit click",
+    "Local file preview/removal works without upload",
+    "Tracking requires code and token",
+    "Valid tracking format stays local; editing clears stale result",
+    "Checklist progress/reset and guide accordion work",
+    "Donation confirmation/completion stays simulation",
+    "SOS opens honest assistance dialog without dispatch",
+    "Map filter updates UI without fake markers",
+    "Invalid parameter handled; unauthenticated admin redirects to login"
+  ],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "screenshots": [
+    "home-390.png",
+    "report-390.png",
+    "donation-390.png",
+    "guides-390.png",
+    "emergency-390.png",
+    "home-1440.png",
+    "report-1440.png",
+    "donation-1440.png",
+    "guides-1440.png",
+    "emergency-1440.png"
+  ]
+}

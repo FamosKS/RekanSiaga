@@ -1,0 +1,38 @@
+{
+  "kind": "LOCAL PostgreSQL/WASM; role claims fixture, not LIVE",
+  "cloudCalls": 0,
+  "checks": [
+    {
+      "name": "No approval means no new RPC and no changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Approved package adds RPCs while report RLS stays active",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing actual submit generates CSPRNG token and hash-only storage usable by v2",
+      "status": "PASS"
+    },
+    {
+      "name": "Incorrect, malformed, expired and revoked credentials return the same null",
+      "status": "PASS"
+    },
+    {
+      "name": "Real existing review RPC authorization/status/history still drives v2 result",
+      "status": "PASS"
+    },
+    {
+      "name": "Legacy v1 remains valid and exposes no raw token or private metadata",
+      "status": "PASS"
+    },
+    {
+      "name": "Anon and authenticated cannot execute v2 or rotation directly",
+      "status": "PASS"
+    },
+    {
+      "name": "Operator rotation atomically revokes old credential, preserves expiry and returns CSPRNG replacement once",
+      "status": "PASS"
+    }
+  ]
+}

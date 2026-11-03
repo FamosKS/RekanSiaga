@@ -1,0 +1,77 @@
+{
+  "kind": "LOCAL_STATIC_DEPLOYMENT_PREPARATION_REVIEW_NOT_POSTGRESQL_EXECUTION",
+  "date": "2026-10-22",
+  "checks": {
+    "baseline_ddl_acl_seed_unchanged": true,
+    "original_staging_guard_unchanged": true,
+    "26_table_names_unchanged": true,
+    "dry_run_still_rollback": true,
+    "deployment_single_top_level_commit": true,
+    "validation_one_read_only_transaction": true,
+    "six_function_signatures_asserted": true,
+    "constraint_manifest_supports_106": true,
+    "index_manifest_supports_61": true,
+    "source_sha256_unchanged:docs/sql/staging/phase4a3-bootstrap-review.sql": true,
+    "source_sha256_unchanged:docs/sql/staging/phase4a3-dry-run-acknowledgement.sql": true,
+    "source_sha256_unchanged:supabase/migrations/001_rekansiaga_initial_schema.sql": true,
+    "local_links_resolve:docs/phase4a3-staging-deployment.md": true,
+    "local_links_resolve:docs/phase4a3-staging-preparation.md": true,
+    "local_links_resolve:docs/phase4a-final-report.md": true
+  },
+  "constraint_counts": {
+    "p": 26,
+    "f": 33,
+    "u": 13,
+    "c": 34
+  },
+  "source_sql_runtime": "NOT_TESTED",
+  "cloud_execution": "NOT_PERFORMED",
+  "readiness": "BLOCKED_PENDING_APPROVAL_DEPLOYMENT_AND_POST_DEPLOYMENT_VALIDATION",
+  "artifacts_sha256": {
+    "docs/sql/staging/phase4a3-deploy-staging-review.sql": "43630fa383741cdcdaed11a738dfdd5cfdefde1f8e3df2ee01282f35eb9545b8",
+    "docs/sql/staging/phase4a3-post-deployment-validation.sql": "8de91c0478e5dc1364c0d940733d6a8adaca0eb785258021794838aa6e3fa776",
+    "docs/sql/staging/phase4a3-final-deployment-verification.sql": "08f5e2895e030fa01e68897cb1ffb37c4488efa96c198427ba54d30716b736f3"
+  },
+  "local_app_checks": {
+    "lint": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "build": {
+      "status": "PASS",
+      "exit_code": 0,
+      "main_chunk_kb": 585.95,
+      "gzip_kb": 171.02,
+      "warning": "Chunk larger than 500 kB; existing application bundle warning"
+    }
+  },
+  "previous_artifacts_sha256": {
+    "docs/sql/staging/phase4a3-deploy-staging-review.sql": "e763b7d53af7bd38f6fe7c464714cb6727420e09ed936436b6c733f1a8cc595c",
+    "docs/sql/staging/phase4a3-post-deployment-validation.sql": "93f95b7ed3e8ad69b8359ab409de920da22c2f2a8b89d16853426f70ca1186de"
+  },
+  "final_verification_review": {
+    "scope": "LOCAL_STATIC_ONLY_NOT_POSTGRESQL_PARSE_OR_RUNTIME",
+    "checks": {
+      "original_guard_identical_all_copies": true,
+      "approval_guard_identical": true,
+      "hard_checkpoint_identical": true,
+      "baseline_ddl_acl_seed_identical": true,
+      "baseline_matches_original_bootstrap": true,
+      "verification_final_statement_rollback": true,
+      "verification_single_begin": true,
+      "permanent_final_statement_commit": true,
+      "four_reviewed_executable_acknowledgements": true,
+      "project_reference_not_invented": true,
+      "explicit_C_ordering": true,
+      "constraint_scope_p_f_u_c": true,
+      "all_reviewed_ack_values_exact": true
+    },
+    "changes": [
+      "Explicit pg_catalog.C ordering of table-name assertion",
+      "106 constraint count scoped to PK/FK/UNIQUE/CHECK; NOT NULL separately validated as column metadata",
+      "Post-deployment manifest ignores PG18 standalone NOT NULL rows in constraint tuple comparison only; column nullability and full audit retained"
+    ],
+    "runtime": "BLOCKED_PENDING_OPERATOR_FINAL_DRY_RUN",
+    "cloud_execution": "NOT_PERFORMED"
+  }
+}

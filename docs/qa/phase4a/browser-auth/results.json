@@ -1,0 +1,28 @@
+{
+  "widths": [
+    360,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "routeChecks": [],
+  "interactions": [
+    "Anonymous production /admin redirects to login",
+    "Wrong password shows generic error with no admin access",
+    "Active super admin reaches protected routes after profile and role reads",
+    "Reload restores SDK session and revalidates identity/profile/roles",
+    "Logout removes access and protected deep link redirects",
+    "Missing staff profile denied",
+    "Inactive staff denied",
+    "Active staff without role denied",
+    "Limited report verifier sees two menus, can open reports, denied staff URL",
+    "Multiple roles combine report and mitigation permissions",
+    "RLS SELECT failure shows access error and hides admin"
+  ],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "screenshots": [],
+  "kind": "Production routes and Supabase SDK with CDP-intercepted synthetic Auth/REST responses. No live account authentication.",
+  "syntheticRequests": 250
+}

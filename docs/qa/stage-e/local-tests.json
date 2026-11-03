@@ -1,0 +1,14 @@
+{
+  "kind": "Local deterministic tests only; no LIVE data, RLS or CAPTCHA acceptance",
+  "tests": [
+    "Content approval covers business modules/source dependencies but never staff/settings/notifications or staging",
+    "All public readers retain anonymous client and publication/verification filters shared with backend contract",
+    "Returning SIGNED_IN and TOKEN_REFRESHED keep verified identity/revision/cache stable while validation runs",
+    "Background revalidation still fails closed on revocation and timeout; old expiry remains enforced",
+    "Role guard keeps Outlet mounted during background checks but rejects errors/revoked/mismatched staff",
+    "Draft recovery encrypts private fields, requires passphrase after discarded runtime and never stores plaintext or the key",
+    "Draft vault rejects security fields/files and removes recovered drafts after success or explicit clear",
+    "Draft ciphertext tampering and expiry cannot restore data"
+  ],
+  "cloudWrites": 0
+}

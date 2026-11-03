@@ -1,0 +1,146 @@
+{
+  "widths": [
+    390,
+    1440
+  ],
+  "routeChecks": [
+    {
+      "width": 390,
+      "route": "/"
+    },
+    {
+      "width": 390,
+      "route": "/informasi"
+    },
+    {
+      "width": 390,
+      "route": "/informasi/slug-tidak-ada"
+    },
+    {
+      "width": 390,
+      "route": "/panduan"
+    },
+    {
+      "width": 390,
+      "route": "/panduan/00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "width": 390,
+      "route": "/pemantauan"
+    },
+    {
+      "width": 390,
+      "route": "/pemantauan/00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "width": 390,
+      "route": "/peta"
+    },
+    {
+      "width": 390,
+      "route": "/darurat"
+    },
+    {
+      "width": 390,
+      "route": "/laporan"
+    },
+    {
+      "width": 390,
+      "route": "/laporan/lacak"
+    },
+    {
+      "width": 390,
+      "route": "/donasi"
+    },
+    {
+      "width": 390,
+      "route": "/demo"
+    },
+    {
+      "width": 390,
+      "route": "/403"
+    },
+    {
+      "width": 390,
+      "route": "/tidak-ada"
+    },
+    {
+      "width": 1440,
+      "route": "/"
+    },
+    {
+      "width": 1440,
+      "route": "/informasi"
+    },
+    {
+      "width": 1440,
+      "route": "/informasi/slug-tidak-ada"
+    },
+    {
+      "width": 1440,
+      "route": "/panduan"
+    },
+    {
+      "width": 1440,
+      "route": "/panduan/00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "width": 1440,
+      "route": "/pemantauan"
+    },
+    {
+      "width": 1440,
+      "route": "/pemantauan/00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "width": 1440,
+      "route": "/peta"
+    },
+    {
+      "width": 1440,
+      "route": "/darurat"
+    },
+    {
+      "width": 1440,
+      "route": "/laporan"
+    },
+    {
+      "width": 1440,
+      "route": "/laporan/lacak"
+    },
+    {
+      "width": 1440,
+      "route": "/donasi"
+    },
+    {
+      "width": 1440,
+      "route": "/demo"
+    },
+    {
+      "width": 1440,
+      "route": "/403"
+    },
+    {
+      "width": 1440,
+      "route": "/tidak-ada"
+    }
+  ],
+  "interactions": [
+    "Dev empty response is distinct from network error",
+    "Invalid input rejected; valid draft stored locally",
+    "Draft excluded from simulated public list",
+    "Published local article appears in list/detail and persists across reload",
+    "Local update appears on public detail",
+    "Archived article hidden on public detail",
+    "Local delete confirmed; dev mode restored",
+    "Public API fixtures render article list/detail, guide/checklist, event, and safe contact without invented phone",
+    "RLS denial shown; retry recovers",
+    "Schema mismatch reports a specific blocker",
+    "Unauthenticated admin deep link requires login"
+  ],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "screenshots": [],
+  "kind": "Local browser: synthetic GET fixtures + localStorage CRUD. All remote requests intercepted. No live Auth/CRUD/RLS acceptance.",
+  "remoteWriteRequests": 0
+}

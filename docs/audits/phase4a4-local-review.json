@@ -1,0 +1,61 @@
+{
+  "kind": "LOCAL_PHASE4A4_REVIEW_NOT_REMOTE_SQL_RESULTS",
+  "recorded_date": "2026-10-23",
+  "checks": {
+    "roles_cast_both_validators": true,
+    "manifest_identical": true,
+    "expected_manifest_sizes": true,
+    "read_only_transaction": true,
+    "final_rollback": true,
+    "no_mutation_statement": true,
+    "expected_function_hashes": true,
+    "pg18_nullability_scope": true,
+    "historical_checksum_matches:phase4a3-deploy-staging-review.sql": true,
+    "historical_checksum_matches:phase4a3-final-deployment-verification.sql": true,
+    "parentheses_balanced_not_sql_parser": true,
+    "local_links:docs/phase4a4-staging-baseline-validation.md": true,
+    "local_links:docs/phase4a-final-report.md": true,
+    "local_links:docs/authentication.md": true,
+    "local_links:docs/phase4a3-staging-preparation.md": true,
+    "local_links:docs/phase4a3-staging-deployment.md": true,
+    "local_links:docs/phase4a-remediation-validation.md": true
+  },
+  "reviewed_source_sha256": {
+    "docs/phase4a3-event-trigger-final-review.md": "3572e665f00c7ead464e38687c3ce5b92c895e6ea036c275d51623422e53e054",
+    "docs/phase4a3-staging-deployment.md": "40ba1b4269bad46d1b64b2679fdfd28442fc89d47709dc872998e20625554add",
+    "docs/phase4a3-staging-preparation.md": "cef6873f7732c7ac4a6921833b0bc77af8faac2403f23b439c676baae4d43bee",
+    "docs/sql/proposals/phase4a-01-assigned-role-read.sql": "dab2a3a9a7cda3e2e37c1e2fc5132f82a62cc8f88d8c7fbee717015c3f9f00db",
+    "docs/sql/proposals/phase4a-02-review-rpc-execute.sql": "42722821814c3d1239cc49e395e957ff974c196e4c6b45bf2dcf0640b11ed614",
+    "docs/sql/proposals/phase4a-03-future-object-defaults.sql": "87d67d3174750fd3aac3eb287473c2577cc62f7a6b7385cc604c1aeed711310f",
+    "docs/sql/proposals/phase4a-03b-managed-owner-defaults.sql": "bb825a76e2aa563610b47a02aa29c902efa49d7faa1100d3630d8c29eb799e26",
+    "docs/sql/staging/phase4a3-bootstrap-review.sql": "feec353e0f1f7fe4022d6c82a076ae5063163ca02dfaab759ee9dc190ffae6a8",
+    "docs/sql/staging/phase4a3-deploy-staging-review.sql": "43630fa383741cdcdaed11a738dfdd5cfdefde1f8e3df2ee01282f35eb9545b8",
+    "docs/sql/staging/phase4a3-dry-run-acknowledgement.sql": "fb39674111400d118cdee5e8a19873b04f8e0e880dd23d34e08fcc21acf636b0",
+    "docs/sql/staging/phase4a3-final-deployment-verification.sql": "08f5e2895e030fa01e68897cb1ffb37c4488efa96c198427ba54d30716b736f3",
+    "docs/sql/staging/phase4a3-inspect-rls-auto-enable.sql": "f859e7bed4ad5116b0673933b0e32c9343fd5d9e796b9e975bc2ed52da0e7fee",
+    "docs/sql/staging/phase4a3-post-deployment-validation.sql": "74a950f95b32fefa6ea63b2c4b7de0bcc0c91a8b642f79cb5de1b0fdc4cc2521",
+    "docs/sql/staging/phase4a3-preflight.sql": "8f25347799f0506e5b2cacd99ab3bf2dfc94386e7a3554fa6750b46b7ac80326",
+    "docs/sql/staging/phase4a3-validate-seeds.sql": "de6fb175dee7fecc9eaa2e9b3afa88759f417248fab4fef2736d45aab23f8804",
+    "docs/sql/staging/phase4a3-validate-structure.sql": "718296eb38473a4df0b137b125f5d6994cacf5fa65f78eb234d745bee29dbd6c"
+  },
+  "historical_main_validator_checksum_observation": {
+    "recorded_older_local_review": "8de91c0478e5dc1364c0d940733d6a8adaca0eb785258021794838aa6e3fa776",
+    "current_file": "74a950f95b32fefa6ea63b2c4b7de0bcc0c91a8b642f79cb5de1b0fdc4cc2521",
+    "matches": false,
+    "interpretation": "Current main file reviewed; historical checksum differs. No assertion that the SQL Editor deployment or validation was this exact revision; main validator not edited by this task. Prior full file bytes unavailable to attribute difference."
+  },
+  "new_supplemental_sql_sha256": "0b7f3f3d2029ca9db2b848286398990e79ad2c9b84a6ff795c8bd4ed50ebd908",
+  "lint": {
+    "status": "PASS",
+    "exit_code": 0
+  },
+  "build": {
+    "status": "PASS",
+    "exit_code": 0,
+    "warning": "Existing chunk >500 kB; 585.95 kB / gzip 171.02 kB"
+  },
+  "postgresql_sql_execution": "NOT_PERFORMED",
+  "remote_changes": "NOT_PERFORMED",
+  "staging_manifest_results": "BLOCKED_NOT_SUPPLIED",
+  "authenticated_api_and_concurrency": "BLOCKED_NOT_TESTED"
+}

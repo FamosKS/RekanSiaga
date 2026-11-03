@@ -1,0 +1,148 @@
+[
+  {
+    "at": "2026-11-02T00:13:37.762Z",
+    "rows": [
+      {
+        "table": "articles",
+        "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "data_sources",
+        "id": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      },
+      {
+        "table": "disaster_events",
+        "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      },
+      {
+        "table": "event_updates",
+        "id": "678eddb6-a6f2-4962-a5d5-152e0de42998",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      },
+      {
+        "table": "event_locations",
+        "id": "ec88d302-0af5-4889-a195-52777bb62519",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      },
+      {
+        "table": "emergency_contacts",
+        "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      },
+      {
+        "table": "mitigation_guides",
+        "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      },
+      {
+        "table": "mitigation_checklist_items",
+        "id": "68f214af-23cf-4099-9de9-80bd12cc34df",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      },
+      {
+        "table": "relief_locations",
+        "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+        "http": 200,
+        "errorCode": null,
+        "visible": true
+      }
+    ],
+    "audit": {
+      "http": 401,
+      "errorCode": "42501",
+      "count": 0
+    }
+  },
+  {
+    "at": "2026-11-02T00:15:02.730Z",
+    "rows": [
+      {
+        "table": "articles",
+        "id": "61d46159-5c02-4b57-8981-1ea7e50daa6e",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "data_sources",
+        "id": "2412fd0f-efcb-4ea5-a554-a79e6ea09535",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "disaster_events",
+        "id": "b1180abd-c412-4af4-8408-d3275e2e7b98",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "event_updates",
+        "id": "678eddb6-a6f2-4962-a5d5-152e0de42998",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "event_locations",
+        "id": "ec88d302-0af5-4889-a195-52777bb62519",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "emergency_contacts",
+        "id": "1d9453c6-ff9f-4fd8-bbf2-341f39af57bc",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "mitigation_guides",
+        "id": "712a13ed-d843-4aff-ad55-c5499b5a7346",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "mitigation_checklist_items",
+        "id": "68f214af-23cf-4099-9de9-80bd12cc34df",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      },
+      {
+        "table": "relief_locations",
+        "id": "c6b1a3b1-db32-4fd2-afe1-926ffa841b8e",
+        "http": 200,
+        "errorCode": null,
+        "visible": false
+      }
+    ],
+    "audit": {
+      "http": 401,
+      "errorCode": "42501",
+      "count": 0
+    }
+  }
+]

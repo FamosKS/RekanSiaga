@@ -1,0 +1,35 @@
+{
+  "kind": "Read-only operator-selected report; Flutter provenance reported by operator",
+  "id": "0f990f12-71d1-4a31-bad0-903eaf8dbb7d",
+  "status": "verified",
+  "codeFormat": "RPT_LEGACY",
+  "createdAt": "2026-11-01T14:33:33.406623+00:00",
+  "updatedAt": "2026-11-01T14:39:17.661811+00:00",
+  "history": [
+    {
+      "from_status": "unverified",
+      "to_status": "verified",
+      "changed_at": "2026-11-01T14:39:17.661811+00:00"
+    }
+  ],
+  "audit": [
+    {
+      "id": "dd57f7e1-f5c8-4ead-9662-146f1e4cbfd1",
+      "action": "INSERT",
+      "actorMatches": false,
+      "at": "2026-11-01T14:33:33.406623+00:00"
+    },
+    {
+      "id": "1cf09cdc-5df7-4a53-a6f3-565f35b583f7",
+      "action": "UPDATE",
+      "actorMatches": true,
+      "at": "2026-11-01T14:39:17.661811+00:00"
+    }
+  ],
+  "anonymous": {
+    "http": 200,
+    "errorCode": null,
+    "visible": true
+  },
+  "at": "2026-11-02T00:31:14.207Z"
+}

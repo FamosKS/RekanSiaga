@@ -1,0 +1,30 @@
+{
+  "kind": "LOCAL PostgreSQL/WASM restrictive SELECT policies; Auth helper fixture, not LIVE",
+  "cloudRequests": 0,
+  "checks": [
+    {
+      "name": "Fixture reproduces anonymous access to private verified row",
+      "status": "PASS"
+    },
+    {
+      "name": "Unapproved privacy change is rejected without changing existing policy",
+      "status": "PASS"
+    },
+    {
+      "name": "Restrictive policies block anonymous and non-reviewer authenticated reads",
+      "status": "PASS"
+    },
+    {
+      "name": "Super Admin/report verifier and service-role access remain available",
+      "status": "PASS"
+    },
+    {
+      "name": "RLS enabled without changing rows, existing policy or grants",
+      "status": "PASS"
+    },
+    {
+      "name": "Repeated privacy patch is idempotent",
+      "status": "PASS"
+    }
+  ]
+}

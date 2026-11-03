@@ -1,0 +1,3 @@
+import { ResourceModulesPage } from '../../features/admin/RemoteResourcePage'
+import { Alert } from '../../components/ui/Alert'
+export function AdminDisastersPage() { return <><Alert tone="primary" heading="Alur publikasi kejadian">Buat atau edit kejadian, pilih sumber dan wilayah, lalu kelola lokasi publik pada tab Lokasi kejadian. Publikasi memerlukan konfirmasi sumber/verifikasi staf dan waktu publikasi. Kosongkan waktu publikasi untuk menariknya dari publik. Laporan verified dapat dihubungkan ke kejadian ini melalui Detail laporan, tanpa menyalin data privat atau membuat kejadian otomatis.</Alert><ResourceModulesPage names={['disasters', 'updates', 'locations']}/></> }

@@ -1,0 +1,22 @@
+[
+  {
+    "phase4a3_dry_run_checkpoint": {
+      "kind": "IN_TRANSACTION_DRY_RUN_NOT_PERSISTED",
+      "existing_event": {
+        "tags": [
+          "CREATE TABLE",
+          "CREATE TABLE AS",
+          "SELECT INTO"
+        ],
+        "event": "ddl_command_end",
+        "owner": "postgres",
+        "enabled": "O",
+        "function": "rls_auto_enable()"
+      },
+      "public_table_count": 26,
+      "public_routine_count": 6,
+      "public_tables_rls_enabled": 26,
+      "existing_function_definition_md5": "846ec2fbff751d24b890656d63c3a9bf"
+    }
+  }
+]

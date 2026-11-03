@@ -1,0 +1,128 @@
+{
+  "kind": "Live dev read-only GET/OPTIONS; not authenticated RLS/catalog acceptance",
+  "projectRef": "uiuiouosblyuqgnvfpeh",
+  "checkedAt": "2026-10-26T14:32:54.757Z",
+  "phase4a": "BLOCKED",
+  "identity": {
+    "responseHost": "uiuiouosblyuqgnvfpeh.supabase.co",
+    "observedProjectRef": "uiuiouosblyuqgnvfpeh",
+    "managementProjectName": "NOT_VERIFIED"
+  },
+  "publicReads": [
+    {
+      "table": "articles",
+      "outcome": "PASS",
+      "visibleRows": 0
+    },
+    {
+      "table": "mitigation_guides",
+      "outcome": "PASS",
+      "visibleRows": 0
+    },
+    {
+      "table": "disaster_events",
+      "outcome": "PASS",
+      "visibleRows": 0
+    },
+    {
+      "table": "emergency_contacts",
+      "outcome": "PASS",
+      "visibleRows": 0
+    },
+    {
+      "table": "event_locations",
+      "outcome": "PASS",
+      "visibleRows": 0
+    },
+    {
+      "table": "relief_locations",
+      "outcome": "PASS",
+      "visibleRows": 0
+    }
+  ],
+  "deniedReads": [
+    {
+      "table": "staff_profiles",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "staff_role_assignments",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "roles",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "public_reports",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "report_access_tokens",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "audit_logs",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "app_settings",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "notification_rules",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "notifications",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    },
+    {
+      "table": "source_sync_logs",
+      "status": 401,
+      "code": "42501",
+      "outcome": "DENIED_AS_EXPECTED"
+    }
+  ],
+  "endpointChecks": [
+    {
+      "endpoint": "/auth/v1/settings",
+      "method": "GET",
+      "status": 200,
+      "note": "Reachability only; no login, RPC invocation, or deployment-version proof"
+    },
+    {
+      "endpoint": "/rest/v1/articles?select=id&limit=0",
+      "method": "GET",
+      "status": 200,
+      "note": "Reachability only; no login, RPC invocation, or deployment-version proof"
+    },
+    {
+      "endpoint": "/functions/v1/report-gateway",
+      "method": "OPTIONS",
+      "status": 404,
+      "note": "Reachability only; no login, RPC invocation, or deployment-version proof"
+    }
+  ],
+  "catalog": "NOT_VERIFIED: no SQL connection provided",
+  "authenticatedCrud": "NOT_RUN: approval and authorized dev session required",
+  "remoteWrites": 0
+}

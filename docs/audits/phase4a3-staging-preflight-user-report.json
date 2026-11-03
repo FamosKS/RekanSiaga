@@ -1,0 +1,30 @@
+{
+  "provenance": "USER-REPORTED STAGING PREFLIGHT METADATA",
+  "projectNameReported": "rekansiaga-staging",
+  "executedByCodex": false,
+  "publicApplicationTablesReported": 0,
+  "publicRelationObjectsReported": 0,
+  "publicFunctionsReported": 1,
+  "functionReported": {
+    "identity": "public.rls_auto_enable()",
+    "owner": "postgres",
+    "securityDefiner": true,
+    "extensionDependencyReported": null
+  },
+  "eventTriggerReported": {
+    "name": "ensure_rls",
+    "event": "ddl_command_end",
+    "enabled": "O"
+  },
+  "notProvided": [
+    "Function definition and reviewed behavior",
+    "Catalog proof of exact return type and argument modes",
+    "Event owner, tags and evtfoid/dependency linkage",
+    "Function language, configuration, search_path and ACL",
+    "Complete event-trigger graph and dependencies",
+    "Fresh project reference and capture time"
+  ],
+  "behaviorReview": "BLOCKED",
+  "bootstrapDryRun": "NOT TESTED",
+  "stagingReadiness": "BLOCKED"
+}

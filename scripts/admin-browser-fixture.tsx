@@ -1,0 +1,21 @@
+// Isolated presentation fixture, served only by smoke-admin-browser.mjs.
+// No production router or authentication guard is modified.
+import { StaffAccessContext } from '../src/features/auth/StaffAccessContext'
+import { createRoot } from 'react-dom/client'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { AdminLayout } from '../src/components/layout/AdminLayout'
+import { AdminDashboardPage } from '../src/pages/admin/AdminDashboardPage'
+import { AdminReportsPage } from '../src/pages/admin/AdminReportsPage'
+import { AdminReportDetailPage } from '../src/pages/admin/AdminReportDetailPage'
+import { AdminDisastersPage } from '../src/pages/admin/AdminDisastersPage'
+import { AdminArticlesPage } from '../src/pages/admin/AdminArticlesPage'
+import { AdminGuidesPage } from '../src/pages/admin/AdminGuidesPage'
+import { AdminEmergencyContactsPage } from '../src/pages/admin/AdminEmergencyContactsPage'
+import { AdminStaffPage } from '../src/pages/admin/AdminStaffPage'
+import { AdminNotificationsPage } from '../src/pages/admin/AdminNotificationsPage'
+import { AdminDataSourcesPage } from '../src/pages/admin/AdminDataSourcesPage'
+import { AdminSettingsPage } from '../src/pages/admin/AdminSettingsPage'
+import { AdminLoginPage } from '../src/pages/admin/AdminLoginPage'
+import '../src/index.css'
+const route = new URLSearchParams(location.search).get('route') ?? '/admin'
+createRoot(document.getElementById('root')!).render(<StaffAccessContext.Provider value={{ userId: 'isolated-fixture', displayName: 'QA fixture', roles: ['super_admin'] }}><MemoryRouter initialEntries={[route]}><Routes><Route path="/admin/login" element={<AdminLoginPage/>}/><Route path="/admin" element={<AdminLayout/>}><Route index element={<AdminDashboardPage/>}/><Route path="laporan" element={<AdminReportsPage/>}/><Route path="laporan/:id" element={<AdminReportDetailPage/>}/><Route path="kejadian" element={<AdminDisastersPage/>}/><Route path="artikel" element={<AdminArticlesPage/>}/><Route path="panduan" element={<AdminGuidesPage/>}/><Route path="kontak-darurat" element={<AdminEmergencyContactsPage/>}/><Route path="staf" element={<AdminStaffPage/>}/><Route path="notifikasi" element={<AdminNotificationsPage/>}/><Route path="sumber-data" element={<AdminDataSourcesPage/>}/><Route path="pengaturan" element={<AdminSettingsPage/>}/></Route></Routes></MemoryRouter></StaffAccessContext.Provider>)

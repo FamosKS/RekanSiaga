@@ -1,0 +1,6 @@
+{
+  "kind": "LOCAL Chrome CORS regression, synthetic HTTP only; not Cloud approval PASS",
+  "status": "BLOCKED_HARNESS",
+  "failure": "CDP timeout",
+  "checks": []
+}

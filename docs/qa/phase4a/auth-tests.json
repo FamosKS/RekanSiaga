@@ -1,0 +1,97 @@
+{
+  "kind": "isolated SDK adapters and deterministic lifecycle; no live accounts or RLS tested",
+  "tests": [
+    {
+      "name": "Active super admin profile and role are read from backend adapter",
+      "passed": true
+    },
+    {
+      "name": "Wrong password propagates SDK error; login never assigns a role",
+      "passed": true
+    },
+    {
+      "name": "Missing/unverified Auth identity denies before reading staff data",
+      "passed": true
+    },
+    {
+      "name": "No staff profile denied",
+      "passed": true
+    },
+    {
+      "name": "Inactive staff denied",
+      "passed": true
+    },
+    {
+      "name": "Active staff without role denied",
+      "passed": true
+    },
+    {
+      "name": "Multi-role array deduplicates; user metadata cannot grant super admin",
+      "passed": true
+    },
+    {
+      "name": "RLS/grant error at profileResult fails closed",
+      "passed": true
+    },
+    {
+      "name": "RLS/grant error at assignments fails closed",
+      "passed": true
+    },
+    {
+      "name": "RLS/grant error at roles fails closed",
+      "passed": true
+    },
+    {
+      "name": "wrong profile identity fails closed",
+      "passed": true
+    },
+    {
+      "name": "malformed active flag fails closed",
+      "passed": true
+    },
+    {
+      "name": "foreign staff assignment fails closed",
+      "passed": true
+    },
+    {
+      "name": "unknown role fails closed",
+      "passed": true
+    },
+    {
+      "name": "hidden/missing role relation fails closed",
+      "passed": true
+    },
+    {
+      "name": "Every route/role pair follows conservative permissions; unknown routes denied",
+      "passed": true
+    },
+    {
+      "name": "Refresh restores session only after getUser verifies identity",
+      "passed": true
+    },
+    {
+      "name": "Logout wins over stale getUser and bootstrap results",
+      "passed": true
+    },
+    {
+      "name": "Account switch ignores previous identity validation",
+      "passed": true
+    },
+    {
+      "name": "Expiry clears private access; refreshed token extends session",
+      "passed": true
+    },
+    {
+      "name": "Revoked or mismatched user denied; cleanup suppresses late callbacks",
+      "passed": true
+    },
+    {
+      "name": "Network failure and validation timeout fail closed",
+      "passed": true
+    },
+    {
+      "name": "Logout calls Supabase signOut without database mutations",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "PHASE4A5A_TWO_ACCOUNT_FIXTURE_TEMPLATE_NOT_PROVISIONED_OR_APPROVED",
+  "project_name": "rekansiaga-staging",
+  "project_reference": null,
+  "run_id": null,
+  "fixture_mutations_approved": false,
+  "schema_stage": "baseline_then_A_only",
+  "actors": [
+    {
+      "label": "CONTROL",
+      "user_id": null,
+      "purpose": "Active super_admin control, except approved same-role foreign-UID case; restored afterwards"
+    },
+    {
+      "label": "SUBJECT",
+      "user_id": null,
+      "purpose": "Serial USER/NO_ROLE/IM/RV/ME/MULTI/INACTIVE/INACTIVE_SA states; no simultaneous states"
+    }
+  ],
+  "account_reuse_rule": "Reuse only same UUID proven in an approved prior synthetic manifest on the same staging project; unknown existing account/email is STOP, never auto update/delete/upsert",
+  "notes": [
+    "Minimum two distinct real Auth UIDs for known-existing foreign row checks; anonymous is not another account.",
+    "Separate real JWT sessions per identity; verify server-returned UID before role tests.",
+    "No credentials/JWT/password/email in this tracked template; use private provisioning ledger.",
+    "SQL dry-run restores app fixture state with ROLLBACK; external Auth provisioning is not rolled back.",
+    "Nine static accounts are an alternative only if serial fixture state transitions are unacceptable; ten not required for A."
+  ]
+}

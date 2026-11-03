@@ -1,0 +1,16 @@
+{
+  "kind": "LOCAL after compatibility patch; no Cloud request",
+  "formats": {
+    "RS": {
+      "web": true,
+      "gatewayParser": true
+    },
+    "RPT": {
+      "web": true,
+      "gatewayParser": true
+    }
+  },
+  "cloudRequests": 0,
+  "cloudCodeApplied": false,
+  "cloudPoliciesApplied": false
+}

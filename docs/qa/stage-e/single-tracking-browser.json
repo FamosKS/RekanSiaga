@@ -1,0 +1,25 @@
+{
+  "kind": "LOCAL isolated headless UI; synthetic receipt; clipboard adapter; HTTPS blocked; not LIVE",
+  "checks": [
+    {
+      "name": "Receipt shows one code and one tracking field; raw token/reference hidden",
+      "status": "PASS"
+    },
+    {
+      "name": "Copy action uses exact displayed code (isolated clipboard adapter)",
+      "status": "PASS"
+    },
+    {
+      "name": "Download contains only one credential and generic receipt text",
+      "status": "PASS"
+    },
+    {
+      "name": "Legacy form toggles two fields and returns to one without document navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "Credential input survives focus changes; no URL or Web Storage persistence",
+      "status": "PASS"
+    }
+  ]
+}

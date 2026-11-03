@@ -1,0 +1,78 @@
+{
+  "kind": "LOCAL PostgreSQL/WASM; auth and storage metadata fixtures, coordinates text, not LIVE",
+  "cloudCalls": 0,
+  "checks": [
+    {
+      "name": "Unapproved package makes no schema/Storage changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Approved package executes and creates a private article-only bucket",
+      "status": "PASS"
+    },
+    {
+      "name": "Focused read-only deployment postflight returns booleans without private payloads",
+      "status": "PASS"
+    },
+    {
+      "name": "Public feed counts ALL 126 published eligible events with no report data or hidden 100-row ceiling",
+      "status": "PASS"
+    },
+    {
+      "name": "Legacy map DTO retained while private report coordinates are replaced by curated event coordinates",
+      "status": "PASS"
+    },
+    {
+      "name": "Official region prefix, type, status, search, sort and page validation work",
+      "status": "PASS"
+    },
+    {
+      "name": "Events without coordinates remain in list; multiple locations/reports do not duplicate event rows",
+      "status": "PASS"
+    },
+    {
+      "name": "Only event managers can link verified reports; direct private SELECT remains denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Multiple verified reports link to one event, idempotently, with audit and no implicit publication/coordinate copy",
+      "status": "PASS"
+    },
+    {
+      "name": "Event status updates are visible through the shared map/list feed",
+      "status": "PASS"
+    },
+    {
+      "name": "Unpublication removes an event from both shared feed and map contract; child change touches timestamp",
+      "status": "PASS"
+    },
+    {
+      "name": "Media registration is role/version bounded and creates a unique safe path without public access",
+      "status": "PASS"
+    },
+    {
+      "name": "Commit attaches only registered uploaded objects; draft remains private; stale write cannot overwrite",
+      "status": "PASS"
+    },
+    {
+      "name": "Published CURRENT cover visible anonymously; archive revokes new reads without deleting originals",
+      "status": "PASS"
+    },
+    {
+      "name": "Aborted pre-upload reservations can be cleaned without deleting article or current media",
+      "status": "PASS"
+    },
+    {
+      "name": "New bucket blocks direct client uploads/deletes even alongside a broad legacy Storage policy",
+      "status": "PASS"
+    },
+    {
+      "name": "Public roles cannot edit articles or disaster events",
+      "status": "PASS"
+    },
+    {
+      "name": "No public writes to media registry or RPCs; cleanup candidates never delete business rows",
+      "status": "PASS"
+    }
+  ]
+}

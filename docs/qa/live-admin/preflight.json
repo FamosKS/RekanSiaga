@@ -1,0 +1,565 @@
+{
+  "package": "dev-live-admin-v1",
+  "decision": "A_B_C_PASS_D_DEPLOYED_DISABLED_PASS_E_PREPARED",
+  "scope": "Final local release package; Cloud activation and live acceptance remain pending per-scope authorization and runtime gates",
+  "checkedAt": "2026-10-26T14:36:01.890216+00:00",
+  "target": {
+    "expectedName": "rekansiaga-dev",
+    "expectedRef": "uiuiouosblyuqgnvfpeh",
+    "responseHost": "uiuiouosblyuqgnvfpeh.supabase.co",
+    "observedProjectRef": "uiuiouosblyuqgnvfpeh",
+    "managementProjectName": "NOT_VERIFIED"
+  },
+  "remoteEvidence": "../mvp/dev-readonly.json",
+  "runtimeEvidence": "preflight-runtime.json",
+  "localValidation": {
+    "releaseSqlStatements": 71,
+    "releasePlpgsqlBlocks": 12,
+    "rollbackSqlStatements": 32,
+    "rollbackPlpgsqlBlocks": 4,
+    "postgresRuntimeChecksPassed": 23,
+    "backendUnitTestsPassed": "20 PASS; D dev-global quota/config/handler scope only",
+    "edgeTypecheck": "PASS after D dev-global change",
+    "backendEslint": "PASS via npm run lint",
+    "frontend": "Previous synthetic browser/Auth acceptance retained; lint/build rerun only",
+    "frontendLint": "PASS exit 0",
+    "frontendBuild": "PASS exit 0; main chunk 676.48 kB, existing >500 kB warning",
+    "seedResumeRegression": "PASS hierarchy-order resume preserves lower-code children; absent code refused",
+    "seedPackage": "PASS source hash retained; 91599 upserts; 184 guarded SQL Editor batches; first/last parsed; all package hashes verified"
+  },
+  "blockers": [],
+  "recovery": {
+    "localRuntime": "PASS: original definitions/ACL restored, metadata baseline checked, data/evidence preserved; drift abort tested",
+    "retry": "Fail closed on duplicate apply, repeated rollback and reapply after recovery. Retained backup/quota/private bucket must not be deleted to force retry; reviewed versioned reconciliation required."
+  },
+  "limitations": [
+    "PostGIS replaced with text fixture",
+    "Auth/storage schemas are fixtures, not external services",
+    "No concurrent-session or real JWT acceptance",
+    "No BRD original found in workspace; shared contract and user brief retained",
+    "Existing backup is a historical snapshot, not current Cloud identity/catalog proof",
+    "No Cloud CRUD, real Web Public browser acceptance, gateway provider or Flutter runtime acceptance",
+    "No official administrative SQL/deployment connector available in this session; SQL Editor fallback prepared"
+  ],
+  "phase4a": "BLOCKED",
+  "sha256": {
+    "docs/sql/dev-mvp-readonly.sql": "a0a146c54d767c57e8bc3280351e095bf8fc8e77c9b3a7266e44270cd2d49387",
+    "supabase/config.toml": "4d42d0a91ead39343d47c02b3404ef1d5e327b90eecc8988baf0ce0bafecaee0",
+    "supabase/functions/_shared/gatewayConfig.ts": "6f9d2803a5bd30e657ee6e3db4926b3977149b2f467db699864137c352fa4e21",
+    "supabase/functions/_shared/reportContract.ts": "13b187dbffb00cf618b25922a153ab49a202e057922d47a0c40a9885b712ff21",
+    "supabase/functions/_shared/reportHandler.ts": "3039dbecd0da406777d4ef36269d89a827c485e5f3584a6b61ab08c484654472",
+    "supabase/functions/report-gateway/.env.example": "9a3a5ff0cccd4df4889ed77003711b7600b110d80d07c2c40b0ff1f680025456",
+    "supabase/functions/report-gateway/index.ts": "3d4d33ad2de5907b433274be1a2cee9a6e5d7208c44cfa590a208057e8759d15",
+    "supabase/releases/dev-live-admin-rollback.sql": "6e94721cd7013652f8435247e684a35aa2e884a5cb49d34fb239b5665eb7b6f1",
+    "supabase/releases/dev-live-admin.sql": "34c2dd3f141bbf9455d2535508d2b7f1795c4c0674eab094ab009e6703e931ee",
+    "docs/sql/dev-live-admin-postflight-readonly.sql": "d19921e1ed984536ae4f7fdf55c97dec363b81a21e3fc21b4e9accee91d1b52e",
+    "supabase/migrations/002_regions_integrity.sql": "aa633c1078eaff167a459afa1e3f2da1b9282f636a27e66df3c1a406182fa09f",
+    "docs/sql/dev-regions-postflight-readonly.sql": "24cc426dd48cf2454e85f1ca1f150544a1b340cb7e83986dc4eba97aa008a519",
+    "scripts/seed-regions.mjs": "9091ad2291ed593353262e1d7ae1d26f43a411202bce1b9660a1373b5129df8c",
+    "scripts/test-preflight-runtime.mjs": "564565b722ecf7a1150617b8da927fe0e10997436c5f53a750978833bc98dbf4",
+    "docs/runbooks/dev-live-admin-operator.md": "7de97daa635b698587a3958bebe9c0da1a4bcd62745c4e8861c72873488dfa3b",
+    "docs/sql/dev-regions-migration-postflight-readonly.sql": "b284cacb28d83e69a71273fb006c5e0a3c15b0c2ce1e7fe4fd5c74a40a032e06",
+    "scripts/import-dev-regions.ps1": "ac909c2c7dafca0c3fbb7636ca036b509230d8129d6f6e980c21a9c2942c48cc"
+  },
+  "previousPreflight": {
+    "decision": "NO-GO",
+    "checkedAt": "2026-10-26T14:36:01.890216+00:00",
+    "blockers": [
+      {
+        "id": "DEV_ADMIN_METADATA",
+        "status": "NOT_VERIFIED",
+        "details": "Publishable REST access cannot establish full live schema/RLS/grants/default ACL/RPC definitions/dependencies/storage or active Auth-role readiness. Management project name not verified. Supabase connector not connected; no administrative SQL session available.",
+        "nextEvidence": "Run docs/sql/dev-mvp-readonly.sql once read-only on confirmed dev, or provide connected read-only administrative access; no credentials in chat."
+      },
+      {
+        "id": "GATEWAY_RUNTIME_CONFIGURATION",
+        "status": "NOT_VERIFIED",
+        "details": "Gateway OPTIONS 404. Existing CAPTCHA provider/sitekey/secret/action/hostname, CORS origins, service runtime binding/HMAC, trusted ingress IP and private Storage configuration not verified. Local validation does not establish actual provider settings.",
+        "nextEvidence": "Verify redacted configuration presence and provider/ingress guarantees before one deployment approval; do not disclose secrets. Real live E2E follows approved deployment."
+      }
+    ],
+    "localValidation": {
+      "releaseSqlStatements": 65,
+      "releasePlpgsqlBlocks": 11,
+      "rollbackSqlStatements": 25,
+      "rollbackPlpgsqlBlocks": 4,
+      "postgresRuntimeChecksPassed": 19,
+      "backendUnitTestsPassed": 12,
+      "edgeTypecheck": "PASS",
+      "backendEslint": "PASS",
+      "frontend": "Previous PASS retained; not rerun"
+    }
+  },
+  "cloudActivation": "A/B PASS retained; C operator psql import prepared, not run by agent",
+  "liveAcceptance": "NOT_RUN",
+  "activationOrder": [
+    "A Admin/Security",
+    "B regions migration",
+    "C 91599 region upserts",
+    "D disabled gateway deploy/configuration",
+    "E enable gateway and Web Admin/Public CRUD proof"
+  ],
+  "approvalRunbook": "../../runbooks/dev-live-admin-operator.md",
+  "operatorPackage": "operator-evidence/dev-release-20261029/release-manifest.json",
+  "cloudExecutionGates": [
+    {
+      "scope": "A",
+      "required": "Explicit A approval; operator-verified dev Dashboard/current catalog compatibility; verified backup restore result if available (TOC/schema extraction is not a full restore test); release transaction guards and postflight security_pass=true"
+    },
+    {
+      "scope": "B/C",
+      "required": "Independent B/C approvals; predecessor PASS; pinned derivative attribution accepted; 91599 and hierarchy postflight PASS; preserve existing data on mismatch"
+    },
+    {
+      "scope": "D/E",
+      "required": "Independent D/E approvals; private runtime configuration/CAPTCHA/ingress verification; disabled deployment before activation; actual Admin CRUD/Web Public and gateway evidence"
+    }
+  ],
+  "internalRoleDefaults": {
+    "action": "UNCHANGED_PROVIDER_MANAGED",
+    "releaseGuard": "Effective RPC privileges incl PUBLIC/inheritance checked before COMMIT",
+    "postflight": "Provider defaults informational; RPC ACL mismatch fails security_pass"
+  },
+  "backupEvidence": {
+    "archive": "operator-evidence/rekansiaga-dev-20261028-223213.dump",
+    "toc": "operator-evidence/rekansiaga-dev-20261028-223213.dump.list",
+    "publicSchemaExtraction": "PASS locally; no row data read/exported",
+    "fullRestore": "NOT_VERIFIED",
+    "currentCloudCatalog": "NOT_VERIFIED_BY_AGENT"
+  },
+  "preparedDate": "2026-10-29",
+  "timezone": "Asia/Jakarta",
+  "stageA": {
+    "approval": "EXPLICIT_USER_APPROVAL_RECEIVED",
+    "approvalDate": "2026-10-29",
+    "timezone": "Asia/Jakarta",
+    "approvalText": "SETUJUI A \u2014 Admin/Security dev",
+    "approvedSql": "A-admin-security.APPROVED.sql",
+    "execution": "DEPLOYED_BY_OPERATOR_SUPABASE_SQL_EDITOR",
+    "postflight": "SECURITY PASS",
+    "requiredPostflight": "A-postflight-readonly.sql: security_pass=true",
+    "nextScope": "B: migration regions; SQL Editor preparation requested by user",
+    "status": "DEPLOYED / SECURITY PASS",
+    "evidenceSource": "User-provided postflight JSON and SQL Editor screenshots; no agent Cloud recheck",
+    "operatorEvidenceSha256": "a4357976bba052eada041a93b67c7cbde3e165c79b5d498e16acae3528480cb5",
+    "security_pass": true,
+    "functionAclPassed": 10,
+    "rlsEnabled": 22,
+    "evidenceBucketPass": true,
+    "reportBoundariesPass": true,
+    "agentCloudWrites": 0,
+    "agentCloudMutationAttempts": 0
+  },
+  "stageB": {
+    "approval": "EXPLICIT_USER_REQUEST_OPERATOR_SQL_EDITOR_ONLY",
+    "approvedSql": "B-regions-integrity.APPROVED.sql",
+    "changes": "Existing migration 002 unchanged; only two approval SET LOCAL comments enabled",
+    "execution": "DEPLOYED_BY_OPERATOR_SUPABASE_SQL_EDITOR",
+    "postflight": "MIGRATION PASS",
+    "postflightScope": "Regions migration only; no repeated stage A checks; no national count requirement before C",
+    "postflightLocalValidation": "PASS PostgreSQL grammar, 4 statements; existing runtime PASS retained",
+    "agentCloudWrites": 0,
+    "nextScope": "C: existing national-region import package ready; awaiting separate approval",
+    "status": "DEPLOYED / MIGRATION PASS",
+    "migration_pass": true,
+    "evidenceSource": "User-pasted B postflight JSON and SQL Editor screenshots; no new agent Cloud query",
+    "operatorPostflight": {
+      "kind": "rekansiaga-dev-regions-migration-postflight-v1",
+      "checks": {
+        "index_ready": true,
+        "regions_rls": true,
+        "helper_acl_pass": true,
+        "catalog_integrity": true,
+        "hierarchy_trigger_ready": true
+      },
+      "catalog": {
+        "invalid_roots": 0,
+        "village_count": 0,
+        "district_count": 0,
+        "orphan_regions": 0,
+        "province_count": 0,
+        "duplicate_codes": 0,
+        "regency_city_count": 0,
+        "invalid_parent_levels": 0
+      },
+      "functions": [
+        {
+          "pass": true,
+          "signature": "validate_region_hierarchy()"
+        },
+        {
+          "pass": true,
+          "signature": "validate_regions_catalog()"
+        }
+      ],
+      "read_only": true,
+      "expected_ref": "uiuiouosblyuqgnvfpeh",
+      "migration_pass": true
+    }
+  },
+  "stageC": {
+    "status": "DEPLOYED / PASS",
+    "rows": 91599,
+    "batches": 184,
+    "sql": "regions-national.sql",
+    "postflight": "PASS",
+    "source": "Existing pinned dataset and generated batches retained; not regenerated or reaudited",
+    "execution": "DEPLOYED_BY_OPERATOR_PSQL",
+    "approval": "EXPLICIT_USER_OPERATOR_PSQL_EXECUTION",
+    "baselineRegionsRows": 0,
+    "baselineSource": "Operator-supplied B postflight; no repeated Cloud query",
+    "handoff": "C-IMPORT.md",
+    "sourceClassification": "Pinned public derivative of Kemendagri 2025 with retained CC BY 4.0 attribution",
+    "operation": "Upsert code/name/type/parent, preserve existing UUIDs; no DELETE",
+    "agentCloudWrites": 0,
+    "approvalDate": "2026-10-29",
+    "timezone": "Asia/Jakarta",
+    "approvalText": "SETUJUI C \u2014 import 91.599 wilayah ke dev",
+    "approvedSql": "regions-national.APPROVED.sql",
+    "approvedBatchDirectory": "regions-batches.APPROVED",
+    "acknowledgementsEnabled": true,
+    "derivationCheck": "185 source files matched release manifest; reversing the two uncommented SET statements reproduces each original byte-for-byte",
+    "nextScope": "D: dev gateway deployment prepared; operator approval required",
+    "sqlEditorPartsDirectory": "regions-15-parts.APPROVED",
+    "sqlEditorPartCount": 15,
+    "sqlEditorParts": [
+      {
+        "file": "regions-15-parts.APPROVED/part-01.sql",
+        "part": 1,
+        "firstBatch": 1,
+        "lastBatch": 13,
+        "upserts": 6500,
+        "bytes": 318945,
+        "sha256": "5716659db319889ea4b67d49da122c279571730d943e6b05f662e41a3c91bb28",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-02.sql",
+        "part": 2,
+        "firstBatch": 14,
+        "lastBatch": 26,
+        "upserts": 6500,
+        "bytes": 359831,
+        "sha256": "15b13f77dc87705664d1c7e4d1bd03f4dce06066c6abd4f396323740e91877d0",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-03.sql",
+        "part": 3,
+        "firstBatch": 27,
+        "lastBatch": 39,
+        "upserts": 6500,
+        "bytes": 374425,
+        "sha256": "fc79a3f79ee52a7174e9fcf854747b705d775e6e1a2809ee34f845b501b65002",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-04.sql",
+        "part": 4,
+        "firstBatch": 40,
+        "lastBatch": 52,
+        "upserts": 6500,
+        "bytes": 375819,
+        "sha256": "0c9bd26d1ea1ad94a7fbb17e1f655e51d11a5506ad20a9103131e32a4de76722",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-05.sql",
+        "part": 5,
+        "firstBatch": 53,
+        "lastBatch": 64,
+        "upserts": 6000,
+        "bytes": 343516,
+        "sha256": "70cb97fef96c44dfadf4d0853f277a9bdba0025802afdb68401e3c96d57e872b",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-06.sql",
+        "part": 6,
+        "firstBatch": 65,
+        "lastBatch": 76,
+        "upserts": 6000,
+        "bytes": 334106,
+        "sha256": "fdf31d3d4d512a034e81b98be2e2b002d6e93a47c5846fa1d90baa7a97aa55fd",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-07.sql",
+        "part": 7,
+        "firstBatch": 77,
+        "lastBatch": 88,
+        "upserts": 6000,
+        "bytes": 329154,
+        "sha256": "aa1a3f1e4d3bed28965363a1cfda92045dc7169d7aab24a178ced97f2bdc4a71",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-08.sql",
+        "part": 8,
+        "firstBatch": 89,
+        "lastBatch": 100,
+        "upserts": 6000,
+        "bytes": 327329,
+        "sha256": "3f9379fedf9cc28caf11e163ed0b88cc97870b726bcd998868a69e9515c24736",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-09.sql",
+        "part": 9,
+        "firstBatch": 101,
+        "lastBatch": 112,
+        "upserts": 6000,
+        "bytes": 328278,
+        "sha256": "3d30b77b9e3d2af00751a34b8feb4a71397c379cdae03d800c2a0da2ffea4da8",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-10.sql",
+        "part": 10,
+        "firstBatch": 113,
+        "lastBatch": 124,
+        "upserts": 6000,
+        "bytes": 328828,
+        "sha256": "2970691a22de53677af9d9ba32cb2e06bd31298cc927a5c3ddd88b1384af6521",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-11.sql",
+        "part": 11,
+        "firstBatch": 125,
+        "lastBatch": 136,
+        "upserts": 6000,
+        "bytes": 336047,
+        "sha256": "56d198ffbb554557c1f4c1f83fe1eb6cf87a9359121c9ec6bdab2f250ff40f16",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-12.sql",
+        "part": 12,
+        "firstBatch": 137,
+        "lastBatch": 148,
+        "upserts": 6000,
+        "bytes": 335662,
+        "sha256": "dc10b196325909b4a2f8ea526e203f0eff62de6d6f9d1d0195c77bdc95bf4020",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-13.sql",
+        "part": 13,
+        "firstBatch": 149,
+        "lastBatch": 160,
+        "upserts": 6000,
+        "bytes": 328976,
+        "sha256": "7df9bfc65a415f89a514b95620031ab55b6cfec0e0a5e788db855cae466cfbbf",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-14.sql",
+        "part": 14,
+        "firstBatch": 161,
+        "lastBatch": 172,
+        "upserts": 6000,
+        "bytes": 323461,
+        "sha256": "aacf1bf7018bf1284e3d3e210fcd1fe1224d41e10c310fdef57c6d0d695981f9",
+        "postflightIncluded": false
+      },
+      {
+        "file": "regions-15-parts.APPROVED/part-15.sql",
+        "part": 15,
+        "firstBatch": 173,
+        "lastBatch": 184,
+        "upserts": 5599,
+        "bytes": 299251,
+        "sha256": "b3f512e659050706154e6340b0238311466c423479fceb7c6f4b99d8879f1d1b",
+        "postflightIncluded": true
+      }
+    ],
+    "packagingCheck": "15 parts each under 500000 bytes; all 91599 parsed row/parent values equal approved SQL in original order; parent-before-statement checked; original 184 guards/transactions retained",
+    "oversizedCombinedFilesRemoved": [
+      "C-regions-batches-001-184.APPROVED.sql",
+      "C-regions-batches-176-184.APPROVED.sql"
+    ],
+    "sqlEditorFormat": "COMPACT_VALUES",
+    "compactRuntimeValidation": {
+      "kind": "Local disposable PostgreSQL fixture; no Cloud A/B checks",
+      "scopeGuard": "PASS; unapproved insert denied",
+      "parentBoundary": "PASS; 13000 rows across all four levels",
+      "uuidPreservation": "PASS; ON CONFLICT keeps existing UUID/count",
+      "missingParent": "PASS; compact transaction rejected/rolled back",
+      "cloudWrites": 0
+    },
+    "queryLengthFailure": "Operator screenshot: SQL Editor rejected oversized old part-01; old part bytes about 1.9 MB; no conclusion about earlier separate import runs",
+    "executionMethod": "Operator-run PowerShell and psql; Session Pooler 5432; SSL required",
+    "psqlSql": "C-regions-psql.APPROVED.sql",
+    "psqlRunner": "rekansiaga-web/scripts/import-dev-regions.ps1",
+    "psqlResult": "C-psql-verification.json created only after actual successful import and read-only count verification",
+    "preferredExecution": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"D:\\Rekan Siaga\\rekansiaga-web\\scripts\\import-dev-regions.ps1\"",
+    "psqlVerificationStatus": "PASS_BY_OPERATOR",
+    "psqlLocalValidation": {
+      "powershellSyntax": "PASS",
+      "installedClient": "psql 18.6 at requested path; --version only",
+      "packageCheckOnly": "PASS, no connection",
+      "invalidHost": "PASS rejected before connection",
+      "mockedSuccess": "PASS fixed dev route/5432/SSL, -W prompt, no inherited PG variables or password arguments, output counts parsed",
+      "mockedSqlError": "PASS nonzero psql exit halts without verification artifact or retry",
+      "mockedCountMismatch": "PASS failed counts halt without PASS artifact",
+      "completeSql": "15 existing compact parts byte-identical in one complete file; 184 transactions and 187 grouped INSERTs; original final read-only postflight retained",
+      "cloudConnections": 0,
+      "cloudWrites": 0
+    },
+    "evidenceSource": "Operator-provided PASS and existing C-psql-verification.json; no agent reimport or Cloud recheck",
+    "operatorVerification": {
+      "status": "PASS",
+      "project_ref": "uiuiouosblyuqgnvfpeh",
+      "provinsi": 38,
+      "kabupaten_kota": 514,
+      "kecamatan": 7285,
+      "desa_kelurahan": 83762,
+      "total": 91599,
+      "hierarchy_errors": 0,
+      "verified_at_utc": "2026-10-29T13:24:31.6675974Z"
+    }
+  },
+  "agentCloudWrites": 0,
+  "stageD": {
+    "status": "DEPLOYED / DISABLED PASS",
+    "handoff": "D-GATEWAY.md",
+    "runner": "rekansiaga-web/scripts/deploy-dev-report-gateway.ps1",
+    "probe": "rekansiaga-web/scripts/check-dev-report-gateway.mjs",
+    "webOrigin": "http://localhost:5173",
+    "turnstileHostname": "localhost",
+    "deployEnabled": false,
+    "cloudExecution": "DEPLOYED_BY_OPERATOR",
+    "liveSubmitTrack": "NOT_RUN; activation and one synthetic report require separate E approval",
+    "agentCloudWrites": 0,
+    "localValidation": {
+      "powershellSyntax": "PASS",
+      "checkOnly": "PASS; existing gateway hashes unchanged; no network",
+      "deploymentMockCasesPassed": 5,
+      "probeUnitTestsPassed": 4,
+      "liveDeployment": "NOT_RUN",
+      "liveSubmitTrack": "NOT_RUN",
+      "frontendChecks": "Previous PASS retained; no frontend source changes or repeated A-C checks",
+      "cloudConnections": 0,
+      "agentCloudWrites": 0,
+      "edgeTypecheck": "PASS after dev-global quota change",
+      "gatewayQuotaTestsPassed": 20
+    },
+    "deploymentAuthorization": "USER_AUTHORIZED_D_AFTER_CONFIGURATION_COMPLETE; disabled deploy only; no E activation/report writes",
+    "operatorReportedSavedSecretNames": [
+      "REPORT_ALLOWED_ORIGINS",
+      "TURNSTILE_HOSTNAMES",
+      "REPORT_GATEWAY_ENABLED",
+      "REPORT_PUBLIC_KEY",
+      "TURNSTILE_SECRET_KEY",
+      "REPORT_RATE_HMAC_KEY"
+    ],
+    "remainingConfiguration": [],
+    "ingressHeaderStatus": "NOT_REQUIRED; HTTP header identity removed in dev-global mode",
+    "frontendTurnstile": {
+      "publicSitekeyConfigured": true,
+      "environmentVariable": "VITE_TURNSTILE_SITE_KEY",
+      "environmentFile": "rekansiaga-web/.env.local (ignored)",
+      "gatewayFlag": false,
+      "sourceComponents": "Existing unchanged",
+      "provider": "Cloudflare Turnstile",
+      "actions": [
+        "submit",
+        "track"
+      ],
+      "tokenField": "captcha_token",
+      "scopedFrontendLint": "PASS",
+      "webBuild": "PASS; existing bundle-size warning",
+      "localComponentContractChecksPassed": 15,
+      "browserAutomation": "NOT_PASS; local Chrome CDP connection reset",
+      "liveProviderGatewayAcceptance": "NOT_RUN",
+      "agentCloudWrites": 0
+    },
+    "devGlobalQuota": {
+      "mode": "dev-global",
+      "priorSourceHashes": {
+        "supabase/functions/_shared/gatewayConfig.ts": "2abfc62cfc147b5b37b85376029eed53aa9fe3b9b5aae010debf0bb5cec7c097",
+        "supabase/functions/_shared/reportHandler.ts": "45e894538e0af4e37f0521c41d780e74ef15f504d4dc847ef1485a7af3481476",
+        "supabase/functions/report-gateway/index.ts": "692115affaa0e36f860101f309f84e80fcadd16f67bf1525efba204b5b96265b"
+      },
+      "requiredCustomSecrets": [
+        "REPORT_PUBLIC_KEY",
+        "REPORT_ALLOWED_ORIGINS",
+        "TURNSTILE_SECRET_KEY",
+        "TURNSTILE_HOSTNAMES",
+        "REPORT_GATEWAY_ENABLED"
+      ],
+      "ignoredLegacySecrets": [
+        "REPORT_RATE_HMAC_KEY",
+        "REPORT_TRUSTED_IP_HEADER"
+      ],
+      "sharedSubmitAttemptsPerSlot": 5,
+      "sharedTrackAttemptsPerSlot": 30,
+      "fixedSlotSeconds": 600,
+      "rpc": "public.report_api_rate_limit(text,text)",
+      "databaseMigrationRequired": false,
+      "cloudDatabaseChanges": 0,
+      "gatewayEnabled": false,
+      "localGatewayTestsPassed": 20,
+      "edgeLint": "PASS changed TS files only",
+      "edgeTypecheck": "PASS",
+      "cloudTests": "NOT_RUN",
+      "limitation": "Shared budget; one caller can consume it. Local SQL fixture is single connection, not multi-session Cloud concurrency proof.",
+      "deploymentScriptMockCasesPassed": 5,
+      "deploymentMockSecrets": "Only four required configuration names; IP/header/HMAC names absent",
+      "deploymentPackageCheckOnly": "PASS; current source pins; no network"
+    },
+    "evidenceSource": "User confirmation and existing D-gateway-probe.json; no agent redeployment or D probe rerun",
+    "operatorProbe": {
+      "projectRef": "uiuiouosblyuqgnvfpeh",
+      "phase": "disabled",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "CORS OPTIONS",
+          "status": 204,
+          "outcome": "PASS"
+        },
+        {
+          "name": "Rejected origin",
+          "status": 403,
+          "outcome": "PASS"
+        },
+        {
+          "name": "GET forbidden",
+          "status": 405,
+          "outcome": "PASS"
+        },
+        {
+          "name": "Disabled before data operations",
+          "status": 503,
+          "outcome": "PASS"
+        }
+      ],
+      "validReportSubmissions": 0,
+      "liveSubmitTrackAcceptance": "NOT_RUN",
+      "active": false
+    }
+  },
+  "stageE": {
+    "status": "PREPARED / AWAITING OPERATOR ACTIVATION",
+    "approval": "PREPARATION_ONLY; no additional Cloud mutation approved",
+    "activationRunner": "rekansiaga-web/scripts/activate-dev-report-gateway.ps1",
+    "handoff": "E-ACTIVATION.md",
+    "requiredSecretNames": "PASS read-only CLI verification; values not displayed/persisted",
+    "activation": "NOT_RUN",
+    "anonymousSubmitTrack": "NOT_RUN",
+    "adminCrud": "NOT_RUN",
+    "cleanup": "NOT_RUN; logical closure/archive prepared; physical purge needs separate exact-row approval",
+    "brd": "Original BRD unavailable; acceptance follows existing shared contract/runbook until BRD mapping supplied",
+    "agentCloudWrites": 0,
+    "localValidation": {
+      "activationTestsPassed": 4,
+      "powershellMockCasesPassed": 9,
+      "localCheckOnly": "PASS",
+      "priorPassedTests": "Retained, not rerun",
+      "cloudWrites": 0
+    },
+    "secretsEvidence": "E-secret-names-readonly.json"
+  }
+}

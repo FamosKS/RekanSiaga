@@ -1,0 +1,16 @@
+[
+  {
+    "schema_name": "public",
+    "function_name": "has_staff_role",
+    "arguments": "p_codes text[]",
+    "security_definer": true,
+    "function_definition": "CREATE OR REPLACE FUNCTION public.has_staff_role(p_codes text[])\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\r\n SELECT EXISTS(\r\n  SELECT 1 FROM public.staff_profiles sp\r\n  JOIN public.staff_role_assignments sra ON sra.staff_id=sp.user_id\r\n  JOIN public.roles r ON r.id=sra.role_id\r\n  WHERE sp.user_id=(SELECT auth.uid()) AND sp.is_active AND r.code=ANY(p_codes)\r\n ); $function$\n"
+  },
+  {
+    "schema_name": "public",
+    "function_name": "review_public_report",
+    "arguments": "p_report_id uuid, p_new_status text, p_reason text",
+    "security_definer": true,
+    "function_definition": "CREATE OR REPLACE FUNCTION public.review_public_report(p_report_id uuid, p_new_status text, p_reason text DEFAULT NULL::text)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\r\nDECLARE v_old text;\r\nBEGIN\r\n IF NOT public.has_staff_role(ARRAY['super_admin','report_verifier']) THEN\r\n  RAISE EXCEPTION 'Forbidden' USING ERRCODE='42501';\r\n END IF;\r\n IF p_new_status NOT IN ('under_review','verified','rejected') THEN\r\n  RAISE EXCEPTION 'Invalid target status' USING ERRCODE='22023';\r\n END IF;\r\n SELECT status INTO v_old FROM public.public_reports WHERE id=p_report_id FOR UPDATE;\r\n IF NOT FOUND THEN RETURN false; END IF;\r\n IF NOT ((v_old='unverified' AND p_new_status IN ('under_review','verified','rejected'))\r\n OR (v_old='under_review' AND p_new_status IN ('verified','rejected'))) THEN\r\n  RAISE EXCEPTION 'Invalid status transition' USING ERRCODE='22023';\r\n END IF;\r\n UPDATE public.public_reports SET status=p_new_status,reviewed_by=auth.uid(),reviewed_at=now()\r\n WHERE id=p_report_id;\r\n INSERT INTO public.report_status_history(report_id,from_status,to_status,changed_by,reason)\r\n VALUES(p_report_id,v_old,p_new_status,auth.uid(),p_reason);\r\n RETURN true;\r\nEND; $function$\n"
+  }
+]

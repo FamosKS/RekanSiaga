@@ -1,0 +1,10 @@
+{
+  "dataset": "Kode Wilayah Administrasi Pemerintahan",
+  "authority": "Kementerian Dalam Negeri Republik Indonesia",
+  "source_url": "https://kodewilayah.kemendagri.go.id/",
+  "retrieved_at": null,
+  "sha256": null,
+  "levels": ["province", "regency", "city", "district", "village"],
+  "remote_seed_status": "NOT_RUN",
+  "note": "Replace this example only in the operator-controlled activation package after an authenticated official export."
+}

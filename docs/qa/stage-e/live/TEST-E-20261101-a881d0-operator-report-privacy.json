@@ -1,0 +1,10 @@
+{
+  "kind": "Read-only HEAD permission check on operator-selected UUID; no private values fetched",
+  "id": "0f990f12-71d1-4a31-bad0-903eaf8dbb7d",
+  "publicClientSessionPresent": false,
+  "http": 200,
+  "errorCode": null,
+  "privateColumnRowCount": 1,
+  "bodyRead": false,
+  "at": "2026-11-02T00:31:50.410Z"
+}

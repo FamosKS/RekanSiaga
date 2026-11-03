@@ -1,0 +1,21 @@
+{
+  "kind": "USER_REPORTED_STAGING_BASELINE_NOT_SQL_EXPORT_OR_CODEX_EXECUTION",
+  "recorded_date": "2026-10-23",
+  "timezone": "Asia/Jakarta",
+  "project_name_reported": "rekansiaga-staging",
+  "project_reference": "NOT_PROVIDED",
+  "deployment": "Permanent bootstrap manually executed by user; exact deployed SQL checksum and COMMIT log not supplied",
+  "reported_direct_query_counts": {
+    "total_tables": 26,
+    "tables_with_rls": 26,
+    "total_functions": 6,
+    "total_policies": 26,
+    "total_roles": 4,
+    "total_sources": 2
+  },
+  "validation_execution_reported": "Earlier text[] vs name[] error; after p.roles::text[] cast, script ran without error",
+  "detailed_result_sets": "NOT_AVAILABLE_IN_WORKSPACE_AT_REVIEW",
+  "authenticated_api": "NOT_PROVIDED",
+  "concurrency": "NOT_PROVIDED",
+  "interpretation": "Aggregate and execution observations only; no blanket manifest/security PASS"
+}

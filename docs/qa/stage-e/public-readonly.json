@@ -1,0 +1,44 @@
+{
+  "kind": "LIVE anonymous GET only, ID sample max 1 per table; not CRUD/status/audit acceptance",
+  "projectRef": "uiuiouosblyuqgnvfpeh",
+  "checkedAt": "2026-10-31T15:17:59.552Z",
+  "checks": [
+    {
+      "table": "articles",
+      "status": 200,
+      "read": "PASS",
+      "visibleSampleRows": 0
+    },
+    {
+      "table": "disaster_events",
+      "status": 200,
+      "read": "PASS",
+      "visibleSampleRows": 0
+    },
+    {
+      "table": "emergency_contacts",
+      "status": 200,
+      "read": "PASS",
+      "visibleSampleRows": 0
+    },
+    {
+      "table": "mitigation_guides",
+      "status": 200,
+      "read": "PASS",
+      "visibleSampleRows": 0
+    },
+    {
+      "table": "relief_locations",
+      "status": 200,
+      "read": "PASS",
+      "visibleSampleRows": 0
+    },
+    {
+      "table": "data_sources",
+      "status": 200,
+      "read": "PASS",
+      "visibleSampleRows": 1
+    }
+  ],
+  "cloudWrites": 0
+}

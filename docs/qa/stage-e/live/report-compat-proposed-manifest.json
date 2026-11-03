@@ -1,0 +1,23 @@
+{
+  "status": "APPROVED_NOT_APPLIED",
+  "projectRef": "uiuiouosblyuqgnvfpeh",
+  "scope": [
+    "enable public_reports RLS and two restrictive report SELECT policies",
+    "one existing track_report_v1 format predicate",
+    "report-gateway deploy preserving secrets and existing controls"
+  ],
+  "cloudApproval": "APPROVED_INCLUDING_EXPLICIT_RLS_ENABLEMENT",
+  "files": {
+    "supabase/functions/report-gateway/index.ts": "449fc81b0b21a76ba2c534872a251a28686ffa2d29ab761964e3cb6bb5688d6d",
+    "supabase/functions/_shared/reportContract.ts": "d294cb26a4f61817399b8ca97ff632d19d959653d275c23965248bdc8d2c5bac",
+    "supabase/functions/_shared/reportHandler.ts": "558ee252668cdbe0c4bb10b6ba31deb7a3406dee32b00ded4e5af219c28a01f3",
+    "supabase/functions/_shared/gatewayConfig.ts": "6f9d2803a5bd30e657ee6e3db4926b3977149b2f467db699864137c352fa4e21",
+    "supabase/config.toml": "4d42d0a91ead39343d47c02b3404ef1d5e327b90eecc8988baf0ce0bafecaee0",
+    "supabase/releases/dev-e-tracking-rpt.PROPOSED.sql": "ab35d7ae8a5fc1913cdb564e1c48169e1860bfdb8c6210de73c6750a60977745",
+    "supabase/releases/dev-e-tracking-rpt-rollback.PROPOSED.sql": "cb2d3a08223545cba325daa2af8948037dfef9e5ae9f9fcd82ef83539424283f",
+    "supabase/releases/dev-e-report-privacy.PROPOSED.sql": "35d88cce7c9b666d48253bc8db5204707f5dc4a1a0e8c067b5abce813063c9e8",
+    "scripts/apply-dev-report-compat.ps1": "156149f3bd09e0571501e7f8d8fb9ac7489bd89e87c8a655bbf45753a88c4c0a",
+    "src/features/reports/reportSchema.ts": "c9a1d5c5d8e53321bafa779c13b156c41d073dce58164ebdd346572c6e0526c5",
+    "src/features/reports/TrackingForm.tsx": "6da2876eb01922f3158f0c1d6aa4d190125741da43eb871855abb31c2e2c6e46"
+  }
+}

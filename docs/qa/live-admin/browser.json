@@ -1,0 +1,163 @@
+{
+  "widths": [
+    390,
+    1440
+  ],
+  "routeChecks": [
+    {
+      "route": "/admin",
+      "width": 390
+    },
+    {
+      "route": "/admin/artikel",
+      "width": 390
+    },
+    {
+      "route": "/admin/kejadian",
+      "width": 390
+    },
+    {
+      "route": "/admin/panduan",
+      "width": 390
+    },
+    {
+      "route": "/admin/kontak-darurat",
+      "width": 390
+    },
+    {
+      "route": "/admin/lokasi-bantuan",
+      "width": 390
+    },
+    {
+      "route": "/admin/staf",
+      "width": 390
+    },
+    {
+      "route": "/admin/notifikasi",
+      "width": 390
+    },
+    {
+      "route": "/admin/sumber-data",
+      "width": 390
+    },
+    {
+      "route": "/admin/pengaturan",
+      "width": 390
+    },
+    {
+      "route": "/admin/audit",
+      "width": 390
+    },
+    {
+      "route": "/admin/laporan",
+      "width": 390
+    },
+    {
+      "route": "/informasi",
+      "width": 390
+    },
+    {
+      "route": "/panduan",
+      "width": 390
+    },
+    {
+      "route": "/pemantauan",
+      "width": 390
+    },
+    {
+      "route": "/peta",
+      "width": 390
+    },
+    {
+      "route": "/darurat",
+      "width": 390
+    },
+    {
+      "route": "/admin",
+      "width": 1440
+    },
+    {
+      "route": "/admin/artikel",
+      "width": 1440
+    },
+    {
+      "route": "/admin/kejadian",
+      "width": 1440
+    },
+    {
+      "route": "/admin/panduan",
+      "width": 1440
+    },
+    {
+      "route": "/admin/kontak-darurat",
+      "width": 1440
+    },
+    {
+      "route": "/admin/lokasi-bantuan",
+      "width": 1440
+    },
+    {
+      "route": "/admin/staf",
+      "width": 1440
+    },
+    {
+      "route": "/admin/notifikasi",
+      "width": 1440
+    },
+    {
+      "route": "/admin/sumber-data",
+      "width": 1440
+    },
+    {
+      "route": "/admin/pengaturan",
+      "width": 1440
+    },
+    {
+      "route": "/admin/audit",
+      "width": 1440
+    },
+    {
+      "route": "/admin/laporan",
+      "width": 1440
+    },
+    {
+      "route": "/informasi",
+      "width": 1440
+    },
+    {
+      "route": "/panduan",
+      "width": 1440
+    },
+    {
+      "route": "/pemantauan",
+      "width": 1440
+    },
+    {
+      "route": "/peta",
+      "width": 1440
+    },
+    {
+      "route": "/darurat",
+      "width": 1440
+    }
+  ],
+  "interactions": [
+    "Draft excluded; publish rendered through anonymous client; open public list polls changes from another client within 28s",
+    "Reconnect and tab-visible events refetch immediately without waiting for polling interval",
+    "Article detail reads server data by slug",
+    "Guide/checklist editors write correct FK fields and public detail refetches by UUID",
+    "Relief coordinates stored as geography WKT, read on public directory/map without fake markers",
+    "Blank review field sends NULL; supplied whitespace is blocked; optional reason preserves review workflow",
+    "Review uses RPC only and renders confirmed status/history",
+    "Gateway receipt shown only after response; tracking token absent from URL/localStorage",
+    "Tracking uses POST gateway and renders confirmed status/time without staff notes",
+    "Risky delete requires confirmation and server representation",
+    "Insufficient role denied protected staff route"
+  ],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "screenshots": [],
+  "kind": "Local UI with intercepted synthetic Auth/REST/gateway; not live Supabase, CAPTCHA, SQL, or RLS acceptance",
+  "syntheticRequests": 1106,
+  "liveDatabaseWrites": 0
+}

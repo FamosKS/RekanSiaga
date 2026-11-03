@@ -1,0 +1,119 @@
+﻿{
+    "checkedAt":  "2026-11-02T00:36:23.250Z",
+    "projectRef":  "uiuiouosblyuqgnvfpeh",
+    "overall":  "E_DEPLOYED_PRIVACY_PASS_TRACKING_ADMIN_MOBILE_ACCEPTANCE_PENDING",
+    "cloudMutationApproval":  "APPROVED_FULL_STAGE_E_SCOPE",
+    "cloudMutations":  22,
+    "unitTestsPassed":  37,
+    "authRegressionPassed":  23,
+    "browserLocalScenariosPassed":  23,
+    "browserBackend":  "SYNTHETIC_ONLY",
+    "actualBrowserTabPatterns":  10,
+    "anonymousLiveGetChecksPassed":  6,
+    "lint":  "PASS after tracking/CAPTCHA changes",
+    "build":  "PASS after tracking changes; existing bundle warning",
+    "features":  {
+                     "tracking":  {
+                                      "local":  "PASS within documented scope",
+                                      "live":  "BLOCKED acceptance: deployment confirmed by operator; real CAPTCHA/private-token tracking pending"
+                                  },
+                     "articles":  {
+                                      "local":  "PASS within documented scope",
+                                      "live":  "PASS: existing approved TEST lifecycle and logical cleanup"
+                                  },
+                     "disasters":  {
+                                       "local":  "PASS within documented scope",
+                                       "live":  "PASS: existing approved TEST lifecycle and logical cleanup"
+                                   },
+                     "contacts":  {
+                                      "local":  "PASS within documented scope",
+                                      "live":  "PASS: existing approved TEST lifecycle and logical cleanup"
+                                  },
+                     "guidesAndRelief":  {
+                                             "local":  "PASS within documented scope",
+                                             "live":  "PASS: existing approved TEST lifecycle and logical cleanup"
+                                         },
+                     "rbacAndAudit":  {
+                                          "local":  "PASS within documented scope",
+                                          "live":  "PARTIAL: anonymous private HEAD now PASS HTTP200/count0; prior TEST audit22 PASS; post-RLS staff access pending"
+                                      },
+                     "testCleanup":  {
+                                         "local":  "PASS within documented scope",
+                                         "live":  "PASS run scope: all9 TEST rows hidden; no new report submitted; chosen Flutter report untouched"
+                                     },
+                     "flutterContract":  {
+                                             "local":  "PASS within documented scope",
+                                             "live":  "OPERATOR-CONFIRMED PASS: Flutter submit after RLS reaches Admin and status verification works; v2 mobile tracking not tested by agent"
+                                         }
+                 },
+    "migrationAdded":  false,
+    "flutterChanged":  false,
+    "stagingChanged":  false,
+    "operatorRunbook":  "docs/runbooks/stage-e-complete.md",
+    "approvalReceivedOn":  "2026-11-01",
+    "activeLiveRun":  "TEST-E-20261101-a881d0",
+    "activeJournal":  "docs/qa/stage-e/live/TEST-E-20261101-a881d0.json",
+    "lastObservedBrowser":  {
+                                "authenticated":  true,
+                                "roles":  [
+                                              "super_admin"
+                                          ],
+                                "source":  "verified live session; current public route can omit Admin chrome",
+                                "historicalOnly":  true
+                            },
+    "createdContentRows":  9,
+    "liveAuditRows":  22,
+    "contentCleanupAnonymousHidden":  9,
+    "autoReloadLive":  "Partial: contact tab and internal SPA routing PASS; other foreground transitions BLOCKED; no state loss observed",
+    "selectedExistingReport":  "docs/qa/stage-e/live/TEST-E-20261101-a881d0-operator-existing-report.json",
+    "privacyEvidence":  "docs/qa/stage-e/live/TEST-E-20261101-a881d0-operator-report-privacy.json",
+    "trackingCompatLocalChecks":  15,
+    "trackingSqlLocalChecks":  7,
+    "reportPrivacySqlLocalChecks":  6,
+    "additionalCloudScope":  "APPLIED: operator reported successful SQL and Gateway deployment; anonymous privacy independently verified LIVE",
+    "additionalCloudRunbook":  "docs/runbooks/stage-e-report-compat-privacy.md",
+    "cloudSecurityChanges":  "Operator applied RLS enablement and two restrictive SELECT policies",
+    "cloudCodeChanges":  "Operator applied tracking predicate and report-gateway deployment",
+    "newReportSubmissions":  0,
+    "edgeTypecheck":  "PASS",
+    "additionalCloudApprovalReceivedOn":  "2026-11-02",
+    "nextAction":  "Normal Chrome: confirm Admin access, track selected existing RPT with private token and CAPTCHA, check drafts; mobile team confirms authorized synthetic submit after RLS without real data changes.",
+    "reportRlsObserved":  "false, operator SQL screenshot",
+    "reportRlsFixLocal":  "6 local PostgreSQL/WASM checks PASS from RLS disabled fixture; not Cloud evidence",
+    "privacyAfterDeployment":  "docs/qa/stage-e/live/report-privacy-after-deploy.json",
+    "singleTrackingV2":  {
+                             "status":  "LOCAL_PASS_PENDING_SEPARATE_CLOUD_APPROVAL",
+                             "cloudCalls":  0,
+                             "cloudMutations":  0,
+                             "contractRegressionTests":  21,
+                             "postgresRuntimeChecks":  8,
+                             "localBrowserChecks":  5,
+                             "lint":  "PASS",
+                             "build":  "PASS existing bundle warning",
+                             "edgeTypecheck":  "PASS",
+                             "rolloutFlag":  "VITE_REPORT_SINGLE_CODE_ENABLED=false until backend deployed",
+                             "operatorRunbook":  "docs/runbooks/single-tracking-v2.md"
+                         },
+    "handoff":  "docs/AGENT-HANDOFF-REKANSIAGA.md",
+    "operatorReportedCurrentAdmin":  "User latest feature request confirms Admin can read reports and change status; not independently re-tested after RLS",
+    "verifiedReportPublicMap":  {
+                                    "status":  "REPLACED_BY_CURATED_EVENT_MAP_LOCAL_NEEDS_CLOUD",
+                                    "requested":  "Leaflet map shows published curated disaster events and locations from shared public_event_feed_v1; a verified private report alone is not a public event.",
+                                    "privacy":  "Map no longer projects private report coordinates or photos; link verified reports to an explicitly managed event through a guarded RPC.",
+                                    "cloudApproval":  "APPROVED_BY_USER_2026-11-03_FOR_REKANSiaga_DEV_ONLY; deployment and LIVE acceptance pending.",
+                                    "handoff":  "docs/AGENT-HANDOFF-REKANSIAGA.md"
+                                },
+    "integratedContentV1":  {
+                                "status":  "CLOUD_DEPLOYMENT_OPERATOR_CONFIRMED_LIVE_ACCEPTANCE_PENDING",
+                                "qa":  "docs/qa/stage-e/integrated-content-status.json",
+                                "runbook":  "docs/runbooks/integrated-content-v1.md",
+                                "localContractSanitizer":  "PASS 7/7",
+                                "localSqlPostgresWasm":  "PASS 18/18",
+                                "browserRerun":  "BLOCKED Chrome CDP before application assertions",
+                                "cloudMutationsThisTurn":  0,
+                                "deploymentParserFix":  "PowerShell now parses direct JSON emitted by psql -A -t; prior run stopped after read-only preflight before mutation",
+                                "operatorDeployment":  "Terminal output confirms approved SQL, postflight, report-publication and article-media deploy on dev",
+                                "frontendFlag":  "VITE_INTEGRATED_CONTENT_ENABLED=true in .env.local; Vite route HTTP 200",
+                                "liveBrowserAcceptance":  "PENDING normal Chrome: synthetic event/article/media, public propagation, RBAC/audit, cleanup and draft/tab retention"
+                            }
+}

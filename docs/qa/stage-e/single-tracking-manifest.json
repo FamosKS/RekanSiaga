@@ -1,0 +1,25 @@
+{
+  "status": "PROPOSED_NOT_APPROVED_NOT_DEPLOYED",
+  "projectRef": "uiuiouosblyuqgnvfpeh",
+  "scope": [
+    "add track_report_v2 and service-only replacement RPC",
+    "additive Gateway contract; preserve v1 CAPTCHA quota RLS",
+    "frontend single-code receipt and tracking"
+  ],
+  "files": {
+    "scripts/deploy-dev-single-tracking.ps1": "f37d89789668babed66c39bde32f2ae03c48ba5edc53726857320be6b61a7b9b",
+    "supabase/releases/dev-single-tracking.PROPOSED.sql": "8aa6a9141898c3a10cf7d5caaa26d3d576bdf20eec5e723cdeb6d2c69adfa3cc",
+    "supabase/functions/report-gateway/index.ts": "449fc81b0b21a76ba2c534872a251a28686ffa2d29ab761964e3cb6bb5688d6d",
+    "supabase/functions/_shared/reportHandler.ts": "558ee252668cdbe0c4bb10b6ba31deb7a3406dee32b00ded4e5af219c28a01f3",
+    "supabase/functions/_shared/reportContract.ts": "d294cb26a4f61817399b8ca97ff632d19d959653d275c23965248bdc8d2c5bac",
+    "supabase/functions/_shared/trackingCredential.ts": "cbb3b1bd382232c31ab6f8fdbe89584cca3268327b8acaf25016c101bf3bf020",
+    "supabase/functions/_shared/gatewayConfig.ts": "6f9d2803a5bd30e657ee6e3db4926b3977149b2f467db699864137c352fa4e21",
+    "supabase/config.toml": "4d42d0a91ead39343d47c02b3404ef1d5e327b90eecc8988baf0ce0bafecaee0",
+    "src/features/reports/ReportReceiptView.tsx": "e2209c47ae53b96436adbcb4dd1b9c64a7fb0e92c4b331f4aff9fcac1d6592d8",
+    "src/features/reports/TrackingForm.tsx": "6da2876eb01922f3158f0c1d6aa4d190125741da43eb871855abb31c2e2c6e46",
+    "src/features/reports/ReportForm.tsx": "7b814d946cc785f8791e30b5ad2dbaf08f98ac0236dfd4e6714981a0436bd7a5",
+    "src/features/reports/reportSchema.ts": "c9a1d5c5d8e53321bafa779c13b156c41d073dce58164ebdd346572c6e0526c5",
+    "src/features/reports/reportApi.ts": "50a4243610ad3f7c9d15497c1010b0e8d8aec686d57a569ef1e625aee6dd4d46",
+    ".env.example": "717d5f32f0aba331989967767ed7e5d70e4e7f0a8702d73334b976aaf4af690d"
+  }
+}

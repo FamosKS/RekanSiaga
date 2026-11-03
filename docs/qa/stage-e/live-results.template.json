@@ -1,0 +1,15 @@
+{
+  "kind": "TEMPLATE ONLY, not LIVE evidence. Never record tokens, credentials, raw receipts, PII or HAR.",
+  "projectRef": "uiuiouosblyuqgnvfpeh",
+  "runLabel": null,
+  "approval": "PENDING complete stage-e-complete.md scope",
+  "tracking": { "status": "BLOCKED", "submit201": null, "track200AfterReview": null, "reportIds": [], "statesObserved": [] },
+  "articles": { "status": "BLOCKED", "id": null, "slug": null, "draftHidden": null, "publishVisible": null, "updatedVisible": null, "archiveHidden": null },
+  "disasters": { "status": "BLOCKED", "id": null, "childIds": [], "sourceId": null, "publicMatches": null },
+  "contacts": { "status": "BLOCKED", "id": null, "publicMatches": null },
+  "guidesAndRelief": { "status": "BLOCKED", "guideId": null, "checklistId": null, "reliefId": null, "publicMatches": null },
+  "rbacAndAudit": { "status": "BLOCKED", "rolesTested": [], "auditEntityIds": [], "unauthorizedWrites": null },
+  "cleanup": { "status": "BLOCKED", "kind": "logical cleanup; terminal reports retained, no physical purge", "approvedExactIds": [], "hiddenPublicIds": [], "retainedTerminalIds": [], "unknownLegacyIds": [] },
+  "flutter": { "contractLocal": "SEE local tests", "runtime": "BLOCKED: mobile app/device acceptance unavailable" },
+  "cloudMutationsPerformed": 0
+}

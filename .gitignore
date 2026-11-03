@@ -1,0 +1,46 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables and local credentials. Keep templates only.
+.env
+.env.*
+!.env.example
+
+# Private keys and local certificates.
+*.pem
+*.key
+*.p12
+*.pfx
+*.mobileprovision
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Private operational fixture manifests and provisioning records (never commit).
+/docs/qa/phase4a/remediation-a/private/
+
+# Public client key kept in an ignored local handoff config, never committed.
+/integration/flutter/dev.local.json
+/integration/flutter/.dart_tool/
+
+# Local SQL parser binaries/cache
+/.tools/

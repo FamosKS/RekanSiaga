@@ -1,0 +1,25 @@
+﻿{
+    "status":  "OPERATOR_REPORTED_DEPLOYED_ACCEPTANCE_PENDING",
+    "projectRef":  "uiuiouosblyuqgnvfpeh",
+    "scope":  [
+                  "enable existing public_reports RLS and add the two previously approved restrictive SELECT privacy policies",
+                  "public event feed and report-event link RPCs",
+                  "private article-media bucket, registry, policies and RPCs",
+                  "report-publication x-client-info CORS hotfix",
+                  "article-media Edge Function",
+                  "no report-gateway/RK2, tracking compatibility, Flutter, staging or secrets changes"
+              ],
+    "files":  {
+                  "scripts/deploy-dev-integrated-content.ps1":  "32fbe14373631797b71781e94d8a729cfdea272e420318fc706ff067b05ba2b2",
+                  "supabase/releases/dev-integrated-content.PROPOSED.sql":  "7a63305c1e411c6b44a1e154ca6bf56df3090dd10e6b6c7fba4caa1aae07ccae",
+                  "supabase/releases/dev-integrated-content-preflight.sql":  "9ce55e80014c4773e7e20cab2060a7e3d49805219a2cf5bf085d4347de2372ed",
+                  "supabase/releases/dev-integrated-content-postflight.sql":  "91e16ce4c7fdebe300c585600f0516562ce31bf6f2be618bd1845bc0bbb6a39d",
+                  "supabase/functions/article-media/index.ts":  "879becc3cc4683409a762ce8c82413fd0dd1ba5441395ae41d39c2e56a5ba307",
+                  "supabase/functions/_shared/articleImage.ts":  "2a3c2496bad6aeb70ee395c54420388de3da402b380d62a7d7530fc875bc69c4",
+                  "supabase/functions/_shared/publicationCors.ts":  "ce53b768dfa3d0a7d7fc47988a460c3bc0b3c3cdc6be0a8c7c7aa4c2ac6a0de3",
+                  "supabase/functions/report-publication/index.ts":  "5bd139e98e2aec5107a592b6d19794a7007004de2ff0e877256162a43c8f03a0",
+                  "supabase/config.toml":  "25e92a4b1e6b67a08ee534aed2fc8615867db55556e9333b5314e3bc751dc8f8",
+                  "supabase/releases/dev-e-report-privacy.PROPOSED.sql":  "35d88cce7c9b666d48253bc8db5204707f5dc4a1a0e8c067b5abce813063c9e8"
+              },
+    "deploymentEvidence":  "Operator terminal output confirms SQL/postflight and both approved Edge Function deployments on ref uiuiouosblyuqgnvfpeh; browser feature acceptance not yet performed."
+}
